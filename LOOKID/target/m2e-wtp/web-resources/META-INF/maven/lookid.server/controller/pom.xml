@@ -152,7 +152,7 @@
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.5.2</version>
+			<version>[0.9.5.3,)</version>
 		</dependency>
 
 		<!-- Json -->
@@ -166,7 +166,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.8</version>
+			<version>[2.9.9.2,)</version>
 		</dependency>
 
 		<!-- JWT -->
