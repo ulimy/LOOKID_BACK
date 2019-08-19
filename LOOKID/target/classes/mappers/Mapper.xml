@@ -2,11 +2,39 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="lookid.server.dao.Mapper">
- 
- 	<select id="login" resultType="Integer">
-		select personpid from profile where id=#{id} and password=#{password}
+
+<mapper namespace="lookid.server.dao.Mapper">
+
+	<!-- 로그아웃은 서비스에서 제거 -->
+
+	<select id="checkId" resultType="lookid.server.dto.SuccessDTO">
+
 	</select>
- 
- </mapper>
+
+	<insert id="signup">
+	
+		insert into user(id,pw,name,phone,mail,address,bank_name,bank_num,bank_holder) values(#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder})
+
+	</insert>
+
+	<select id="signin" resultType="lookid.server.vo.UserVO">
+
+	</select>
+
+	<select id="find_id" resultType="lookid.server.dto.FindIdDTO">
+
+	</select>
+
+	<select id="find_pw" resultType="lookid.server.dto.SuccessDTO">
+	
+	</select>
+	
+	<update id="modify_pw">
+	
+	</update>
+	
+	<update id="modify">
+	
+	</update>
+
+</mapper>
