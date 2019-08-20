@@ -39,6 +39,7 @@ public class UserController {
 	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
 	public @ResponseBody SuccessDTO idcheck(@RequestParam(value = "id") String id) {
 		return null;
+		
 	}
 
 	// 회원가입
