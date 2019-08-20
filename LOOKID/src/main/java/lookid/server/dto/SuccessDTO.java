@@ -3,6 +3,10 @@ package lookid.server.dto;
 public class SuccessDTO {
 	boolean success;
 
+	public SuccessDTO(boolean success) {
+		this.success = success;
+	}
+
 	public boolean isSuccess() {
 		return success;
 	}

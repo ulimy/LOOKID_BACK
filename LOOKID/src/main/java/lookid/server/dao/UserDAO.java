@@ -11,7 +11,7 @@ public interface UserDAO {
 
 	public SuccessDTO checkId(String id) throws Exception;
 
-	public SuccessDTO signup(UserVO user) throws Exception;
+	public void signup(UserVO user) throws Exception;
 
 	public UserVO signin(SigninDTO user) throws Exception;
 

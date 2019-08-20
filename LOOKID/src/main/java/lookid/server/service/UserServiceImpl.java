@@ -16,7 +16,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO dao;
-
+	
+	private final SuccessDTO success = new SuccessDTO(true);
+	private final SuccessDTO fail = new SuccessDTO(false);
+	
 	// 아이디 중복확인
 	@Override
 	public SuccessDTO checkId(String id) throws Exception {

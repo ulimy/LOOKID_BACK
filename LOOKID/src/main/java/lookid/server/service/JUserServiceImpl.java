@@ -13,6 +13,9 @@ public class JUserServiceImpl implements JUserService {
 	@Autowired
 	private JUserDAO jdao;
 
+	private final SuccessDTO success = new SuccessDTO(true);
+	private final SuccessDTO fail = new SuccessDTO(false);
+
 	// 로그아웃
 	@Override
 	public void signout() throws Exception {

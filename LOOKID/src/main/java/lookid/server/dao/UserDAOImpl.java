@@ -25,9 +25,8 @@ public class UserDAOImpl implements UserDAO {
 
 	// 회원가입
 	@Override
-	public SuccessDTO signup(UserVO user) throws Exception {
+	public void signup(UserVO user) throws Exception {
 
-		return null;
 	}
 
 	// 로그인
