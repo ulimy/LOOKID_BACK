@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lookid.server.dao.UserDAO;
+import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.SigninDTO;
@@ -52,4 +53,10 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	// 관리자 검색
+	@Override
+	public FindAdminDTO find_admin(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

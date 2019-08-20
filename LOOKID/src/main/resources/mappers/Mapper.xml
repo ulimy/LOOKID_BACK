@@ -12,11 +12,14 @@
 	</select>
 
 	<insert id="signup">
-	
-		insert into user(id,pw,name,phone,mail,address,bank_name,bank_num,bank_holder) values(#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder})
+
+		insert into
+		user(id,pw,name,phone,mail,address,bank_name,bank_num,bank_holder)
+		values(#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder})
 
 	</insert>
 
+	<!-- user_pid select -->
 	<select id="signin" resultType="lookid.server.vo.UserVO">
 
 	</select>
@@ -26,15 +29,20 @@
 	</select>
 
 	<select id="find_pw" resultType="lookid.server.dto.SuccessDTO">
-	
+
 	</select>
-	
+
+	<select id="find_admin" resultType="lookid.server.dto.FindAdminDTO">
+
+	</select>
+
 	<update id="modify_pw">
-	
+
 	</update>
-	
+
 	<update id="modify">
-	
+
 	</update>
+
 
 </mapper>

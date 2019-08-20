@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.SigninDTO;
@@ -43,9 +44,7 @@ public class UserController {
 	// 회원가입
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public @ResponseBody SuccessDTO signup(@RequestBody UserVO user) {
-
 		return null;
-
 	}
 
 	// 로그인
@@ -64,29 +63,33 @@ public class UserController {
 	// 아이디 찾기
 	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
 	public @ResponseBody FindIdDTO find_id(@RequestBody FindIdDTO user) {
-
 		return null;
 	}
 
 	// 비밀번호 찾기
 	@RequestMapping(value = "/find_pw", method = RequestMethod.GET)
 	public @ResponseBody SuccessDTO find_pw(@RequestBody FindPwDTO user) {
-
 		return null;
 	}
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/modify_pw", method = RequestMethod.PUT)
 	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw) {
-
 		return null;
 	}
 
 	// 내 정보 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
 	public @ResponseBody SuccessDTO modify(@RequestBody UserVO user) {
+		return null;
+	}
+
+	// 관리자 검색
+	@RequestMapping(value = "/find_admin", method = RequestMethod.GET)
+	public @ResponseBody FindAdminDTO find_admin(@RequestParam(value = "id") String id) {
 
 		return null;
+
 	}
 
 }

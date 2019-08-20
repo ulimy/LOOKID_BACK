@@ -1,5 +1,6 @@
 package lookid.server.service;
 
+import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.SigninDTO;
@@ -17,5 +18,7 @@ public interface UserService {
 	public FindIdDTO find_id(FindIdDTO user) throws Exception;
 
 	public SuccessDTO find_pw(FindPwDTO user) throws Exception;
+	
+	public FindAdminDTO find_admin(String id) throws Exception;
 
 }
