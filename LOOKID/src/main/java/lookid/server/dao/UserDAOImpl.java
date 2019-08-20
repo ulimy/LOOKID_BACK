@@ -27,6 +27,9 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void signup(UserVO user) throws Exception {
 
+		mapper.signup(user.getId(), user.getPw(), user.getName(), user.getPhone(), user.getMail(), user.getAddress(),
+				user.getBank_name(), user.getBank_num(), user.getBank_holder());
+
 	}
 
 	// 로그인

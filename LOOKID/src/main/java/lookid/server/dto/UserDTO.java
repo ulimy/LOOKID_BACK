@@ -1,8 +1,7 @@
-package lookid.server.vo;
+package lookid.server.dto;
 
-public class UserVO {
+public class UserDTO {
 
-	private int user_pid;
 	private String id;
 	private String pw;
 	private String name;
@@ -12,14 +11,6 @@ public class UserVO {
 	private String bank_name;
 	private String bank_num;
 	private String bank_holder;
-
-	public int getUser_pid() {
-		return user_pid;
-	}
-
-	public void setUser_pid(int user_pid) {
-		this.user_pid = user_pid;
-	}
 
 	public String getId() {
 		return id;
@@ -95,9 +86,9 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "UserVO [user_pid=" + user_pid + ", id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone
-				+ ", mail=" + mail + ", address=" + address + ", bank_name=" + bank_name + ", bank_num=" + bank_num
-				+ ", bank_holder=" + bank_holder + "]";
+		return "UserDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone + ", mail=" + mail
+				+ ", address=" + address + ", bank_name=" + bank_name + ", bank_num=" + bank_num + ", bank_holder="
+				+ bank_holder + "]";
 	}
 
 }
