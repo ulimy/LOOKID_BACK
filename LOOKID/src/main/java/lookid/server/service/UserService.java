@@ -20,5 +20,7 @@ public interface UserService {
 	public SuccessDTO find_pw(FindPwDTO user) throws Exception;
 	
 	public FindAdminDTO find_admin(String id) throws Exception;
+	
+	public int count() throws Exception;
 
 }

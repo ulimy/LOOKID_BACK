@@ -9,7 +9,7 @@ import lookid.server.vo.UserVO;
 
 public interface Mapper {
 
-	public SuccessDTO checkId(@Param("id") String id);
+	public Integer checkId(@Param("id") String id);
 
 	public void signup(@Param("id") String id, @Param("pw") String pw, @Param("name") String name,
 			@Param("phone") String phone, @Param("mail") String mail, @Param("address") String address,
@@ -31,4 +31,6 @@ public interface Mapper {
 
 	public void modify_pw(@Param("pw") String pw);
 
+	public int count();
+	
 }

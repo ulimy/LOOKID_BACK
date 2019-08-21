@@ -18,9 +18,8 @@ public class UserDAOImpl implements UserDAO {
 
 	// 아이디 중복확인
 	@Override
-	public SuccessDTO checkId(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer checkId(String id) throws Exception {
+		return mapper.checkId(id);
 	}
 
 	// 회원가입
@@ -42,8 +41,7 @@ public class UserDAOImpl implements UserDAO {
 	// 아이디 찾기
 	@Override
 	public FindIdDTO find_id(FindIdDTO user) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.find_id(user.getName(), user.getPhone());
 	}
 
 	// 비밀번호 찾기
@@ -56,7 +54,13 @@ public class UserDAOImpl implements UserDAO {
 	// 관리자 검색
 	@Override
 	public FindAdminDTO find_admin(String id) throws Exception {
-		return null;
+		return mapper.find_admin(id);
+	}
+	
+	//튜플 카운트
+	@Override
+	public int count() throws Exception{
+		return mapper.count();
 	}
 
 }

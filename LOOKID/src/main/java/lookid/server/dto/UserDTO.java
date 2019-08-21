@@ -1,5 +1,6 @@
 package lookid.server.dto;
 
+//user_pid를 제외한 DTO
 public class UserDTO {
 
 	private String id;

@@ -7,15 +7,28 @@
 
 	<!-- 로그아웃은 서비스에서 제거 -->
 
-	<select id="checkId" resultType="lookid.server.dto.SuccessDTO">
+	<select id="checkId" resultType="Integer">
+
+		select user_pid from user where
+		id=#{id}
 
 	</select>
 
+	<!-- phone이 db에 이미 존재한다면 insert를 하지 않는다 -->
 	<insert id="signup">
 
 		insert into
 		user(id,pw,name,phone,mail,address,bank_name,bank_num,bank_holder)
-		values(#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder})
+		select
+		#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder}
+		from dual
+		where
+		not exists (
+		select user_pid
+		from user
+		where phone = #{phone}
+		) 
+		LIMIT 1
 
 	</insert>
 
@@ -26,6 +39,8 @@
 
 	<select id="find_id" resultType="lookid.server.dto.FindIdDTO">
 
+		select * from user where name=#{name} and phone=#{phone}
+
 	</select>
 
 	<select id="find_pw" resultType="lookid.server.dto.SuccessDTO">
@@ -33,7 +48,7 @@
 	</select>
 
 	<select id="find_admin" resultType="lookid.server.dto.FindAdminDTO">
-
+		select * from user where id=#{id}
 	</select>
 
 	<update id="modify_pw">
@@ -43,6 +58,11 @@
 	<update id="modify">
 
 	</update>
+	
+	<!-- 튜플 개수 카운트 -->
+	<select id="count" resultType="Integer">
+		select count(*) from user
+	</select>
 
 
 </mapper>

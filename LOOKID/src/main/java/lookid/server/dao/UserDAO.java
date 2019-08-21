@@ -9,7 +9,7 @@ import lookid.server.vo.UserVO;
 
 public interface UserDAO {
 
-	public SuccessDTO checkId(String id) throws Exception;
+	public Integer checkId(String id) throws Exception;
 
 	public void signup(UserVO user) throws Exception;
 
@@ -20,5 +20,7 @@ public interface UserDAO {
 	public SuccessDTO find_pw(FindPwDTO user) throws Exception;
 	
 	public FindAdminDTO find_admin(String id) throws Exception;	
+	
+	public int count() throws Exception;
 	
 }

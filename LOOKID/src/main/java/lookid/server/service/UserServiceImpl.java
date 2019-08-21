@@ -1,5 +1,7 @@
 package lookid.server.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +25,37 @@ public class UserServiceImpl implements UserService {
 	// 아이디 중복확인
 	@Override
 	public SuccessDTO checkId(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			if (dao.checkId(id) != 0) {
+				return success;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return fail;
+		}
+
 	}
 
 	// 회원가입
 	@Override
 	public SuccessDTO signup(UserVO user) throws Exception {
 
+		// phone이 중복되어 insert 안 됐을 시 fail 리턴 예외처리
+		int beforeInsert,afterInsert;
+		
 		try {
+			beforeInsert = count();
 			dao.signup(user);
-			return success;
+			afterInsert = count();
+			
+			if(beforeInsert == afterInsert) { //phone 중복으로 튜플이 늘어나지 않았을 때 fail을 리턴
+				return fail;
+			}
+			else { // phone이 중복되지 않아 정상적으로 회원가입 완료
+				return success;
+			}
+					
 		} catch (Exception e) {
 			return fail;
 		}
@@ -50,21 +72,25 @@ public class UserServiceImpl implements UserService {
 	// 아이디 찾기
 	@Override
 	public FindIdDTO find_id(FindIdDTO user) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.find_id(user);
 	}
 
 	// 비밀번호 찾기
 	@Override
 	public SuccessDTO find_pw(FindPwDTO user) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	// 관리자 검색
 	@Override
 	public FindAdminDTO find_admin(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.find_admin(id);
+	}
+	
+	//튜플 카운트
+	@Override
+	public int count() throws Exception{
+		return dao.count();
 	}
 }
