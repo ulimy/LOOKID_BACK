@@ -4,12 +4,16 @@ import java.util.Map;
 
 public interface JWTService {
 
-	public <T> String create(String user_pid, T data);
+	public <T> String create(String key, T data);
 
 	boolean isUsable(String jwt);
 
-	public Map<String, Object> get(String user_pid);
+	public byte[] generateKey();
+	
+	public Map<String, Object> get(String key);
 
 	public void detroy(String jwt);
 
+	public int getUser_pid();
+	
 }

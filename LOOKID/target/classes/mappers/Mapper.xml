@@ -36,7 +36,7 @@
 	<!-- user_pid select -->
 	<select id="signin" resultType="lookid.server.vo.UserVO">
 
-		
+		select * from user where id=#{id} and pw=#{pw}		
 
 	</select>
 
@@ -60,8 +60,7 @@
 		
 	</update>
 
-	<select id="find_admin"
-		resultType="lookid.server.dto.FindAdminDTO">
+	<select id="find_admin" resultType="lookid.server.dto.FindAdminDTO">
 		select * from user where id=#{id}
 	</select>
 
@@ -72,7 +71,7 @@
 	</update>
 
 	<update id="modify">
-		<!-- jwt 구현 전까지는 id를 조건으로 임시지정 -->
+		<!-- jwt 구현 전까지는 id를 조건으로 임시지정 구현후 토큰을 통해 user_pid를 알아내어 조건을 user_pid로 sql문작성-->
 		update user set
 		pw=#{pw},name=#{name},phone=#{phone},mail=#{mail},address=#{address},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
 		where id=#{id}

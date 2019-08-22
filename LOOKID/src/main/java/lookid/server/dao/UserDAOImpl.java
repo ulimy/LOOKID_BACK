@@ -34,8 +34,7 @@ public class UserDAOImpl implements UserDAO {
 	// 로그인
 	@Override
 	public UserVO signin(SigninDTO user) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.signin(user.getId(), user.getPw());
 	}
 
 	// 아이디 찾기

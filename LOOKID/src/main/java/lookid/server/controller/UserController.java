@@ -1,5 +1,7 @@
 package lookid.server.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,6 @@ import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
 import lookid.server.dto.UserDTO;
 import lookid.server.service.JUserService;
-import lookid.server.service.JWTService;
 import lookid.server.service.UserService;
 import lookid.server.vo.UserVO;
 
@@ -25,16 +26,14 @@ import lookid.server.vo.UserVO;
 public class UserController {
 
 	@Autowired
-	@Qualifier("JWTService")
-	private JWTService JWTService;
-
-	@Autowired
 	@Qualifier("JUserService")
 	private JUserService juss;
 
 	@Autowired
 	@Qualifier("UserService")
 	private UserService uss;
+	
+	//jwt인터셉터를 이용하여 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰의 유효성과 user_pid를 파싱해준다. 단 모든 메소드가아닌 필요한 메소드의 url만 지정.
 
 	// 아이디 중복확인
 	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
@@ -52,11 +51,9 @@ public class UserController {
 
 	// 로그인
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public @ResponseBody UserVO signin(@RequestBody SigninDTO user) {
-		// jwt 토큰생성
+	public @ResponseBody UserDTO signin(@RequestBody SigninDTO user,HttpServletResponse response) throws Exception {
 		// null처리
-		// user_pid는 토큰에, 나머지정보는 UserDTO에 담기
-		return null;
+		return uss.signin(user,response);
 	}
 
 	// 로그아웃

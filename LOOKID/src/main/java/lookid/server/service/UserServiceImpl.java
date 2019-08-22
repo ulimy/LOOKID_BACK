@@ -1,18 +1,18 @@
 package lookid.server.service;
 
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import lookid.server.dao.Mapper;
 import lookid.server.dao.UserDAO;
 import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
@@ -20,6 +20,7 @@ import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
 import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
+import lookid.server.dto.UserDTO;
 import lookid.server.vo.UserVO;
 
 @Service("UserService")
@@ -30,6 +31,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JavaMailSender mailSender; // find_pw 랜덤스트링 mail전송
+
+	@Autowired
+	@Qualifier("JWTService")
+	private JWTService JWTService;
 
 	private final SuccessDTO success = new SuccessDTO(true);
 	private final SuccessDTO fail = new SuccessDTO(false);
@@ -75,11 +80,37 @@ public class UserServiceImpl implements UserService {
 
 	// 로그인
 	@Override
-	public UserVO signin(SigninDTO user) throws Exception {
-		//jwt토큰 생성
+	public UserDTO signin(SigninDTO user, HttpServletResponse response) throws Exception {
+		// jwt토큰 생성
 		// user_pid는 토큰에, 나머지정보는 UserDTO에 담기
+
+		int user_pid; // user_pid jwt생성에 이용
+
+		UserVO uvo = dao.signin(user);
+
+		user_pid = uvo.getUser_pid();
+		UserDTO udto = new UserDTO(uvo.getId(), uvo.getPw(), uvo.getName(), uvo.getPhone(), uvo.getMail(),
+				uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder());
+
+		String token = JWTService.create("user_pid", user_pid); //토큰 생성
 		
-		return null;
+		if (JWTService.isUsable(token)) {
+			response.setHeader("Authorization", token); //http 헤더에 토큰 담기
+
+			System.out.println("token : ");
+			System.out.println("[ " + token + " ]");
+			
+		}
+		
+		/*
+		 * 파싱 테스트 ( ~ 2019-08-22)
+		 */
+		
+//		int upid = JWTService.getUser_pid();
+//		
+//		System.out.println(upid);
+		
+		return udto; //안드로이드에게 userDTO정보를 넘겨줌.
 	}
 
 	// 아이디 찾기
@@ -105,7 +136,8 @@ public class UserServiceImpl implements UserService {
 			StringBuffer buf = new StringBuffer();
 
 			for (int i = 0; i < 10; i++) { // 10자리 랜덤스트링 생성
-				// rnd.nextBoolean() 는 랜덤으로 true, false 를 리턴. true일 시 랜덤 한 소문자를, false 일 시 랜덤한 숫자를 StringBuffer에 append.
+				// rnd.nextBoolean() 는 랜덤으로 true, false 를 리턴. true일 시 랜덤 한 소문자를, false 일 시 랜덤한
+				// 숫자를 StringBuffer에 append.
 				if (rnd.nextBoolean()) {
 					buf.append((char) ((int) (rnd.nextInt(26)) + 97));
 				} else {
@@ -113,16 +145,17 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 			temp_pw = buf.toString();
-		
+
 			String subject = "루키드 LOOKID 임시 비밀번호 발급입니다."; // 메일 제목
-			String text = "회원님의 임시 비밀번호가 발급되었습니다." + "\n\n" + "임시 비밀번호로 로그인하여 '내 정보 수정' -> '비밀번호 변경' 을 해주세요." + "\n\n" + "임시 비밀번호 : " + temp_pw; // 메일 내용
+			String text = "회원님의 임시 비밀번호가 발급되었습니다." + "\n\n" + "임시 비밀번호로 로그인하여 '내 정보 수정' -> '비밀번호 변경' 을 해주세요." + "\n\n"
+					+ "임시 비밀번호 : " + temp_pw; // 메일 내용
 
 			/*
 			 * 메일 전송 api
 			 * 
 			 */
 			try {
-				
+
 				MimeMessage message = mailSender.createMimeMessage();
 				message.setFrom(new InternetAddress("smulookid@gmail.com"));
 				message.addRecipient(RecipientType.TO, new InternetAddress(mail));
@@ -140,7 +173,7 @@ public class UserServiceImpl implements UserService {
 			ModifyTempPwDTO mtp = new ModifyTempPwDTO();
 			mtp.setMail(mail);
 			mtp.setPw(temp_pw);
-			
+
 			dao.modify_temp_pw(mtp);
 
 			return success;

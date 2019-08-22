@@ -13,6 +13,19 @@ public class UserDTO {
 	private String bank_num;
 	private String bank_holder;
 
+	public UserDTO(String id, String pw, String name, String phone, String mail, String address, String bank_name,
+			String bank_num, String bank_holder) {
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.phone = phone;
+		this.mail = mail;
+		this.address = address;
+		this.bank_name = bank_name;
+		this.bank_num = bank_num;
+		this.bank_holder = bank_holder;
+	}
+
 	public String getId() {
 		return id;
 	}
