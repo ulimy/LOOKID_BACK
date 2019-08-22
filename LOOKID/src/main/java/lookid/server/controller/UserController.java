@@ -14,6 +14,7 @@ import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
+import lookid.server.dto.UserDTO;
 import lookid.server.service.JUserService;
 import lookid.server.service.JWTService;
 import lookid.server.service.UserService;
@@ -74,9 +75,9 @@ public class UserController {
 
 	// 비밀번호 찾기
 	@RequestMapping(value = "/find_pw", method = RequestMethod.GET)
-	public @ResponseBody SuccessDTO find_pw(@RequestBody FindPwDTO user) {
+	public @ResponseBody SuccessDTO find_pw(@RequestBody FindPwDTO user) throws Exception {
 		// null처리
-		return null;
+		return uss.find_pw(user);
 	}
 
 	// 관리자 검색
@@ -95,9 +96,10 @@ public class UserController {
 
 	// 내 정보 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
-	public @ResponseBody SuccessDTO modify(@RequestBody UserVO user) {
-
-		return null;
+	public @ResponseBody SuccessDTO modify(@RequestBody UserDTO user) throws Exception {
+		// jwt 구현전까지는 임시로 where id=#{id} 지정
+		// 내정보수정버튼을 클릭했을 때 현재 본인의 정보가 먼저 텍스트필드칸에 채워지게 구현(안드로이드) 빈칸으로 수정 누르면 null값으로 들어감 bank정보를 not null 처리하지 않았기 때문.
+		return juss.modify(user);
 	}
 
 }

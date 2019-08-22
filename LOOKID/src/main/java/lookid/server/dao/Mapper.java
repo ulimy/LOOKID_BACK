@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Param;
 
 import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
-import lookid.server.dto.SuccessDTO;
 import lookid.server.vo.UserVO;
 
 public interface Mapper {
@@ -20,7 +19,9 @@ public interface Mapper {
 
 	public FindIdDTO find_id(@Param("name") String name, @Param("phone") String phone);
 
-	public SuccessDTO find_pw(@Param("id") String id, @Param("mail") String mail);
+	public String find_pw(@Param("id") String id, @Param("mail") String mail);
+	
+	public void modify_temp_pw(@Param("pw") String pw, @Param("mail") String mail);
 
 	public FindAdminDTO find_admin(@Param("id") String id);	
 	

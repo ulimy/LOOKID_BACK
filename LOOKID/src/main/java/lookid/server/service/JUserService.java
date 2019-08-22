@@ -1,7 +1,7 @@
 package lookid.server.service;
 
 import lookid.server.dto.SuccessDTO;
-import lookid.server.vo.UserVO;
+import lookid.server.dto.UserDTO;
 
 public interface JUserService {
 
@@ -9,6 +9,6 @@ public interface JUserService {
 
 	public SuccessDTO modify_pw(String pw) throws Exception;
 
-	public SuccessDTO modify(UserVO user) throws Exception;
+	public SuccessDTO modify(UserDTO user) throws Exception;
 
 }

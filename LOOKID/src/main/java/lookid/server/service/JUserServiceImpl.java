@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import lookid.server.dao.JUserDAO;
 import lookid.server.dto.SuccessDTO;
-import lookid.server.vo.UserVO;
+import lookid.server.dto.UserDTO;
 
 @Service("JUserService")
 public class JUserServiceImpl implements JUserService {
@@ -32,9 +32,13 @@ public class JUserServiceImpl implements JUserService {
 
 	// 내 정보 수정
 	@Override
-	public SuccessDTO modify(UserVO user) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public SuccessDTO modify(UserDTO user) throws Exception {
+		try {
+			jdao.modify(user);
+			return success;
+		} catch (Exception e) {
+			return fail;
+		}
 	}
 
 }

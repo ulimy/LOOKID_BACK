@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
+import lookid.server.dto.ModifyTempPwDTO;
 import lookid.server.dto.SigninDTO;
-import lookid.server.dto.SuccessDTO;
 import lookid.server.vo.UserVO;
 
 @Repository
@@ -46,9 +46,14 @@ public class UserDAOImpl implements UserDAO {
 
 	// 비밀번호 찾기
 	@Override
-	public SuccessDTO find_pw(FindPwDTO user) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public String find_pw(FindPwDTO user) throws Exception {
+		return mapper.find_pw(user.getId(), user.getMail());
+	}
+
+	// 임시 비밀번호 수정
+	@Override
+	public void modify_temp_pw(ModifyTempPwDTO user) throws Exception {
+		mapper.modify_temp_pw(user.getPw(), user.getMail());
 	}
 
 	// 관리자 검색
@@ -56,10 +61,10 @@ public class UserDAOImpl implements UserDAO {
 	public FindAdminDTO find_admin(String id) throws Exception {
 		return mapper.find_admin(id);
 	}
-	
-	//튜플 카운트
+
+	// 튜플 카운트
 	@Override
-	public int count() throws Exception{
+	public int count() throws Exception {
 		return mapper.count();
 	}
 
