@@ -56,7 +56,7 @@
 	<!-- 랜덤스트링 임시비밀번호로 db update -->
 	<update id="modify_temp_pw">
 		
-		update user set pw=#{pw} where mail=#{mail}
+		update user set pw=#{pw} where mail=#{mail} and id=#{id}
 		
 	</update>
 

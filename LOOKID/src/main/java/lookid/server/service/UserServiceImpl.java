@@ -1,6 +1,7 @@
 package lookid.server.service;
 
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.Random;
 
 import javax.mail.internet.InternetAddress;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	private UserDAO dao;
 
 	@Autowired
-	private JavaMailSender mailSender; // find_pw 랜덤스트링 mail전송
+	private JavaMailSender mailSender;
 
 	@Autowired
 	@Qualifier("JWTService")
@@ -103,11 +105,12 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		/*
-		 * 파싱 테스트 ( ~ 2019-08-22)
+		 * 파싱 테스트 ( ~ 2019-08-23)
 		 */
 		
 //		int upid = JWTService.getUser_pid();
 //		
+//		System.out.println("[ JWT ]");
 //		System.out.println(upid);
 		
 		return udto; //안드로이드에게 userDTO정보를 넘겨줌.
@@ -122,7 +125,7 @@ public class UserServiceImpl implements UserService {
 
 	// 비밀번호 찾기
 	@Override
-	public SuccessDTO find_pw(FindPwDTO user) throws Exception {
+	public SuccessDTO find_pw(FindPwDTO user) throws FileNotFoundException, URISyntaxException, Exception {
 		// find_pw 랜덤스트링 mail전송, 기존 pw를 랜덤스트링으로 db수정
 
 		String mail = dao.find_pw(user); // 임시비밀번호가 보내질 회원의 mail
@@ -173,6 +176,7 @@ public class UserServiceImpl implements UserService {
 			ModifyTempPwDTO mtp = new ModifyTempPwDTO();
 			mtp.setMail(mail);
 			mtp.setPw(temp_pw);
+			mtp.setId(user.getId()); // mail과함께 입력한 id 까지 where 조건으로 들어가야 동일 이메일 전부다 임시비밀번호로 바뀌는 오류 방지
 
 			dao.modify_temp_pw(mtp);
 
@@ -187,10 +191,10 @@ public class UserServiceImpl implements UserService {
 	public FindAdminDTO find_admin(String id) throws Exception {
 		return dao.find_admin(id);
 	}
-
-	// 튜플 카운트
+	
 	@Override
-	public int count() throws Exception {
+	public int count() throws Exception{
 		return dao.count();
 	}
+
 }

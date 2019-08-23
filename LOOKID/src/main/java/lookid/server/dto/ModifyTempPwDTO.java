@@ -3,8 +3,17 @@ package lookid.server.dto;
 // 임시비밀번호로 DB 수정 
 public class ModifyTempPwDTO {
 
+	private String id;
 	private String pw;
 	private String mail;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getPw() {
 		return pw;
@@ -24,7 +33,7 @@ public class ModifyTempPwDTO {
 
 	@Override
 	public String toString() {
-		return "ModifyTempPwDTO [pw=" + pw + ", mail=" + mail + "]";
+		return "ModifyTempPwDTO [id=" + id + ", pw=" + pw + ", mail=" + mail + "]";
 	}
 
 }

@@ -21,7 +21,7 @@ public interface Mapper {
 
 	public String find_pw(@Param("id") String id, @Param("mail") String mail);
 	
-	public void modify_temp_pw(@Param("pw") String pw, @Param("mail") String mail);
+	public void modify_temp_pw(@Param("id") String id,@Param("pw") String pw, @Param("mail") String mail);
 
 	public FindAdminDTO find_admin(@Param("id") String id);	
 	

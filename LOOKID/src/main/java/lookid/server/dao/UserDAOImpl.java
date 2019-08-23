@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
 	// 임시 비밀번호 수정
 	@Override
 	public void modify_temp_pw(ModifyTempPwDTO user) throws Exception {
-		mapper.modify_temp_pw(user.getPw(), user.getMail());
+		mapper.modify_temp_pw(user.getId(),user.getPw(), user.getMail());
 	}
 
 	// 관리자 검색

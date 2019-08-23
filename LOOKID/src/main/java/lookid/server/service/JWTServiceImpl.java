@@ -27,8 +27,8 @@ public class JWTServiceImpl implements JWTService {
 		String jwt = Jwts.builder()
 				.setHeaderParam("typ", "JWT")
 				.claim(key, data)
-				.signWith(SignatureAlgorithm.HS256, this.generateKey())											
-				.compact(); //직렬화
+				.signWith(SignatureAlgorithm.HS256, this.generateKey())
+				.compact(); // 직렬화
 
 		return jwt;
 	}
@@ -50,13 +50,11 @@ public class JWTServiceImpl implements JWTService {
 	// 토큰 유효성 검사
 	@Override
 	public boolean isUsable(String jwt) {
-		try{
-			Jws<Claims> claims = Jwts.parser()
-					  .setSigningKey(this.generateKey())
-					  .parseClaimsJws(jwt);
+		try {
+			Jws<Claims> claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(jwt);
 			return true;
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			throw new UnauthorizedException();
 		}
 	}
@@ -64,24 +62,18 @@ public class JWTServiceImpl implements JWTService {
 	// 토큰 데이터 파싱
 	@Override
 	public Map<String, Object> get(String key) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String jwt = request.getHeader("Authorization"); //HTTP Authorization 헤더에 담긴 토큰을 요청.
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+				.getRequest();
+		String jwt = request.getHeader("Authorization"); // HTTP Authorization 헤더에 담긴 토큰을 요청.
 		Jws<Claims> claims = null;
 		try {
-			claims = Jwts.parser()
-						 .setSigningKey(SALT.getBytes("UTF-8"))
-						 .parseClaimsJws(jwt);
+			claims = Jwts.parser().setSigningKey(SALT.getBytes("UTF-8")).parseClaimsJws(jwt);
 		} catch (Exception e) {
 			throw new UnauthorizedException();
 		}
 		@SuppressWarnings("unchecked")
-		Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
+		Map<String, Object> value = (LinkedHashMap<String, Object>) claims.getBody().get(key);
 		return value;
-	}
-
-	@Override
-	public int getUser_pid() {
-		return (int)this.get("user_pid").get("user_pid"); // ?
 	}
 	
 	// 토큰 삭제
@@ -90,6 +82,5 @@ public class JWTServiceImpl implements JWTService {
 		// TODO Auto-generated method stub
 
 	}
-	
 
 }
