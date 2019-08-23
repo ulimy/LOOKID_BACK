@@ -5,7 +5,7 @@ public class ChildVO {
 	private int childpid;
 	private int g_pid;
 	private int d_pid;
-	private String c_num;
+	private String c_name;
 
 	public int getChildpid() {
 		return childpid;
