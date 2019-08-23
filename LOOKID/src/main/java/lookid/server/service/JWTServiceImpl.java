@@ -1,6 +1,7 @@
 package lookid.server.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class JWTServiceImpl implements JWTService {
 		return jwt;
 	}
 
+	// 키
 	@Override
 	public byte[] generateKey() {
 
@@ -59,23 +61,13 @@ public class JWTServiceImpl implements JWTService {
 		}
 	}
 
-	// 토큰 데이터 파싱
+	// jwt에서 user_pid 파싱
 	@Override
-	public Map<String, Object> get(String key) {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-				.getRequest();
-		String jwt = request.getHeader("Authorization"); // HTTP Authorization 헤더에 담긴 토큰을 요청.
-		Jws<Claims> claims = null;
-		try {
-			claims = Jwts.parser().setSigningKey(SALT.getBytes("UTF-8")).parseClaimsJws(jwt);
-		} catch (Exception e) {
-			throw new UnauthorizedException();
-		}
-		@SuppressWarnings("unchecked")
-		Map<String, Object> value = (LinkedHashMap<String, Object>) claims.getBody().get(key);
-		return value;
+	public String getUser_pid(String jwt) throws RuntimeException {
+		Jws claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(jwt);
+		return (String) claims.getBody().toString();
 	}
-	
+
 	// 토큰 삭제
 	@Override
 	public void detroy(String jwt) {

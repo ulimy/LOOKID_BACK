@@ -1,6 +1,7 @@
 package lookid.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import lookid.server.dao.JUserDAO;
@@ -12,6 +13,10 @@ public class JUserServiceImpl implements JUserService {
 
 	@Autowired
 	private JUserDAO jdao;
+	
+	@Autowired
+	@Qualifier("JWTService")
+	private JWTService JWTService;
 
 	private final SuccessDTO success = new SuccessDTO(true);
 	private final SuccessDTO fail = new SuccessDTO(false);
@@ -33,6 +38,7 @@ public class JUserServiceImpl implements JUserService {
 	// 내 정보 수정
 	@Override
 	public SuccessDTO modify(UserDTO user) throws Exception {
+	
 		try {
 			jdao.modify(user);
 			return success;

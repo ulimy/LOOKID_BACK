@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -94,26 +93,25 @@ public class UserServiceImpl implements UserService {
 		UserDTO udto = new UserDTO(uvo.getId(), uvo.getPw(), uvo.getName(), uvo.getPhone(), uvo.getMail(),
 				uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder());
 
-		String token = JWTService.create("user_pid", user_pid); //토큰 생성
-		
+		String token = JWTService.create("user_pid", user_pid); // 토큰 생성
+
 		if (JWTService.isUsable(token)) {
-			response.setHeader("Authorization", token); //http 헤더에 토큰 담기
+			response.setHeader("Authorization", token); // http 헤더에 토큰 담기
 
 			System.out.println("token : ");
-			System.out.println("[ " + token + " ]");
-			
+			System.out.println("[ " + token + " ]"); //jwt 콘솔 출력
+
 		}
-		
+
 		/*
-		 * 파싱 테스트 ( ~ 2019-08-23)
+		 * 파싱 테스트
 		 */
-		
-//		int upid = JWTService.getUser_pid();
-//		
-//		System.out.println("[ JWT ]");
-//		System.out.println(upid);
-		
-		return udto; //안드로이드에게 userDTO정보를 넘겨줌.
+		String temp = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
+		temp = temp.replaceAll("[^0-9]", ""); // toString 문자열에서 String타입 숫자만 추출
+		int u_pid = Integer.parseInt(temp); // String 숫자 -> Integer 변환 = user_pid 
+		System.out.println(u_pid);
+	
+		return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
 	}
 
 	// 아이디 찾기
@@ -191,9 +189,9 @@ public class UserServiceImpl implements UserService {
 	public FindAdminDTO find_admin(String id) throws Exception {
 		return dao.find_admin(id);
 	}
-	
+
 	@Override
-	public int count() throws Exception{
+	public int count() throws Exception {
 		return dao.count();
 	}
 
