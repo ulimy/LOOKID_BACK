@@ -10,6 +10,6 @@ public interface JWTService {
 
 	public void detroy(String jwt);
 
-	public String getUser_pid(String jwt);
+	public int getUser_pid(String jwt);
 
 }

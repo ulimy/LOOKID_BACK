@@ -106,9 +106,7 @@ public class UserServiceImpl implements UserService {
 		/*
 		 * 파싱 테스트
 		 */
-		String temp = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
-		temp = temp.replaceAll("[^0-9]", ""); // toString 문자열에서 String타입 숫자만 추출
-		int u_pid = Integer.parseInt(temp); // String 숫자 -> Integer 변환 = user_pid 
+		int u_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
 		System.out.println(u_pid);
 	
 		return udto; // 안드로이드에게 userDTO정보를 넘겨줌.

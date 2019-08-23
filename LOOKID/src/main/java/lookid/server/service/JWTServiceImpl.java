@@ -1,15 +1,8 @@
 package lookid.server.service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -63,9 +56,14 @@ public class JWTServiceImpl implements JWTService {
 
 	// jwt에서 user_pid 파싱
 	@Override
-	public String getUser_pid(String jwt) throws RuntimeException {
+	public int getUser_pid(String jwt) throws RuntimeException {
 		Jws claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(jwt);
-		return (String) claims.getBody().toString();
+		
+		String temp = (String) claims.getBody().toString(); // 파싱된 데이터가 toString 형태로 존재 
+		temp = temp.replaceAll("[^0-9]", ""); // toString 문자열에서 String타입 숫자만 추출
+		int user_pid = Integer.parseInt(temp); // String 숫자 -> Integer 변환 = user_pid 
+		
+		return user_pid;
 	}
 
 	// 토큰 삭제
