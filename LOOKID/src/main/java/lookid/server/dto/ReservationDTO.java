@@ -2,9 +2,10 @@ package lookid.server.dto;
 
 import java.util.Date;
 
-// 예약 정보
+// �삁�빟 �젙蹂�
 public class ReservationDTO {
 
+	private int rv_pid;
 	private String r_name;
 	private Date r_date;
 	private Date s_date;
@@ -20,6 +21,15 @@ public class ReservationDTO {
 	private String wb_num;
 	private int cost;
 	private int deposit;
+	private int state;
+	
+	public int getRv_pid() {
+		return rv_pid;
+	}
+
+	public void setRv_pid(int rv_pid) {
+		this.rv_pid = rv_pid;
+	}
 
 	public String getR_name() {
 		return r_name;
@@ -141,12 +151,21 @@ public class ReservationDTO {
 		this.deposit = deposit;
 	}
 
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "LookidDTO [r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date + ", e_date=" + e_date
-				+ ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name + ", bank_num=" + bank_num
-				+ ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item + ", return_item=" + return_item
-				+ ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost + ", deposit=" + deposit + "]";
+		return "ReservationDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date
+				+ ", e_date=" + e_date + ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name
+				+ ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item
+				+ ", return_item=" + return_item + ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost
+				+ ", deposit=" + deposit + ", state=" + state + "]";
 	}
 
 }
