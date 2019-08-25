@@ -25,12 +25,12 @@ public interface Mapper {
 
 	public FindAdminDTO find_admin(@Param("id") String id);	
 	
-	public void modify(@Param("id") String id, @Param("pw") String pw, @Param("name") String name,
+	public void modify(@Param("user_pid") int user_pid, @Param("pw") String pw, @Param("name") String name,
 			@Param("phone") String phone, @Param("mail") String mail, @Param("address") String address,
 			@Param("bank_name") String bank_name, @Param("bank_num") String bank_num,
 			@Param("bank_holder") String bank_holder);
 
-	public void modify_pw(@Param("pw") String pw);
+	public void modify_pw(@Param("user_pid") int user_pid, @Param("pw") String pw);
 
 	public int count();
 	

@@ -1,5 +1,6 @@
 package lookid.server.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +57,6 @@ public class UserController {
 		return uss.signin(user,response);
 	}
 
-	// 로그아웃
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public void signout() {
-		// jwt 서비스로 가서 토큰 삭제
-		return;
-	}
-
 	// 아이디 찾기
 	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
 	public @ResponseBody FindIdDTO find_id(@RequestBody FindIdDTO user) throws Exception {
@@ -85,16 +79,26 @@ public class UserController {
 
 	}
 
+	// 로그아웃
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	public void signout(HttpServletRequest request) throws Exception {
+		// jwt 서비스로 가서 토큰 삭제
+		// 로그아웃후 다시 로그인했을때 로그아웃전 토큰과 동일한 String의 토큰이 생성되는지 아닌지 확인
+		
+		juss.signout(request);
+		
+		return;
+	}
+	
 	// 비밀번호 변경
 	@RequestMapping(value = "/modify_pw", method = RequestMethod.PUT)
-	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw) {
-		return null;
+	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw) throws Exception {
+		return juss.modify_pw(pw);
 	}
 
 	// 내 정보 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
-	public @ResponseBody SuccessDTO modify(@RequestBody UserDTO user) throws Exception {
-		// jwt 구현전까지는 임시로 where id=#{id} 지정
+	public @ResponseBody SuccessDTO modify(@RequestBody UserVO user) throws Exception {
 		// 내정보수정버튼을 클릭했을 때 현재 본인의 정보가 먼저 텍스트필드칸에 채워지게 구현(안드로이드) 빈칸으로 수정 누르면 null값으로 들어감 bank정보를 not null 처리하지 않았기 때문.
 		return juss.modify(user);
 	}

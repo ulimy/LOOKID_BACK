@@ -43,14 +43,15 @@ public class UserServiceImpl implements UserService {
 	// 아이디 중복확인
 	@Override
 	public SuccessDTO checkId(String id) throws Exception {
+		// 아이디가 이미 존재하면 false 존재하지 않으면 true 리턴
 		try {
 			if (dao.checkId(id) != 0) {
-				return success;
+				return fail;
 			} else {
 				return null;
 			}
 		} catch (Exception e) {
-			return fail;
+			return success;
 		}
 
 	}
@@ -87,29 +88,39 @@ public class UserServiceImpl implements UserService {
 
 		int user_pid; // user_pid jwt생성에 이용
 
-		UserVO uvo = dao.signin(user);
+		try {
+			// id , pw 존재할 시
+			UserVO uvo = dao.signin(user);
 
-		user_pid = uvo.getUser_pid();
-		UserDTO udto = new UserDTO(uvo.getId(), uvo.getPw(), uvo.getName(), uvo.getPhone(), uvo.getMail(),
-				uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder());
+			user_pid = uvo.getUser_pid();
+			UserDTO udto = new UserDTO(uvo.getId(), uvo.getPw(), uvo.getName(), uvo.getPhone(), uvo.getMail(),
+					uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder());
 
-		String token = JWTService.create("user_pid", user_pid); // 토큰 생성
+			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
 
-		if (JWTService.isUsable(token)) {
-			response.setHeader("Authorization", token); // http 헤더에 토큰 담기
+			if (JWTService.isUsable(token)) {
+				response.setHeader("Authorization", token); // http 헤더에 토큰 담기
 
-			System.out.println("token : ");
-			System.out.println("[ " + token + " ]"); //jwt 콘솔 출력
+				System.out.println("token : ");
+				System.out.println("[ " + token + " ]"); //jwt 콘솔 출력
 
+			}
+			return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
+			
+		} catch (Exception e) {
+			System.out.println(e); // id, pw가 틀릴 시 NullPointerException 발생
+			UserDTO udto = new UserDTO(null, null, null, null, null, null, null, null, null); //id, pw가 틀릴 시 null userDTO 리턴
+			return udto;
 		}
 
 		/*
 		 * 파싱 테스트
 		 */
-		int u_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
-		System.out.println(u_pid);
+		
+//		int u_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
+//		System.out.println(u_pid);
 	
-		return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
+	
 	}
 
 	// 아이디 찾기

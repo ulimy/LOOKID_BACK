@@ -14,10 +14,10 @@ import lookid.server.exception.UnauthorizedException;
 public class JWTServiceImpl implements JWTService {
 
 	private static final String SALT = "UserSecret";
-
+	
 	// 토큰 생성
 	@Override
-	public <T> String create(String key, T data) {
+	public <T> String create(String key, T data) { // 토큰만료시간을 설정하면 토큰이 로그인 할 때 마다 바뀜
 		String jwt = Jwts.builder()
 				.setHeaderParam("typ", "JWT")
 				.claim(key, data)
@@ -69,7 +69,8 @@ public class JWTServiceImpl implements JWTService {
 	// 토큰 삭제
 	@Override
 	public void detroy(String jwt) {
-		// TODO Auto-generated method stub
+
+		return ;
 
 	}
 

@@ -28,6 +28,7 @@ public class UserDAOImpl implements UserDAO {
 
 		mapper.signup(user.getId(), user.getPw(), user.getName(), user.getPhone(), user.getMail(), user.getAddress(),
 				user.getBank_name(), user.getBank_num(), user.getBank_holder());
+		return ;
 
 	}
 
@@ -53,6 +54,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void modify_temp_pw(ModifyTempPwDTO user) throws Exception {
 		mapper.modify_temp_pw(user.getId(),user.getPw(), user.getMail());
+		return ;
 	}
 
 	// 관리자 검색
