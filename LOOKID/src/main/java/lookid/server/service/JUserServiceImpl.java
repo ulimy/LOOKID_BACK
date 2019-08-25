@@ -31,7 +31,7 @@ public class JUserServiceImpl implements JUserService {
 		// destroy 메소드 구현
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화 해주는 destroy메소드 구현
 		
-		String token = request.getHeader("Authorization"); // Authorization?
+		String token = request.getHeader("Authorization");
 		
 		try {
 			if (token != null && JWTService.isUsable(token)) {
@@ -59,7 +59,7 @@ public class JUserServiceImpl implements JUserService {
 	@Override
 	public SuccessDTO modify_pw(String pw) throws Exception {
 
-//		final String token = request.getHeader("Authorization"); Authorization?
+//		final String token = request.getHeader("Authorization");
 //		System.out.println(token);
 
 		// http에서 토큰 파싱만 되면 modify_pw 구현완료
@@ -90,11 +90,11 @@ public class JUserServiceImpl implements JUserService {
 	@Override
 	public SuccessDTO modify(UserVO user) throws Exception {
 
-//		final String token = request.getHeader("Authorization"); Authorization?
+//		final String token = request.getHeader("Authorization");
 //		System.out.println(token);
 
 		// http에서 토큰 파싱만 되면 modify 구현완료
-		// update 시 phone이 중복되면 안됨 modify sql문 수정 (~2019.08.25)
+		// update 시 phone이 중복되면 안됨 modify sql문 수정해야함 (~2019.08.25)
 
 		String token = "";
 		
