@@ -58,7 +58,7 @@ public class JUserServiceImpl implements JUserService {
 	// 비밀번호 변경
 	@Override
 	public SuccessDTO modify_pw(String pw) throws Exception {
-
+		
 //		final String token = request.getHeader("Authorization");
 //		System.out.println(token);
 
@@ -93,9 +93,11 @@ public class JUserServiceImpl implements JUserService {
 //		final String token = request.getHeader("Authorization");
 //		System.out.println(token);
 
-		// http에서 토큰 파싱만 되면 modify 구현완료
-		// update 시 phone이 중복되면 안됨 modify sql문 수정해야함 (~2019.08.25)
-
+		// http에서 토큰 파싱만 되면 modify 구현완료 
+		
+		// 1. http에서 토큰 가져오기 -> 인터셉터활용해보기 민수's 구글참고
+		// 2. destroy 메소드 구현
+		
 		String token = "";
 		
 		try {

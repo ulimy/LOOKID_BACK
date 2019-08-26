@@ -92,9 +92,10 @@ public class UserServiceImpl implements UserService {
 			// id , pw 존재할 시
 			UserVO uvo = dao.signin(user);
 
-			user_pid = uvo.getUser_pid();
-			UserDTO udto = new UserDTO(uvo.getId(), uvo.getPw(), uvo.getName(), uvo.getPhone(), uvo.getMail(),
-					uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder());
+			user_pid = uvo.getUser_pid(); // 토큰생성에 쓰일 user_pid 따로 저장
+			
+			UserDTO udto = new UserDTO(uvo.getName(), uvo.getPhone(), uvo.getMail(),
+					uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder()); // UserVO정보를 UserDTO에 담기
 
 			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
 
@@ -109,7 +110,7 @@ public class UserServiceImpl implements UserService {
 			
 		} catch (Exception e) {
 			System.out.println(e); // id, pw가 틀릴 시 NullPointerException 발생
-			UserDTO udto = new UserDTO(null, null, null, null, null, null, null, null, null); //id, pw가 틀릴 시 null userDTO 리턴
+			UserDTO udto = new UserDTO(null, null, null, null, null, null, null); //id, pw가 틀릴 시 null userDTO 리턴
 			return udto;
 		}
 
@@ -119,7 +120,6 @@ public class UserServiceImpl implements UserService {
 		
 //		int u_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
 //		System.out.println(u_pid);
-	
 	
 	}
 
@@ -183,7 +183,7 @@ public class UserServiceImpl implements UserService {
 			ModifyTempPwDTO mtp = new ModifyTempPwDTO();
 			mtp.setMail(mail);
 			mtp.setPw(temp_pw);
-			mtp.setId(user.getId()); // mail과함께 입력한 id 까지 where 조건으로 들어가야 동일 이메일 전부다 임시비밀번호로 바뀌는 오류 방지
+			mtp.setId(user.getId()); // mail과함께 입력한 id 까지 where 조건으로 들어가야 동일 이메일 전부다 같은 임시비밀번호로 바뀌는 오류 방지할 수 있음
 
 			dao.modify_temp_pw(mtp);
 

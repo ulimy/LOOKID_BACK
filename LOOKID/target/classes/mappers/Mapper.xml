@@ -9,8 +9,7 @@
 
 	<select id="checkId" resultType="Integer">
 
-		select user_pid from user where
-		id=#{id}
+		select user_pid from user where id=#{id}
 
 	</select>
 
@@ -36,22 +35,19 @@
 	<!-- user_pid select -->
 	<select id="signin" resultType="lookid.server.vo.UserVO">
 
-		select * from user where id=#{id}
-		and pw=#{pw}
+		select * from user where id=#{id} and pw=#{pw}
 
 	</select>
 
 	<select id="find_id" resultType="lookid.server.dto.FindIdDTO">
 
-		select * from user where
-		name=#{name} and phone=#{phone}
+		select * from user where name=#{name} and phone=#{phone}
 
 	</select>
 
 	<select id="find_pw" resultType="String">
 
-		select mail from user where
-		id=#{id} and mail=#{mail}
+		select mail from user where id=#{id} and mail=#{mail}
 
 	</select>
 
@@ -75,11 +71,14 @@
 
 	</update>
 
-	<!-- jwt 구현 전까지는 id를 조건으로 임시지정 구현후 토큰을 통해 user_pid를 알아내어 조건을 user_pid로 sql문작성 -->
+	<!-- 토큰을 통해 user_pid를 알아내어 조건을 user_pid로 sql문작성 -->
+	<!-- phone : unique 중복 업데이트 안됨 -->
 	<update id="modify">
+
 		update user set
 		pw=#{pw},name=#{name},phone=#{phone},mail=#{mail},address=#{address},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
 		where user_pid=#{user_pid}
+
 	</update>
 
 	<!-- 튜플 개수 카운트 -->

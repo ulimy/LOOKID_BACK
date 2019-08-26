@@ -3,8 +3,6 @@ package lookid.server.dto;
 //user_pid를 제외한 DTO
 public class UserDTO {
 
-	private String id;
-	private String pw;
 	private String name;
 	private String phone;
 	private String mail;
@@ -13,10 +11,8 @@ public class UserDTO {
 	private String bank_num;
 	private String bank_holder;
 
-	public UserDTO(String id, String pw, String name, String phone, String mail, String address, String bank_name,
-			String bank_num, String bank_holder) {
-		this.id = id;
-		this.pw = pw;
+	public UserDTO(String name, String phone, String mail, String address, String bank_name, String bank_num,
+			String bank_holder) {
 		this.name = name;
 		this.phone = phone;
 		this.mail = mail;
@@ -24,22 +20,6 @@ public class UserDTO {
 		this.bank_name = bank_name;
 		this.bank_num = bank_num;
 		this.bank_holder = bank_holder;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPw() {
-		return pw;
-	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
 	}
 
 	public String getName() {
@@ -100,9 +80,8 @@ public class UserDTO {
 
 	@Override
 	public String toString() {
-		return "UserDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone + ", mail=" + mail
-				+ ", address=" + address + ", bank_name=" + bank_name + ", bank_num=" + bank_num + ", bank_holder="
-				+ bank_holder + "]";
+		return "UserDTO [name=" + name + ", phone=" + phone + ", mail=" + mail + ", address=" + address + ", bank_name="
+				+ bank_name + ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + "]";
 	}
 
 }
