@@ -9,8 +9,8 @@ public interface JUserService {
 
 	public void signout(HttpServletRequest request) throws Exception;
 
-	public SuccessDTO modify_pw(String pw) throws Exception;
+	public SuccessDTO modify_pw(String pw, HttpServletRequest request) throws Exception;
 
-	public SuccessDTO modify(UserVO user) throws Exception;
+	public SuccessDTO modify(UserVO user, HttpServletRequest request) throws Exception;
 
 }

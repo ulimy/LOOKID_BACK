@@ -21,23 +21,16 @@ public class JWTInterceptor implements HandlerInterceptor {
 	@Autowired
 	private JWTService jwtService;
 
-//	public String getJWTToken(HttpServletRequest request) {
-//		
-//		final String token = request.getHeader(HEADER_AUTH); // HTTP 헤더에 담긴 토큰을 꺼낸다. (요청)
-//
-//		if (token != null && jwtService.isUsable(token)) {
-//			return token; // 토큰이 존재하며 유효할 시 true를 리턴
-//		} else {
-//			throw new UnauthorizedException(); // 그렇지 않으면 예외발생
-//		}
-//	}
-
+	// 전처리기는 클라이언트에서 컨트롤러로 요청할 때, 컨트롤러가 호출되기 전에 실행되는 메서드
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
+		
 		final String token = request.getHeader(HEADER_AUTH); // HTTP 헤더에 담긴 토큰을 꺼낸다. (요청)
 
+		System.out.println("인터셉터 컨트롤러 접근 전처리");
+		System.out.println("꺼내온 토큰 : " + " [ " + token + " ] ");
+		
 		if (token != null && jwtService.isUsable(token)) {
 			return true; // 토큰이 존재하며 유효할 시 true를 리턴
 		} else {
@@ -46,12 +39,15 @@ public class JWTInterceptor implements HandlerInterceptor {
 
 	}
 
+	// 후처리기는 컨트롤러에서 클라이언트로 요청할 때, 컨트롤러가 호출되고 난 후에 실행되는 메서드
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("인터셉터 postHandle");
 	}
 
+	// 컨트롤러의 처리가 끝나고 화면처리까지 모두 끝나면 실행되는 메서드
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {

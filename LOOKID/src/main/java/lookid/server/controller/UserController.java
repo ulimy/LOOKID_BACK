@@ -92,15 +92,15 @@ public class UserController {
 	
 	// 비밀번호 변경
 	@RequestMapping(value = "/modify_pw", method = RequestMethod.PUT)
-	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw) throws Exception {
-		return juss.modify_pw(pw);
+	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw, HttpServletRequest request) throws Exception {
+		return juss.modify_pw(pw, request);
 	}
 
 	// 내 정보 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
-	public @ResponseBody SuccessDTO modify(@RequestBody UserVO user) throws Exception {
+	public @ResponseBody SuccessDTO modify(@RequestBody UserVO user, HttpServletRequest request) throws Exception {
 		// 내정보수정버튼을 클릭했을 때 현재 본인의 정보가 먼저 텍스트필드칸에 채워지게 구현(안드로이드) 빈칸으로 수정 누르면 null값으로 들어감 bank정보를 not null 처리하지 않았기 때문.
-		return juss.modify(user);
+		return juss.modify(user,request);
 	}
 
 }

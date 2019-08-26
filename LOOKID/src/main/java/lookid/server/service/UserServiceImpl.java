@@ -114,13 +114,6 @@ public class UserServiceImpl implements UserService {
 			return udto;
 		}
 
-		/*
-		 * 파싱 테스트
-		 */
-		
-//		int u_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
-//		System.out.println(u_pid);
-	
 	}
 
 	// 아이디 찾기

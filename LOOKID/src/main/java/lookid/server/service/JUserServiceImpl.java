@@ -27,18 +27,21 @@ public class JUserServiceImpl implements JUserService {
 	// 로그아웃
 	@Override
 	public void signout(HttpServletRequest request) throws Exception {
-		// destroy 메소드를 통해 토큰 삭제
+		// destroy 메소드를 통해 토큰 무효화
 		// destroy 메소드 구현
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화 해주는 destroy메소드 구현
 		
-		String token = request.getHeader("Authorization");
+		//HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+		final String token = request.getHeader("Authorization");
+		System.out.println(token); // 헤더에서 꺼낸 토큰 콘솔 출력
 		
+		// String token = "";
 		try {
 			if (token != null && JWTService.isUsable(token)) {
 
 				JWTService.detroy(token);
 
-				if (JWTService.isUsable(token) && token != null) {
+				if (token != null && JWTService.isUsable(token)) {
 					System.out.println("아직유효");
 				} else {
 					System.out.println("삭제완료");
@@ -57,15 +60,14 @@ public class JUserServiceImpl implements JUserService {
 
 	// 비밀번호 변경
 	@Override
-	public SuccessDTO modify_pw(String pw) throws Exception {
+	public SuccessDTO modify_pw(String pw, HttpServletRequest request) throws Exception {
 		
-//		final String token = request.getHeader("Authorization");
-//		System.out.println(token);
-
 		// http에서 토큰 파싱만 되면 modify_pw 구현완료
+		final String token = request.getHeader("Authorization");
+		System.out.println(token);
 
-		String token = "";
 
+		// String token = "";
 		try {
 
 			if (token != null && JWTService.isUsable(token)) {
@@ -88,18 +90,14 @@ public class JUserServiceImpl implements JUserService {
 
 	// 내 정보 수정
 	@Override
-	public SuccessDTO modify(UserVO user) throws Exception {
-
-//		final String token = request.getHeader("Authorization");
-//		System.out.println(token);
+	public SuccessDTO modify(UserVO user, HttpServletRequest request) throws Exception {
 
 		// http에서 토큰 파싱만 되면 modify 구현완료 
+		final String token = request.getHeader("Authorization");
+		System.out.println(token);
+
 		
-		// 1. http에서 토큰 가져오기 -> 인터셉터활용해보기 민수's 구글참고
-		// 2. destroy 메소드 구현
-		
-		String token = "";
-		
+		//String token = "";
 		try {
 
 			if (token != null && JWTService.isUsable(token)) {
