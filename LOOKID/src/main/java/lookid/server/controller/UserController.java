@@ -34,7 +34,7 @@ public class UserController {
 	@Qualifier("UserService")
 	private UserService uss;
 	
-	//jwt인터셉터를 이용하여 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰의 유효성과 user_pid를 파싱해준다. 단 모든 메소드가아닌 필요한 메소드의 url만 지정.
+	//JWTInterceptor 를 이용하여 url로 지정한 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰을 파싱해준다. 단 모든 메소드가아닌 필요한 메소드의 url만 지정.
 
 	// 아이디 중복확인
 	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
@@ -79,7 +79,7 @@ public class UserController {
 
 	}
 
-	// 로그아웃
+	// 로그아웃  -> interceptor 포함 url 지정
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
 	public void signout(HttpServletRequest request) throws Exception {
 		// jwt 서비스로 가서 토큰 삭제
@@ -90,13 +90,13 @@ public class UserController {
 		return;
 	}
 	
-	// 비밀번호 변경
+	// 비밀번호 변경  -> interceptor 포함 url 지정
 	@RequestMapping(value = "/modify_pw", method = RequestMethod.PUT)
 	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw, HttpServletRequest request) throws Exception {
 		return juss.modify_pw(pw, request);
 	}
 
-	// 내 정보 수정
+	// 내 정보 수정  -> interceptor 포함 url 지정
 	@RequestMapping(value = "/modify", method = RequestMethod.PUT)
 	public @ResponseBody SuccessDTO modify(@RequestBody UserVO user, HttpServletRequest request) throws Exception {
 		// 내정보수정버튼을 클릭했을 때 현재 본인의 정보가 먼저 텍스트필드칸에 채워지게 구현(안드로이드) 빈칸으로 수정 누르면 null값으로 들어감 bank정보를 not null 처리하지 않았기 때문.

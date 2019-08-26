@@ -30,6 +30,19 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+	<!-- interceptor -->
+	<beans:bean id="interceptorForExam" class="lookid.server.interceptor.JWTInterceptor">
+	</beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/modify" />  <!-- /user/modify 로 들어오는 모든 요청에 대해 interceptor 수행-->
+			<mapping path="/user/modify_pw" />  <!-- /user/modify_pw 로 들어오는 모든 요청에 대해 interceptor 수행-->
+			<mapping path="/user/signout" />  <!-- /user/signout 로 들어오는 모든 요청에 대해 interceptor 수행-->
+			
+			<beans:ref bean="interceptorForExam" />
+		</interceptor>
+	</interceptors>
+
 	<context:component-scan base-package="lookid.server" />
 
 </beans:beans>

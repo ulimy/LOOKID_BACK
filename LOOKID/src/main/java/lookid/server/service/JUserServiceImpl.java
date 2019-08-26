@@ -67,7 +67,7 @@ public class JUserServiceImpl implements JUserService {
 		System.out.println(token);
 
 
-		// String token = "";
+		//String token = "";
 		try {
 
 			if (token != null && JWTService.isUsable(token)) {
