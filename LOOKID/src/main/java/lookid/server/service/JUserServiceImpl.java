@@ -35,7 +35,7 @@ public class JUserServiceImpl implements JUserService {
 		try {
 			if (token != null && JWTService.isUsable(token)) {
 
-				JWTService.detroy(token);
+				JWTService.detroy(token,request);
 
 				if (token != null && JWTService.isUsable(token)) {
 					System.out.println("아직유효");
