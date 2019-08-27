@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import lookid.server.exception.UnauthorizedException;
 import lookid.server.service.JWTService;
 
 @Component
@@ -24,23 +25,21 @@ public class JWTInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		final String token = request.getHeader(HEADER_AUTH); // HTTP 헤더에 담긴 토큰을 꺼낸다. (요청)
+		final String token = request.getHeader(HEADER_AUTH); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 		System.out.println("꺼내온 토큰 : " + " [ " + token + " ] ");
 
 		System.out.println("Interceptor preHandled access of Controller");
 		
 		try {
 			if (token != null && jwtService.isUsable(token)) { // 토큰이 존재하며 유효할 시 true를 리턴
-				//return true;
+				return true;
 			} else { // 그렇지 않으면 예외발생
-				//throw new UnauthorizedException(); 
+				throw new UnauthorizedException(); 
 			}	
 		} catch (Exception e) {
 			System.out.println(e);
-			//return false;
+			return false;
 		}
-
-		return true; // 토큰 http 헤더 파싱 구현 전 까지 인터셉터 전처리 true 임의 리턴
 	}
 
 	// 후처리기는 컨트롤러에서 클라이언트로 요청할 때, 컨트롤러가 호출되고 난 후에 실행되는 메서드

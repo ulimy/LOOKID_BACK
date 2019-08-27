@@ -2,6 +2,8 @@ package lookid.server.service;
 
 import java.io.UnsupportedEncodingException;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -65,13 +67,16 @@ public class JWTServiceImpl implements JWTService {
 		
 		return user_pid;
 	}
-
+	
+	
 	// 토큰 삭제
 	@Override
 	public void detroy(String jwt) {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화 해주는 destroy메소드 구현
+	
+		
+		
 		return ;
-
 	}
 
 }

@@ -15,9 +15,7 @@ public class JUserDAOImpl implements JUserDAO {
 	// 비밀번호 변경
 	@Override
 	public void modify_pw(ModifyPwDTO user) throws Exception {
-		
 		mapper.modify_pw(user.getUser_pid(),user.getPw());
-		
 		return ;
 	}
 

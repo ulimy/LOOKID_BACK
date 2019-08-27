@@ -28,14 +28,10 @@ public class JUserServiceImpl implements JUserService {
 	@Override
 	public void signout(HttpServletRequest request) throws Exception {
 		// destroy 메소드를 통해 토큰 무효화
-		// destroy 메소드 구현
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화 해주는 destroy메소드 구현
 		
-		//HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		final String token = request.getHeader("Authorization");
-		System.out.println(token); // 헤더에서 꺼낸 토큰 콘솔 출력
+		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 		
-		// String token = "";
 		try {
 			if (token != null && JWTService.isUsable(token)) {
 
@@ -62,12 +58,8 @@ public class JUserServiceImpl implements JUserService {
 	@Override
 	public SuccessDTO modify_pw(String pw, HttpServletRequest request) throws Exception {
 		
-		// http에서 토큰 파싱만 되면 modify_pw 구현완료
-		final String token = request.getHeader("Authorization");
-		System.out.println(token);
+		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 
-
-		//String token = "";
 		try {
 
 			if (token != null && JWTService.isUsable(token)) {
@@ -92,12 +84,8 @@ public class JUserServiceImpl implements JUserService {
 	@Override
 	public SuccessDTO modify(UserVO user, HttpServletRequest request) throws Exception {
 
-		// http에서 토큰 파싱만 되면 modify 구현완료 
-		final String token = request.getHeader("Authorization");
-		System.out.println(token);
+		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 
-		
-		//String token = "";
 		try {
 
 			if (token != null && JWTService.isUsable(token)) {
