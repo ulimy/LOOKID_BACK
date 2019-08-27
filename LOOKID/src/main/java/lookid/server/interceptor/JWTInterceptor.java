@@ -26,9 +26,9 @@ public class JWTInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		final String token = request.getHeader(HEADER_AUTH); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
-		System.out.println("꺼내온 토큰 : " + " [ " + token + " ] ");
 
 		System.out.println("Interceptor preHandled access of Controller");
+		System.out.println("꺼내온 토큰 : " + " [ " + token + " ] ");
 		
 		try {
 			if (token != null && jwtService.isUsable(token)) { // 토큰이 존재하며 유효할 시 true를 리턴

@@ -44,7 +44,7 @@ public class JUserServiceImpl implements JUserService {
 				}
 
 			} else {
-				System.out.println("jwt 파싱 실패");
+				System.out.println("HTTP JWT 파싱 실패");
 			}
 
 		} catch (Exception e) {
