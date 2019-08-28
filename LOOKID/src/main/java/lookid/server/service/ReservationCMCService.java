@@ -2,13 +2,17 @@ package lookid.server.service;
 
 import lookid.server.dto.ReservationDetailDTO;
 import lookid.server.dto.RvPidDTO;
+import lookid.server.dto.SuccessDTO;
 
 public interface ReservationCMCService {
 
-	public void create(ReservationDetailDTO input) throws Exception;
+	// 예약 하기
+	public SuccessDTO create(int user_pid, ReservationDetailDTO input) throws Exception;
 	
+	// 예약 수정
 	public void modify(ReservationDetailDTO input) throws Exception;
-	
+
+	// 예약 취소
 	public void cancle(RvPidDTO input) throws Exception;
 	
 }

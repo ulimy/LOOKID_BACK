@@ -6,7 +6,7 @@ public class GroupInfoDTO {
 	private GroupDTO group;
 	// child_pid 가 , 로 구분되어 string 으로
 	private String child;
-	// admin (user_pid) 가 , 로 구분되어 stringd으로
+	// admin (user_pid) 가 , 로 구분되어 string으로
 	private String admin;
 
 	public GroupDTO getGroup() {
