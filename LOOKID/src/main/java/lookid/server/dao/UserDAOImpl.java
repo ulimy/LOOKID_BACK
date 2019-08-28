@@ -7,7 +7,6 @@ import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
-import lookid.server.dto.SigninDTO;
 import lookid.server.vo.UserVO;
 
 @Repository
@@ -30,12 +29,6 @@ public class UserDAOImpl implements UserDAO {
 				user.getBank_name(), user.getBank_num(), user.getBank_holder());
 		return ;
 
-	}
-
-	// 로그인
-	@Override
-	public UserVO signin(SigninDTO user) throws Exception {
-		return mapper.signin(user.getId(), user.getPw());
 	}
 
 	// 아이디 찾기

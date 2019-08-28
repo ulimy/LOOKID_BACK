@@ -7,10 +7,8 @@ import java.util.Random;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +17,7 @@ import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
-import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
-import lookid.server.dto.UserDTO;
 import lookid.server.vo.UserVO;
 
 @Service("UserService")
@@ -32,10 +28,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
-	@Autowired
-	@Qualifier("JWTService")
-	private JWTService JWTService;
 
 	private final SuccessDTO success = new SuccessDTO(true);
 	private final SuccessDTO fail = new SuccessDTO(false);
@@ -67,7 +59,7 @@ public class UserServiceImpl implements UserService {
 			beforeInsert = count();
 			dao.signup(user);
 			afterInsert = count();
-			
+
 			if (beforeInsert == afterInsert) { // phone 중복으로 튜플이 늘어나지 않았을 때 fail을 리턴
 				return fail;
 			} else { // phone이 중복되지 않아 정상적으로 회원가입 완료
@@ -76,42 +68,6 @@ public class UserServiceImpl implements UserService {
 
 		} catch (Exception e) {
 			return fail;
-		}
-
-	}
-
-	// 로그인
-	@Override
-	public UserDTO signin(SigninDTO user, HttpServletResponse response) throws Exception {
-		// jwt토큰 생성
-		// user_pid는 토큰에, 나머지정보는 UserDTO에 담기
-
-		int user_pid; // user_pid jwt생성에 이용
-
-		try {
-			// id , pw 존재할 시
-			UserVO uvo = dao.signin(user);
-
-			user_pid = uvo.getUser_pid(); // 토큰생성에 쓰일 user_pid 따로 저장
-			
-			UserDTO udto = new UserDTO(uvo); // UserVO정보를 UserDTO에 담기
-
-			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
-
-			if (JWTService.isUsable(token)) {
-				response.setHeader("Authorization", token); // http 헤더에 토큰 담기
-
-				System.out.println("token : ");
-				System.out.println("[ " + token + " ]"); // jwt 콘솔 출력
-
-			}
-			return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
-			
-		} catch (Exception e) {
-			
-			System.out.println(e); // id, pw가 틀릴 시 NullPointerException 발생
-			return null; // id, pw 가 틀릴 시 null 리턴
-		
 		}
 
 	}

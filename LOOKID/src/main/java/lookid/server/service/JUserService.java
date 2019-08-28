@@ -1,17 +1,16 @@
 package lookid.server.service;
 
-import javax.servlet.http.HttpServletRequest;
-
 import lookid.server.dto.ModifyPwDTO;
+import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
 import lookid.server.vo.UserVO;
 
 public interface JUserService {
 
-	public void signout(HttpServletRequest request) throws Exception;
+	public UserVO signin(SigninDTO user) throws Exception;
+	
+	public SuccessDTO modify_pw(ModifyPwDTO user,int user_pid) throws Exception;
 
-	public SuccessDTO modify_pw(ModifyPwDTO user, HttpServletRequest request) throws Exception;
-
-	public SuccessDTO modify(UserVO user, HttpServletRequest request) throws Exception;
+	public SuccessDTO modify(UserVO user, int user_pid) throws Exception;
 
 }

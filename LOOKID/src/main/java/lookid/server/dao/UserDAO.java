@@ -4,7 +4,6 @@ import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
-import lookid.server.dto.SigninDTO;
 import lookid.server.vo.UserVO;
 
 public interface UserDAO {
@@ -12,8 +11,6 @@ public interface UserDAO {
 	public Integer checkId(String id) throws Exception;
 
 	public void signup(UserVO user) throws Exception;
-
-	public UserVO signin(SigninDTO user) throws Exception;
 
 	public FindIdDTO find_id(FindIdDTO user) throws Exception;
 
