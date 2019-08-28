@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
+import lookid.server.dto.ModifyPwDTO;
 import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
 import lookid.server.dto.UserDTO;
@@ -86,14 +87,14 @@ public class UserController {
 		// 로그아웃후 다시 로그인했을때 로그아웃전 토큰과 동일한 String의 토큰이 생성되는지 아닌지 확인
 		
 		jservice.signout(request);
-		
 		return;
 	}
 	
 	// 비밀번호 변경  -> interceptor 포함 url 지정
 	@RequestMapping(value = "/modify_pw", method = RequestMethod.PUT)
-	public @ResponseBody SuccessDTO modify_pw(@RequestParam(value = "pw") String pw, HttpServletRequest request) throws Exception {
-		return jservice.modify_pw(pw, request);
+	public @ResponseBody SuccessDTO modify_pw(@RequestBody ModifyPwDTO user, HttpServletRequest request) throws Exception {
+
+		return jservice.modify_pw(user, request);
 	}
 
 	// 내 정보 수정  -> interceptor 포함 url 지정
@@ -102,5 +103,6 @@ public class UserController {
 		// 내정보수정버튼을 클릭했을 때 현재 본인의 정보가 먼저 텍스트필드칸에 채워지게 구현(안드로이드) 빈칸으로 수정 누르면 null값으로 들어감 bank정보를 not null 처리하지 않았기 때문.
 		return jservice.modify(user,request);
 	}
+	
 
 }

@@ -6,11 +6,6 @@ public class ModifyPwDTO {
 	private int user_pid;
 	private String pw;
 
-	public ModifyPwDTO(int user_pid, String pw) {
-		this.user_pid = user_pid;
-		this.pw = pw;
-	}
-
 	public int getUser_pid() {
 		return user_pid;
 	}

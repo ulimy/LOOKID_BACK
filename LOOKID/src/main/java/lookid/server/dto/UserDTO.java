@@ -1,5 +1,7 @@
 package lookid.server.dto;
 
+import lookid.server.vo.UserVO;
+
 //user_pid를 제외한 DTO
 public class UserDTO {
 
@@ -11,15 +13,14 @@ public class UserDTO {
 	private String bank_num;
 	private String bank_holder;
 
-	public UserDTO(String name, String phone, String mail, String address, String bank_name, String bank_num,
-			String bank_holder) {
-		this.name = name;
-		this.phone = phone;
-		this.mail = mail;
-		this.address = address;
-		this.bank_name = bank_name;
-		this.bank_num = bank_num;
-		this.bank_holder = bank_holder;
+	public UserDTO(UserVO vo) {
+		this.name = vo.getName();
+		this.phone = vo.getPhone();
+		this.mail = vo.getMail();
+		this.address = vo.getAddress();
+		this.bank_name = vo.getBank_name();
+		this.bank_num = vo.getBank_num();
+		this.bank_holder = vo.getBank_holder();
 	}
 
 	public String getName() {

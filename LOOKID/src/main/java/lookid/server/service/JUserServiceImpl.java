@@ -30,17 +30,20 @@ public class JUserServiceImpl implements JUserService {
 		// destroy 메소드를 통해 토큰 무효화
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화 해주는 destroy메소드 구현
 		
-		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
+		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 		
 		try {
 			if (token != null && JWTService.isUsable(token)) {
 
-				JWTService.detroy(token,request);
-
-				if (token != null && JWTService.isUsable(token)) {
-					System.out.println("아직유효");
-				} else {
-					System.out.println("삭제완료");
+				token = JWTService.detroy(token);
+			
+				try {
+					if (token != null && JWTService.isUsable(token)) {
+						System.out.println("토큰이 아직 유효합니다.");
+					}
+				} catch (Exception e) {
+					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
+					System.out.println(e);
 				}
 
 			} else {
@@ -56,16 +59,18 @@ public class JUserServiceImpl implements JUserService {
 
 	// 비밀번호 변경
 	@Override
-	public SuccessDTO modify_pw(String pw, HttpServletRequest request) throws Exception {
+	public SuccessDTO modify_pw(ModifyPwDTO user, HttpServletRequest request) throws Exception {
 		
 		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
-
+	
 		try {
 
 			if (token != null && JWTService.isUsable(token)) {
 				int user_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
-
-				ModifyPwDTO mpdto = new ModifyPwDTO(user_pid, pw);
+				
+				ModifyPwDTO mpdto = new ModifyPwDTO();
+				mpdto.setUser_pid(user_pid);
+				mpdto.setPw(user.getPw());
 
 				jdao.modify_pw(mpdto);
 

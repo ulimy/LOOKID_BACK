@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 			beforeInsert = count();
 			dao.signup(user);
 			afterInsert = count();
-
+			
 			if (beforeInsert == afterInsert) { // phone 중복으로 튜플이 늘어나지 않았을 때 fail을 리턴
 				return fail;
 			} else { // phone이 중복되지 않아 정상적으로 회원가입 완료
@@ -94,8 +94,7 @@ public class UserServiceImpl implements UserService {
 
 			user_pid = uvo.getUser_pid(); // 토큰생성에 쓰일 user_pid 따로 저장
 			
-			UserDTO udto = new UserDTO(uvo.getName(), uvo.getPhone(), uvo.getMail(),
-					uvo.getAddress(), uvo.getBank_name(), uvo.getBank_num(), uvo.getBank_holder()); // UserVO정보를 UserDTO에 담기
+			UserDTO udto = new UserDTO(uvo); // UserVO정보를 UserDTO에 담기
 
 			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
 
@@ -103,15 +102,16 @@ public class UserServiceImpl implements UserService {
 				response.setHeader("Authorization", token); // http 헤더에 토큰 담기
 
 				System.out.println("token : ");
-				System.out.println("[ " + token + " ]"); //jwt 콘솔 출력
+				System.out.println("[ " + token + " ]"); // jwt 콘솔 출력
 
 			}
 			return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
 			
 		} catch (Exception e) {
+			
 			System.out.println(e); // id, pw가 틀릴 시 NullPointerException 발생
-			UserDTO udto = new UserDTO(null, null, null, null, null, null, null); //id, pw가 틀릴 시 null userDTO 리턴
-			return udto;
+			return null; // id, pw 가 틀릴 시 null 리턴
+		
 		}
 
 	}
