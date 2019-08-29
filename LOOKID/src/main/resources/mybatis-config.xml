@@ -5,9 +5,8 @@
 
 <configuration>
 
-	<settings>           
-     	<setting name="jdbcTypeForNull" value="NULL" /> <!-- null을 insert할 수 있도록 함 -->
-   	</settings>
-   	
-   
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" /> <!-- null을 insert할 수 있도록 함 -->
+	</settings>
+
 </configuration>

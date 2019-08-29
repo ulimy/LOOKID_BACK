@@ -70,11 +70,11 @@ public class JWTServiceImpl implements JWTService {
 	// 토큰 무효화
 	@Override
 	public String detroy(String jwt) {
-		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화 해주는 destroy메소드 구현
+		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
 	
 		jwt = Jwts.builder()
 			.setHeaderParam("typ", "JWT")
-			.setExpiration(new Date(System.currentTimeMillis())) // 만료시간을 현재시간으로 설정
+			.setExpiration(new Date(System.currentTimeMillis())) // 만료시간을 현재시간으로 설정하여 토큰을 바로 만료시킴
 			.signWith(SignatureAlgorithm.HS256, this.generateKey())
 			.compact(); // 직렬화
 

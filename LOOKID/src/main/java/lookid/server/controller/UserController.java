@@ -41,13 +41,12 @@ public class UserController {
 	@Qualifier("JWTService")
 	private JWTService JWTService;
 
-	// JWTInterceptor 를 이용하여 url로 지정한 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰을 파싱해준다. 단 모든
-	// 메소드가아닌 필요한 메소드의 url만 지정.
+	// JWTInterceptor 를 이용하여 url로 지정한 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰유효성을 검증 해준다. 
+	// 단 모든 메소드가아닌 필요한 메소드의 url만 지정.
 
 	// 아이디 중복확인
 	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
 	public @ResponseBody SuccessDTO idcheck(@RequestParam(value = "id") String id) throws Exception {
-		// null처리
 		return service.checkId(id);
 	}
 
@@ -61,14 +60,12 @@ public class UserController {
 	// 아이디 찾기
 	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
 	public @ResponseBody FindIdDTO find_id(@RequestBody FindIdDTO user) throws Exception {
-		// null처리
 		return service.find_id(user);
 	}
 
 	// 비밀번호 찾기
 	@RequestMapping(value = "/find_pw", method = RequestMethod.GET)
 	public @ResponseBody SuccessDTO find_pw(@RequestBody FindPwDTO user) throws Exception {
-		// null처리
 		return service.find_pw(user);
 	}
 
@@ -82,7 +79,7 @@ public class UserController {
 	// 로그인
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public @ResponseBody UserDTO signin(@RequestBody SigninDTO user, HttpServletResponse response) throws Exception {
-		// null처리
+		// NullPointException처리
 		// user_pid는 토큰에, 나머지정보는 UserDTO에 담기
 		try {
 			// id , pw 존재할 시
@@ -93,11 +90,11 @@ public class UserController {
 
 			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
 
-			if (JWTService.isUsable(token)) {
-				response.setHeader("Authorization", token); // http 헤더에 토큰 담기
+			if (JWTService.isUsable(token)) { // 토큰이 유효할 때
+				response.setHeader("Authorization", token); // http 헤더에 토큰 담기. 안드로이드로 전송?
+				// http 헤더 토큰 키 네임 : Authorization
 
-				System.out.println("token : ");
-				System.out.println("[ " + token + " ]"); // jwt 콘솔 출력
+				System.out.println("token : " + "\n" + "[ " + token + " ]"); // jwt 콘솔 출력
 			}
 			return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
 		} catch (Exception e) {
@@ -111,8 +108,6 @@ public class UserController {
 	public void signout(HttpServletRequest request) throws Exception {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
 		
-		// 로그아웃후 다시 로그인했을때 로그아웃전 토큰과 동일한 String의 토큰이 생성되는지 아닌지 확인
-
 		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 		try {
 			if (token != null && JWTService.isUsable(token)) {

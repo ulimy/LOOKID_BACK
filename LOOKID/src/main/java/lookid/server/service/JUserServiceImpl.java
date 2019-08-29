@@ -45,7 +45,7 @@ public class JUserServiceImpl implements JUserService {
 	@Override
 	public SuccessDTO modify(UserVO user, int user_pid) throws Exception {
 		try {
-			user.setUser_pid(user_pid); // 헤더에서 꺼낸 토큰에서 파싱된 user_pid를 where 조건으로 사용하기위해 set
+			user.setUser_pid(user_pid); // 헤더에서 꺼낸 토큰에서 파싱된 user_pid를 where 조건으로 사용하기위해 user_pid를 set
 			jdao.modify(user);
 			return success;
 		} catch (Exception e) {

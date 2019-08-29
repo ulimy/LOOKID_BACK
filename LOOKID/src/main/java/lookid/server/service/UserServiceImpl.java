@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 
 			if (beforeInsert == afterInsert) { // phone 중복으로 튜플이 늘어나지 않았을 때 fail을 리턴
 				return fail;
-			} else { // phone이 중복되지 않아 정상적으로 회원가입 완료
+			} else { // phone이 중복되지 않아 튜플이 늘어났을 때 정상적으로 회원가입 완료
 				return success;
 			}
 
@@ -82,62 +82,67 @@ public class UserServiceImpl implements UserService {
 	// 비밀번호 찾기
 	@Override
 	public SuccessDTO find_pw(FindPwDTO user) throws FileNotFoundException, URISyntaxException, Exception {
-		// find_pw 랜덤스트링 mail전송, 기존 pw를 랜덤스트링으로 db수정
+		// 랜덤스트링을 생성하여 mail전송, 기존 pw를 생성된 랜덤스트링으로 db수정
 
-		String mail = dao.find_pw(user); // 임시비밀번호가 보내질 회원의 mail
-		String temp_pw; // 임시비밀번호
-
-		/*
-		 * 랜덤스트링 임시비밀번호 생성
-		 */
-		if (mail != null) {
-			Random rnd = new Random();
-			StringBuffer buf = new StringBuffer();
-
-			for (int i = 0; i < 10; i++) { // 10자리 랜덤스트링 생성
-				// rnd.nextBoolean() 는 랜덤으로 true, false 를 리턴. true일 시 랜덤 한 소문자를, false 일 시 랜덤한
-				// 숫자를 StringBuffer에 append.
-				if (rnd.nextBoolean()) {
-					buf.append((char) ((int) (rnd.nextInt(26)) + 97));
-				} else {
-					buf.append((rnd.nextInt(10)));
-				}
-			}
-			temp_pw = buf.toString();
-
-			String subject = "루키드 LOOKID 임시 비밀번호 발급입니다."; // 메일 제목
-			String text = "회원님의 임시 비밀번호가 발급되었습니다." + "\n\n" + "임시 비밀번호로 로그인하여 '내 정보 수정' -> '비밀번호 변경' 을 해주세요." + "\n\n"
-					+ "임시 비밀번호 : " + temp_pw; // 메일 내용
+		try {
+			String mail = dao.find_pw(user); // 임시비밀번호가 보내질 회원의 mail
+			String temp_pw; // 임시비밀번호
 
 			/*
-			 * 메일 전송 api
-			 * 
+			 * 랜덤스트링 임시비밀번호 생성
 			 */
-			try {
+			if (mail != null) {
+				Random rnd = new Random();
+				StringBuffer buf = new StringBuffer();
 
-				MimeMessage message = mailSender.createMimeMessage();
-				message.setFrom(new InternetAddress("smulookid@gmail.com"));
-				message.addRecipient(RecipientType.TO, new InternetAddress(mail));
-				message.setSubject(subject);
-				message.setText(text, "utf-8", "html");
-				mailSender.send(message);
-			} catch (Exception e) {
-				e.printStackTrace();
+				for (int i = 0; i < 10; i++) { // 10자리 랜덤스트링 생성
+					// rnd.nextBoolean() 는 랜덤으로 true, false 를 리턴. true일 시 랜덤 한 소문자를, false 일 시 랜덤한
+					// 숫자를 StringBuffer에 append.
+					if (rnd.nextBoolean()) {
+						buf.append((char) ((int) (rnd.nextInt(26)) + 97)); // 소문자
+					} else {
+						buf.append((rnd.nextInt(10))); // 0~9 정수
+					}
+				}
+				temp_pw = buf.toString();
+
+				String subject = "루키드 LOOKID 임시 비밀번호 발급입니다."; // 메일 제목
+				String text = "회원님의 임시 비밀번호가 발급되었습니다." + "\n\n" + "임시 비밀번호로 로그인하여 '내 정보 수정' -> '비밀번호 변경' 을 해주세요."
+						+ "\n\n" + "임시 비밀번호 : " + temp_pw; // 메일 내용
+
+				/*
+				 * 메일 전송 api
+				 * 
+				 */
+				try {
+
+					MimeMessage message = mailSender.createMimeMessage();
+					message.setFrom(new InternetAddress("smulookid@gmail.com")); // 발신자
+					message.addRecipient(RecipientType.TO, new InternetAddress(mail));
+					message.setSubject(subject);
+					message.setText(text, "utf-8", "html");
+					mailSender.send(message);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return fail;
+				}
+
+				/*
+				 * db 임시비밀번호로 수정
+				 */
+				ModifyTempPwDTO mtp = new ModifyTempPwDTO();
+				mtp.setMail(mail);
+				mtp.setPw(temp_pw);
+				mtp.setId(user.getId()); // mail과함께 입력한 id 까지 where 조건으로 들어가야 동일 이메일 전부다 같은 임시비밀번호로 바뀌는 오류 방지할 수 있음
+
+				dao.modify_temp_pw(mtp);
+
+				return success;
+			} else {
 				return fail;
 			}
-
-			/*
-			 * db 임시비밀번호로 수정
-			 */
-			ModifyTempPwDTO mtp = new ModifyTempPwDTO();
-			mtp.setMail(mail);
-			mtp.setPw(temp_pw);
-			mtp.setId(user.getId()); // mail과함께 입력한 id 까지 where 조건으로 들어가야 동일 이메일 전부다 같은 임시비밀번호로 바뀌는 오류 방지할 수 있음
-
-			dao.modify_temp_pw(mtp);
-
-			return success;
-		} else {
+		} catch (Exception e) {
+			System.out.println(e);
 			return fail;
 		}
 	}
@@ -148,6 +153,7 @@ public class UserServiceImpl implements UserService {
 		return dao.find_admin(id);
 	}
 
+	// 튜플 카운트
 	@Override
 	public int count() throws Exception {
 		return dao.count();

@@ -13,9 +13,9 @@ import lookid.server.service.JWTService;
 
 @Component
 public class JWTInterceptor extends HandlerInterceptorAdapter {
-	// jwt인터셉터를 이용하여 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰의 유효성과 user_pid를 파싱해준다.
+	// jwt인터셉터를 이용하여 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰의 유효성 검사
 
-	private static final String HEADER_AUTH = "Authorization";
+	private static final String HEADER_AUTH = "Authorization"; // 토큰 http 헤더의 키 네임
 
 	@Autowired
 	private JWTService jwtService;
@@ -28,7 +28,7 @@ public class JWTInterceptor extends HandlerInterceptorAdapter {
 		final String token = request.getHeader(HEADER_AUTH); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 
 		System.out.println("Interceptor preHandled access of Controller");
-		System.out.println("꺼내온 토큰 : " + " [ " + token + " ] ");
+		System.out.println("꺼내온 토큰 : " + " [ " + token + " ] "); // 콘솔에 임의로 토큰 String을 출력
 		
 		try {
 			if (token != null && jwtService.isUsable(token)) { // 토큰이 존재하며 유효할 시 true를 리턴

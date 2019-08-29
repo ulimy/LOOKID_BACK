@@ -14,6 +14,7 @@
 	</select>
 
 	<!-- phone이 db에 이미 존재한다면 insert를 하지 않는다 -->
+	<!-- dual을 사용하여 empty table일 때 insert가 가능하도록 함-->
 	<insert id="signup">
 
 		insert into
@@ -32,7 +33,6 @@
 
 	</insert>
 
-	<!-- user_pid select -->
 	<select id="signin" resultType="lookid.server.vo.UserVO">
 
 		select * from user where id=#{id} and pw=#{pw}
@@ -63,8 +63,7 @@
 		select * from user where id=#{id}
 	</select>
 
-
-	<!-- jwt 필요 -->
+	<!-- jwt 에서 파싱된 user_pid 조건-->
 	<update id="modify_pw">
 
 		update user set pw=#{pw} where user_pid=#{user_pid}
@@ -81,7 +80,7 @@
 
 	</update>
 
-	<!-- 튜플 개수 카운트 -->
+	<!-- user table 튜플 개수 카운트 -->
 	<select id="count" resultType="Integer">
 		select count(*) from user
 	</select>

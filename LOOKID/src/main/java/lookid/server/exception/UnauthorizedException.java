@@ -1,5 +1,6 @@
 package lookid.server.exception;
 
+// JWT에 관련된 예외처리 클래스
 public class UnauthorizedException extends RuntimeException {
 	
 	/**
