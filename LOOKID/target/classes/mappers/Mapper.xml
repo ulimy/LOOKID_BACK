@@ -23,6 +23,13 @@
 	<insert id="group_create" parameterType="lookid.server.vo.GroupVO" useGeneratedKeys="true" keyProperty="g_pid">
 		insert into groups (rv_pid,g_name,count) values (#{rv_pid},#{g_name},#{count})
 	</insert>
-
+	
+	<!-- child 정보 생성 -->
+	<insert id="child_create">
+		insert into child (g_pid,c_name) values 
+		<foreach collection="children" item="item" separator=",">
+		(${g_pid},"${item}")
+		</foreach>
+	</insert>
 
 </mapper>

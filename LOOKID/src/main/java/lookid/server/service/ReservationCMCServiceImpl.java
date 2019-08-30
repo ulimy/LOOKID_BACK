@@ -31,16 +31,13 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 			for (GroupInfoDTO group : input.getGroupInfo()) {
 				// 그룹 정보 디비에 넣고 g_pid 돌려받기
 				int g_pid = create.group_create(rv_pid, group.getGroup());
+				
+				// chiㅣd 정보 뽑아 디비에 넣기
+				create.child_create(g_pid,group.getChild());
+				
+				//admin 정보 뽑아 디비에 넣기
+				
 			}
-
-			// 그룹 정보 뽑아 디비에 넣고 g_pid 돌려받기
-
-			// child 정보 뽑아 디비에 넣기
-
-			// admin 정보 뽑아 디비에 넣기
-
-			
-			
 			return success;
 		} catch (Exception e) {
 			System.out.println(e);

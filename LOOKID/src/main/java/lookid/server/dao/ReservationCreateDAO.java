@@ -12,7 +12,7 @@ public interface ReservationCreateDAO {
 	public int group_create(int rv_pid, GroupDTO input) throws Exception;
 	
 	// 피보호자 정보 생성
-	public void child_create(String child,int g_pid) throws Exception;
+	public void child_create(int g_pid, String child) throws Exception;
 	
 	// 관리자 정보 생성
 	public void admin_create(int admin,int g_pid)  throws Exception;

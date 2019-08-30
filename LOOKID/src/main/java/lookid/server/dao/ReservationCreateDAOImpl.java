@@ -1,5 +1,8 @@
 package lookid.server.dao;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,15 +27,15 @@ public class ReservationCreateDAOImpl implements ReservationCreateDAO {
 	// 그룹 정보 추가
 	@Override
 	public int group_create(int rv_pid, GroupDTO input) throws Exception {
-		GroupVO gv = new GroupVO(rv_pid,input);
+		GroupVO gv = new GroupVO(rv_pid, input);
 		mapper.group_create(gv);
 		return gv.getG_pid();
 	}
 
 	@Override
-	public void child_create(String child, int g_pid) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void child_create(int g_pid, String child) throws Exception {
+		// child 정보 , 으로 잘라 배열로 만들어서 g_pid와 함께 mapper로 전달
+		mapper.child_create(g_pid,child.split(","));
 	}
 
 	@Override
