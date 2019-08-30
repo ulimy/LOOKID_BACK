@@ -1,11 +1,19 @@
 package lookid.server.vo;
 
+import lookid.server.dto.GroupDTO;
+
 public class GroupVO {
 
 	private int g_pid;
 	private int rv_pid;
 	private String g_name;
 	private int count;
+	
+	public GroupVO(int rv_pid, GroupDTO dto){
+		this.rv_pid = rv_pid;
+		this.g_name = dto.getG_name();
+		this.count = dto.getCount();
+	}
 
 	public int getG_pid() {
 		return g_pid;

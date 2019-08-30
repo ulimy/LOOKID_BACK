@@ -9,7 +9,7 @@ public interface ReservationCreateDAO {
 	public int reservation_create(int user_pid, ReservationVO input) throws Exception;
 	
 	// 그룹 정보 생성
-	public int group_create(GroupDTO input,int rv_pid) throws Exception;
+	public int group_create(int rv_pid, GroupDTO input) throws Exception;
 	
 	// 피보호자 정보 생성
 	public void child_create(String child,int g_pid) throws Exception;
