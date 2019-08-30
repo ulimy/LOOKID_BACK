@@ -2,30 +2,22 @@ package lookid.server.dto;
 
 import java.util.Arrays;
 
+import lookid.server.vo.ReservationVO;
+
 // 전체 예약 정보 (예약 하기, 예약 조회, 예약 수정 등에 사용)
 public class ReservationDetailDTO {
 
 	// 예약 정보
-	private ReservationDTO reservation;
-	// 그룹 개수
-	private int groupCount;
+	private ReservationVO reservation;
 	// 그룹 당 피보호자, 관리자 정보¸
 	private GroupInfoDTO[] groupInfo;
 
-	public ReservationDTO getReservation() {
+	public ReservationVO getReservation() {
 		return reservation;
 	}
 
-	public void setReservation(ReservationDTO reservation) {
+	public void setReservation(ReservationVO reservation) {
 		this.reservation = reservation;
-	}
-
-	public int getGroupCount() {
-		return groupCount;
-	}
-
-	public void setGroupCount(int groupCount) {
-		this.groupCount = groupCount;
 	}
 
 	public GroupInfoDTO[] getGroupInfo() {
@@ -38,7 +30,7 @@ public class ReservationDetailDTO {
 
 	@Override
 	public String toString() {
-		return "ReservationDetailDTO [reservation=" + reservation + ", groupCount=" + groupCount + ", groupInfo="
+		return "ReservationDetailDTO [reservation=" + reservation + ", groupInfo="
 				+ Arrays.toString(groupInfo) + "]";
 	}
 

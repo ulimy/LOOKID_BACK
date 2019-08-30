@@ -2,11 +2,43 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="lookid.server.dao.Mapper">
- 
- 	<select id="login" resultType="Integer">
-		select personpid from profile where id=#{id} and password=#{password}
-	</select>
- 
- </mapper>
+
+<mapper namespace="lookid.server.dao.Mapper">
+
+	<!-- <insert id="reservation_create" useGeneratedKeys="true" keyProperty="rv_pid" 
+		parameterType="lookid.server.dto.ReservationDTO"> insert into reservation 
+		(user_pid,r_name,r_date,s_date,e_date,name,phone,back_name,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state) 
+		values (#{user_pid},#{r_name},#{r_date},#{s_date},#{e_date},#{name},#{phone},#{back_name},#{bank_holder},#{receipt_item},#{return_item},#{address},#{wb_num},#{cost},#{deposit},#{state}) 
+		</insert> -->
+
+	<!-- 예약 정보 생성 -->
+	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO" useGeneratedKeys="true" keyProperty="rv_pid">
+		insert into reservation
+		(user_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state)
+		values
+		(#{user_pid},#{r_name},#{r_date},#{s_date},#{e_date},#{name},#{phone},#{bank_name},#{bank_num},#{bank_holder},#{receipt_item},#{return_item},#{address},#{wb_num},#{cost},#{deposit},#{state})
+	</insert>
+
+	<!-- 그룹 정보 생성 -->
+	<insert id="group_create" parameterType="lookid.server.vo.GroupVO" useGeneratedKeys="true" keyProperty="g_pid">
+		insert into groups (rv_pid,g_name,count) values (#{rv_pid},#{g_name},#{count})
+	</insert>
+	
+	<!-- child 정보 생성 -->
+	<insert id="child_create">
+		insert into child (g_pid,c_name) values 
+		<foreach collection="children" item="item" separator=",">
+		(${g_pid},"${item}")
+		</foreach>
+	</insert>
+	
+	<!-- admin 정보 생성 -->
+	<insert id="admin_create">
+		insert into admin (user_pid,g_pid) values
+		<foreach collection="admins" item="item" separator=",">
+		(${item},${g_pid})
+		</foreach>
+	</insert>
+	
+	
+</mapper>

@@ -5,7 +5,7 @@ public class ChildVO {
 	private int childpid;
 	private int g_pid;
 	private int d_pid;
-	private String c_num;
+	private String c_name;
 
 	public int getChildpid() {
 		return childpid;
@@ -31,17 +31,17 @@ public class ChildVO {
 		this.d_pid = d_pid;
 	}
 
-	public String getC_num() {
-		return c_num;
+	public String getC_name() {
+		return c_name;
 	}
 
-	public void setC_num(String c_num) {
-		this.c_num = c_num;
+	public void setC_name(String c_name) {
+		this.c_name = c_name;
 	}
 
 	@Override
 	public String toString() {
-		return "ChildVO [childpid=" + childpid + ", g_pid=" + g_pid + ", d_pid=" + d_pid + ", c_num=" + c_num + "]";
+		return "ChildVO [childpid=" + childpid + ", g_pid=" + g_pid + ", d_pid=" + d_pid + ", c_name=" + c_name + "]";
 	}
 
 }
