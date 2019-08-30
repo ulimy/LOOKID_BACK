@@ -36,6 +36,7 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 				create.child_create(g_pid,group.getChild());
 				
 				//admin 정보 뽑아 디비에 넣기
+				create.admin_create(g_pid, group.getAdmin());
 				
 			}
 			return success;

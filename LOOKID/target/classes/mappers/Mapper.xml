@@ -31,5 +31,14 @@
 		(${g_pid},"${item}")
 		</foreach>
 	</insert>
-
+	
+	<!-- admin 정보 생성 -->
+	<insert id="admin_create">
+		insert into admin (user_pid,g_pid) values
+		<foreach collection="admins" item="item" separator=",">
+		(${item},${g_pid})
+		</foreach>
+	</insert>
+	
+	
 </mapper>

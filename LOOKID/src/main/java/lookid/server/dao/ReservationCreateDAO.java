@@ -15,5 +15,5 @@ public interface ReservationCreateDAO {
 	public void child_create(int g_pid, String child) throws Exception;
 	
 	// 관리자 정보 생성
-	public void admin_create(int admin,int g_pid)  throws Exception;
+	public void admin_create(int g_pid, String admin)  throws Exception;
 }

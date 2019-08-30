@@ -1,8 +1,5 @@
 package lookid.server.dao;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,8 +36,8 @@ public class ReservationCreateDAOImpl implements ReservationCreateDAO {
 	}
 
 	@Override
-	public void admin_create(int admin, int g_pid) throws Exception {
-		// TODO Auto-generated method stub
+	public void admin_create(int g_pid, String admin) throws Exception {
+		mapper.admin_create(g_pid, admin.split(","));
 
 	}
 
