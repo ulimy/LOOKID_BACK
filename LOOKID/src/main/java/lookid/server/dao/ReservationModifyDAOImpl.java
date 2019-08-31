@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lookid.server.dto.GroupDTO;
-import lookid.server.vo.ReservationVO;
+import lookid.server.dto.ReservationDTO;
 
 @Repository("ReservationModifyDAO")
 public class ReservationModifyDAOImpl implements ReservationModifyDAO {
@@ -13,7 +13,7 @@ public class ReservationModifyDAOImpl implements ReservationModifyDAO {
 	private Mapper mapper;
 
 	@Override
-	public void reservation_modify(ReservationVO input) {
+	public void reservation_modify(ReservationDTO input) {
 		mapper.reservation_modify(input);
 		return;
 	}

@@ -3,6 +3,7 @@ package lookid.server.dao;
 import org.apache.ibatis.annotations.Param;
 
 import lookid.server.dto.GroupDTO;
+import lookid.server.dto.ReservationDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
 import lookid.server.vo.GroupVO;
@@ -28,7 +29,7 @@ public interface Mapper {
 	public void admin_create(@Param("g_pid")int g_pid, @Param("admins")String[] admins);
 	
 	// 예약 정보 수정
-	public void reservation_modify(ReservationVO input);
+	public void reservation_modify(ReservationDTO input);
 	
 	// 그룹 정보 수정
 	public void group_modify(GroupDTO input);

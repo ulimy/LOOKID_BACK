@@ -1,13 +1,10 @@
-package lookid.server.vo;
+package lookid.server.dto;
 
 import java.util.Date;
 
-import lookid.server.dto.ReservationDTO;
-
-public class ReservationVO {
-
+// user_pid를 클라이언트에게 보내지 않기 위해 선언
+public class ReservationDTO {
 	private int rv_pid;
-	private int user_pid;
 	private String r_name;
 	private Date r_date;
 	private Date s_date;
@@ -24,26 +21,6 @@ public class ReservationVO {
 	private int cost;
 	private int deposit;
 	private int state;
-	
-	public ReservationVO(int user_pid, ReservationDTO dto){
-		this.user_pid = user_pid;
-		this.r_name=dto.getR_name();
-		this.r_date=dto.getR_date();
-		this.s_date=dto.getS_date();
-		this.e_date=dto.getE_date();
-		this.name=dto.getName();
-		this.phone=dto.getPhone();
-		this.bank_name=dto.getBank_name();
-		this.bank_num=dto.getBank_num();
-		this.bank_holder=dto.getBank_holder();
-		this.receipt_item=dto.isReceipt_item();
-		this.return_item=dto.isReturn_item();
-		this.address=dto.getAddress();
-		this.wb_num=dto.getWb_num();
-		this.cost=dto.getCost();
-		this.deposit=dto.getDeposit();
-		this.state=dto.getState();
-	}
 
 	public int getRv_pid() {
 		return rv_pid;
@@ -51,14 +28,6 @@ public class ReservationVO {
 
 	public void setRv_pid(int rv_pid) {
 		this.rv_pid = rv_pid;
-	}
-
-	public int getUser_pid() {
-		return user_pid;
-	}
-
-	public void setUser_pid(int user_pid) {
-		this.user_pid = user_pid;
 	}
 
 	public String getR_name() {
@@ -191,11 +160,11 @@ public class ReservationVO {
 
 	@Override
 	public String toString() {
-		return "LookidDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date
+		return "ReservationDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date
 				+ ", e_date=" + e_date + ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name
 				+ ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item
 				+ ", return_item=" + return_item + ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost
-				+ ", deposit=" + deposit + ", state=" + state + ", user_pid=" + user_pid + "]";
+				+ ", deposit=" + deposit + ", state=" + state + "]";
 	}
 
 }
