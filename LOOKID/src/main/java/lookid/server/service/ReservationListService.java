@@ -6,9 +6,9 @@ import lookid.server.dto.RvPidDTO;
 
 public interface ReservationListService {
 
-	public RvPidDTO today();
+	public RvPidDTO[] today(int user_pid);
 
-	public ReservationListDTO[] list();
+	public ReservationListDTO[] list(int user_pid);
 
 	public ReservationDetailDTO detail(int rv_pid);
 
