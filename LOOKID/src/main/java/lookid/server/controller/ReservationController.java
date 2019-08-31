@@ -29,6 +29,14 @@ public class ReservationController {
 	@Qualifier("ReservationCMCService")
 	ReservationCMCService cmc;
 	
+	// 이용당일 여부 확인
+	@RequestMapping(value = "/today", method = RequestMethod.GET)
+	public @ResponseBody RvPidDTO[] today() throws Exception{
+		// jwt 개발 전이라 임의로 선언
+		int user_pid = 1;
+		return list.today(user_pid);
+	}
+	
 	// 예약 내역 조회
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody ReservationListDTO[] list() throws Exception{

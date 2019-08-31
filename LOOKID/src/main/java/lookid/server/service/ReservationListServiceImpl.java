@@ -17,9 +17,13 @@ public class ReservationListServiceImpl implements ReservationListService {
 	ReservationListDAO list;
 
 	@Override
-	public RvPidDTO today() {
-		// TODO Auto-generated method stub
-		return null;
+	public RvPidDTO[] today(int user_pid) {
+		try{
+			return list.today(user_pid);
+		}catch (Exception e){
+			System.out.println(e);
+			return null;
+		}
 	}
 
 	@Override
