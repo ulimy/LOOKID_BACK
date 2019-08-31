@@ -3,10 +3,14 @@ package lookid.server.dao;
 import org.apache.ibatis.annotations.Param;
 
 import lookid.server.dto.GroupDTO;
+import lookid.server.dto.ReservationListDTO;
 import lookid.server.vo.GroupVO;
 import lookid.server.vo.ReservationVO;
 
 public interface Mapper {
+	// 예약 내역 조회
+	public ReservationListDTO[] reservation_list(@Param("user_pid")int user_pid);
+	
 	// 예약 정보 생성
 	public void reservation_create(ReservationVO input);
 	

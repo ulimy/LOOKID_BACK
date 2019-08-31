@@ -9,7 +9,7 @@ public interface ReservationListDAO {
 	
 	public RvPidDTO today();
 	
-	public ReservationListDTO list(int user_pid) throws Exception;
+	public ReservationListDTO[] list(int user_pid) throws Exception;
 	
 	public ReservationVO reservation_detail(int rv_pid) throws Exception;
 	

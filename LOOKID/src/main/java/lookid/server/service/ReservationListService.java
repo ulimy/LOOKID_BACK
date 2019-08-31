@@ -8,7 +8,7 @@ public interface ReservationListService {
 
 	public RvPidDTO today();
 
-	public ReservationListDTO[] list();
+	public ReservationListDTO[] list(int user_pid);
 
 	public ReservationDetailDTO detail(int rv_pid);
 
