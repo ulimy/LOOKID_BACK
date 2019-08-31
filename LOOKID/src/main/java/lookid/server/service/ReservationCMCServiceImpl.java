@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import lookid.server.dao.ReservationCancleDAO;
 import lookid.server.dao.ReservationCreateDAO;
 import lookid.server.dao.ReservationModifyDAO;
 import lookid.server.dto.GroupInfoDTO;
@@ -21,6 +22,10 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 	@Autowired
 	@Qualifier("ReservationModifyDAO")
 	ReservationModifyDAO modify;
+	
+	@Autowired
+	@Qualifier("ReservationCancleDAO")
+	ReservationCancleDAO cancle;
 
 	private final SuccessDTO success = new SuccessDTO(true);
 	private final SuccessDTO fail = new SuccessDTO(false);
@@ -71,8 +76,13 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 	}
 
 	@Override
-	public void cancle(RvPidDTO input) throws Exception {
-
+	public SuccessDTO cancle(RvPidDTO input) throws Exception {
+		try{
+			cancle.reservation_cancle(input.getRv_pid());
+			return success;
+		}catch (Exception e){
+			return fail;
+		}
 	}
 
 }

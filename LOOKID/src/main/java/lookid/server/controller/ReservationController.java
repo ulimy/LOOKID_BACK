@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lookid.server.dto.ReservationDetailDTO;
+import lookid.server.dto.RvPidDTO;
 import lookid.server.dto.SuccessDTO;
 import lookid.server.service.ReservationCMCService;
 
@@ -34,5 +35,11 @@ public class ReservationController {
 	public @ResponseBody SuccessDTO modify(@RequestBody ReservationDetailDTO input) throws Exception {
 		return cmc.modify(input);
 	}
+	
+	@RequestMapping(value="/cancle", method = RequestMethod.DELETE)
+	public @ResponseBody SuccessDTO cancle(@RequestBody RvPidDTO input) throws Exception {
+		return cmc.cancle(input);
+	}
+	
 
 }

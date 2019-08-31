@@ -31,5 +31,8 @@ public interface Mapper {
 	// admin 정보 수정을 위한 child 정보 삭제
 	public void admin_delete(@Param("g_pid")int g_pid);
 	
+	// 예약 취소
+	public void reservation_delete(@Param("rv_pid")int rv_pid);
+	
 	
 }
