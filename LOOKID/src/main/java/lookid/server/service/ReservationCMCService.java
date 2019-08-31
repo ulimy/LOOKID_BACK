@@ -13,6 +13,6 @@ public interface ReservationCMCService {
 	public SuccessDTO modify(ReservationDetailDTO input) throws Exception;
 
 	// 예약 취소
-	public void cancle(RvPidDTO input) throws Exception;
+	public SuccessDTO cancle(RvPidDTO input) throws Exception;
 	
 }

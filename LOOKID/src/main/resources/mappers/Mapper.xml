@@ -56,4 +56,9 @@
 		delete from admin where g_pid=#{g_pid}
 	</delete>
 	
+	<!-- 예약 삭제 -->
+	<delete id="reservation_delete">
+		delete from reservation where rv_pid=#{rv_pid}
+	</delete>	
+
 </mapper>
