@@ -8,15 +8,15 @@ import lookid.server.vo.ReservationVO;
 public class ReservationDetailDTO {
 
 	// 예약 정보
-	private ReservationVO reservation;
+	private ReservationDTO reservation;
 	// 그룹 당 피보호자, 관리자 정보¸
 	private GroupInfoDTO[] groupInfo;
 
-	public ReservationVO getReservation() {
+	public ReservationDTO getReservation() {
 		return reservation;
 	}
 
-	public void setReservation(ReservationVO reservation) {
+	public void setReservation(ReservationDTO reservation) {
 		this.reservation = reservation;
 	}
 

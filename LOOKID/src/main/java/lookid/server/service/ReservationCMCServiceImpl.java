@@ -11,6 +11,7 @@ import lookid.server.dto.GroupInfoDTO;
 import lookid.server.dto.ReservationDetailDTO;
 import lookid.server.dto.RvPidDTO;
 import lookid.server.dto.SuccessDTO;
+import lookid.server.vo.ReservationVO;
 
 @Service("ReservationCMCService")
 public class ReservationCMCServiceImpl implements ReservationCMCService {
@@ -34,8 +35,8 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 	@Override
 	public SuccessDTO create(int user_pid, ReservationDetailDTO input) throws Exception {
 		try {
-			// 예약 정보 뽑아 디비에 넣고 rv_pid 돌려받기
-			int rv_pid = create.reservation_create(user_pid, input.getReservation());
+			// 예약 정보 뽑아 user_pid와 함께 ReservationVO에 넣거 디비에 넣고 rv_pid 돌려받기
+			int rv_pid = create.reservation_create(new ReservationVO(user_pid,input.getReservation()));
 			// 그룹 개수만큼
 			for (GroupInfoDTO group : input.getGroupInfo()) {
 				// 그룹 정보 디비에 넣고 g_pid 돌려받기

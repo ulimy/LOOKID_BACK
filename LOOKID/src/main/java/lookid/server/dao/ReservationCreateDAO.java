@@ -6,7 +6,7 @@ import lookid.server.vo.ReservationVO;
 public interface ReservationCreateDAO {
 	
 	// 예약 정보 생성
-	public int reservation_create(int user_pid, ReservationVO input) throws Exception;
+	public int reservation_create(ReservationVO input) throws Exception;
 	
 	// 그룹 정보 생성
 	public int group_create(int rv_pid, GroupDTO input) throws Exception;
