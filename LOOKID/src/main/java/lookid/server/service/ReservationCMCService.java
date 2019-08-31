@@ -10,7 +10,7 @@ public interface ReservationCMCService {
 	public SuccessDTO create(int user_pid, ReservationDetailDTO input) throws Exception;
 	
 	// 예약 수정
-	public void modify(ReservationDetailDTO input) throws Exception;
+	public SuccessDTO modify(ReservationDetailDTO input) throws Exception;
 
 	// 예약 취소
 	public void cancle(RvPidDTO input) throws Exception;
