@@ -34,6 +34,11 @@
 	<select id="child_detail" resultType="String">
 		select c_name from child where g_pid=#{g_pid}
 	</select>
+	
+	<!-- admin 상세조회 -->
+	<select id="admin_detail" resultType="String">
+		select name from user where user_pid=(select user_pid from admin where g_pid=#{g_pid})
+	</select>
 
 	<!-- 예약 정보 생성 -->
 	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO" useGeneratedKeys="true" keyProperty="rv_pid">

@@ -55,6 +55,7 @@ public class ReservationListServiceImpl implements ReservationListService {
 				// child 정보 담기
 				gid.setChild(list.child_detail(g_pid));
 				// admin정보 담기
+				gid.setAdmin(list.admin_detail(g_pid));
 				
 				//GroupInfoDTO를 result에 추가
 				result.addGroupInfoDTO(gid);

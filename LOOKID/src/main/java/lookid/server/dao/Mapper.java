@@ -22,8 +22,11 @@ public interface Mapper {
 	// 그룹 상세 조회
 	public GroupDTO[] group_detail(@Param("rv_pid")int rv_pid);
 	
-	//child 상세 조회
+	// child 상세 조회
 	public String[] child_detail(@Param("g_pid")int g_pid);
+	
+	// admin 상세 조회
+	public String[] admin_detail(@Param("g_pid")int g_pid);
 	
 	// 예약 정보 생성
 	public void reservation_create(ReservationVO input);
