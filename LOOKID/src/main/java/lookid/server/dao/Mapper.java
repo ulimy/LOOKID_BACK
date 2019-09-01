@@ -16,6 +16,9 @@ public interface Mapper {
 	// 예약 내역 조회
 	public ReservationListDTO[] reservation_list(@Param("user_pid")int user_pid);
 	
+	// 예약 상세 조회
+	public ReservationDTO reservation_detail(@Param("rv_pid")int rv_pid);
+	
 	// 예약 정보 생성
 	public void reservation_create(ReservationVO input);
 	

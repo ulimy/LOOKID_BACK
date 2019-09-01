@@ -26,6 +26,7 @@ public class ReservationListServiceImpl implements ReservationListService {
 		}
 	}
 
+	// 예약 내역 조회
 	@Override
 	public ReservationListDTO[] list(int user_pid) {
 		try{
@@ -35,10 +36,24 @@ public class ReservationListServiceImpl implements ReservationListService {
 		}
 	}
 
+	// 예약 내역 상세 조회
 	@Override
 	public ReservationDetailDTO detail(int rv_pid) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			ReservationDetailDTO result = new ReservationDetailDTO();
+			// 예약 정보 담기
+			result.setReservation(list.reservation_detail(rv_pid));
+			// 그룹 정보 받아오기
+			
+			// 그룹 개수 만큼 
+			// 그룹 정 보 담고
+			// child 정보 담기
+			// admin정보 담기
+			
+			return result;
+		}catch (Exception e){
+			return null;
+		}
 	}
 
 }
