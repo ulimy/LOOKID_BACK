@@ -13,19 +13,20 @@ import lookid.server.dto.RvPidDTO;
 
 @Repository("ReservationListDAO")
 public class ReservationListDAOImpl implements ReservationListDAO {
-	
+
 	@Autowired
 	private Mapper mapper;
-	
+
 	// 예약 당일 여부 확인
 	@Override
 	public RvPidDTO[] today(int user_pid) {
+		System.out.println("TODAYDAO");
 		// 오늘 날짜 계산
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar time = Calendar.getInstance();       
+		Calendar time = Calendar.getInstance();
 		return mapper.today(user_pid, format.format(time.getTime()));
 	}
-	
+
 	// 예약 내역 조회
 	@Override
 	public ReservationListDTO[] list(int user_pid) throws Exception {
@@ -44,18 +45,18 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 
 	@Override
 	public String child_detail(int g_pid) throws Exception {
-		String result="";
-		for (String input : mapper.child_detail(g_pid)){
+		String result = "";
+		for (String input : mapper.child_detail(g_pid)) {
 			result = result.concat(input);
 			result = result.concat(",");
 		}
 		return result;
 	}
-	
+
 	@Override
 	public String admin_detail(int g_pid) throws Exception {
-		String result="";
-		for (String input : mapper.admin_detail(g_pid)){
+		String result = "";
+		for (String input : mapper.admin_detail(g_pid)) {
 			result = result.concat(input);
 			result = result.concat(",");
 		}
