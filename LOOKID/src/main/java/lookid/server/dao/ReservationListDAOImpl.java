@@ -39,8 +39,7 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 
 	@Override
 	public GroupDTO[] group_detail(int rv_pid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.group_detail(rv_pid);
 	}
 
 	@Override

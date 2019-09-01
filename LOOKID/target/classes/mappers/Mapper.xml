@@ -24,6 +24,11 @@
 		select rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state
 		from reservation where rv_pid=#{rv_pid}
 	</select>
+	
+	<!-- 그룹 상세 조쇠 -->
+	<select id="group_detail" resultType="lookid.server.dto.GroupDTO">
+		select g_pid,g_name,count from groups where rv_pid=#{rv_pid}
+	</select>
 
 	<!-- 예약 정보 생성 -->
 	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO" useGeneratedKeys="true" keyProperty="rv_pid">
