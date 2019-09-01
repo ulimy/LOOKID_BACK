@@ -25,7 +25,7 @@
 		from reservation where rv_pid=#{rv_pid}
 	</select>
 	
-	<!-- 그룹 상세 조쇠 -->
+	<!-- 그룹 상세 조회 -->
 	<select id="group_detail" resultType="lookid.server.dto.GroupDTO">
 		select g_pid,g_name,count from groups where rv_pid=#{rv_pid}
 	</select>
