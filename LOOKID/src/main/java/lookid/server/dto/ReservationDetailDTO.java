@@ -28,8 +28,8 @@ public class ReservationDetailDTO {
 	}
 	
 	// GroupInfoDTO 중에서 Group정보만 넣어서  add
-	public void addGroup(GroupDTO groupdto){
-		this.groupInfo.add(new GroupInfoDTO(groupdto));
+	public void addGroupInfoDTO(GroupInfoDTO groupinfodto){
+		this.groupInfo.add(groupinfodto);
 	}
 
 	@Override

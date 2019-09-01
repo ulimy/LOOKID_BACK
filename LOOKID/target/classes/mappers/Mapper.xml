@@ -29,6 +29,11 @@
 	<select id="group_detail" resultType="lookid.server.dto.GroupDTO">
 		select g_pid,g_name,count from groups where rv_pid=#{rv_pid}
 	</select>
+	
+	<!-- child 상세 조회 -->
+	<select id="child_detail" resultType="String">
+		select c_name from child where g_pid=#{g_pid}
+	</select>
 
 	<!-- 예약 정보 생성 -->
 	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO" useGeneratedKeys="true" keyProperty="rv_pid">

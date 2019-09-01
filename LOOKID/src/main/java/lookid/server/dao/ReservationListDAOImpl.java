@@ -43,13 +43,17 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 	}
 
 	@Override
-	public String admin_detail(int g_pid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String child_detail(int g_pid) throws Exception {
+		String result="";
+		for (String input : mapper.child_detail(g_pid)){
+			result = result.concat(input);
+			result = result.concat(",");
+		}
+		return result;
+	}
+	
+	@Override
+	public String admin_detail(int g_pid) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lookid.server.dao.ReservationListDAO;
 import lookid.server.dto.GroupDTO;
+import lookid.server.dto.GroupInfoDTO;
 import lookid.server.dto.ReservationDetailDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
@@ -46,10 +47,15 @@ public class ReservationListServiceImpl implements ReservationListService {
 			result.setReservation(list.reservation_detail(rv_pid));
 			// 그룹 개수 만큼
 			for (GroupDTO gd : list.group_detail(rv_pid)) {
-				// 그룹 정보 담기
-				result.addGroup(gd);
+				// 그룹 정보를 담을 GroupInfoDTO에 그룹 정보 담기
+				GroupInfoDTO gid = new GroupInfoDTO(gd);
+				//child, admin 정보를 가져오기 위한 g_pid
+				int g_pid = gd.getG_pid();
 				// child 정보 담기
+				// System.out.println(list.child_detail(g_pid));
 				// admin정보 담기
+				
+				result.addGroupInfoDTO(gid);
 			}
 			return result;
 		} catch (Exception e) {
