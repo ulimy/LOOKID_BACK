@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lookid.server.dto.GroupDTO;
+import lookid.server.dto.ReservationDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
-import lookid.server.vo.ReservationVO;
 
 @Repository("ReservationListDAO")
 public class ReservationListDAOImpl implements ReservationListDAO {
@@ -23,8 +23,7 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 		// 오늘 날짜 계산
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar time = Calendar.getInstance();       
-		return mapper.today(user_pid,"2019-09-30");
-		// return mapper.today(user_pid, format.format(time.getTime()));
+		return mapper.today(user_pid, format.format(time.getTime()));
 	}
 	
 	// 예약 내역 조회
@@ -34,27 +33,33 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 	}
 
 	@Override
-	public ReservationVO reservation_detail(int rv_pid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ReservationDTO reservation_detail(int rv_pid) throws Exception {
+		return mapper.reservation_detail(rv_pid);
 	}
 
 	@Override
 	public GroupDTO[] group_detail(int rv_pid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String admin_detail(int g_pid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.group_detail(rv_pid);
 	}
 
 	@Override
 	public String child_detail(int g_pid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String result="";
+		for (String input : mapper.child_detail(g_pid)){
+			result = result.concat(input);
+			result = result.concat(",");
+		}
+		return result;
+	}
+	
+	@Override
+	public String admin_detail(int g_pid) throws Exception {
+		String result="";
+		for (String input : mapper.admin_detail(g_pid)){
+			result = result.concat(input);
+			result = result.concat(",");
+		}
+		return result;
 	}
 
 }
