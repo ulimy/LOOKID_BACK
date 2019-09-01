@@ -42,6 +42,7 @@ public class ReservationListServiceImpl implements ReservationListService {
 	@Override
 	public ReservationDetailDTO detail(int rv_pid) {
 		try {
+			// 전체 결과를 담을 ReservationDetailDTO
 			ReservationDetailDTO result = new ReservationDetailDTO();
 			// 예약 정보 담기
 			result.setReservation(list.reservation_detail(rv_pid));
@@ -52,9 +53,10 @@ public class ReservationListServiceImpl implements ReservationListService {
 				//child, admin 정보를 가져오기 위한 g_pid
 				int g_pid = gd.getG_pid();
 				// child 정보 담기
-				// System.out.println(list.child_detail(g_pid));
+				gid.setChild(list.child_detail(g_pid));
 				// admin정보 담기
 				
+				//GroupInfoDTO를 result에 추가
 				result.addGroupInfoDTO(gid);
 			}
 			return result;
