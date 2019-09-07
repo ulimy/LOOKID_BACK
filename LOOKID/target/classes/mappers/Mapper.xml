@@ -75,7 +75,7 @@
 	<update id="modify">
 
 		update user set
-		pw=#{pw},name=#{name},phone=#{phone},mail=#{mail},address=#{address},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
+		name=#{name},phone=#{phone},mail=#{mail},address=#{address},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
 		where user_pid=#{user_pid}
 
 	</update>

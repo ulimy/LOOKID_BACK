@@ -2,8 +2,8 @@ package lookid.server.dto;
 
 import lookid.server.vo.UserVO;
 
-// user_pid, id, pw를 제외한 DTOㄴ
-public class UserDTO {
+// user_pid, id, pw를 제외한 DTO
+public class UserDTO{
 
 	private String name;
 	private String phone;
@@ -13,7 +13,7 @@ public class UserDTO {
 	private String bank_num;
 	private String bank_holder;
 
-	// signin 에서 vo값을 dto에 담기위한 생성자 
+	// signin 에서 vo값을 dto에 담기위한 생성자
 	public UserDTO(UserVO vo) {
 		this.name = vo.getName();
 		this.phone = vo.getPhone();
@@ -23,7 +23,11 @@ public class UserDTO {
 		this.bank_num = vo.getBank_num();
 		this.bank_holder = vo.getBank_holder();
 	}
-
+	
+	public UserDTO(NullPointerException e) {
+		
+	}
+	
 	public String getName() {
 		return name;
 	}

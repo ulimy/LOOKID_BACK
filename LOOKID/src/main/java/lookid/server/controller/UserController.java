@@ -3,6 +3,7 @@ package lookid.server.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,6 @@ import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
 import lookid.server.dto.UserDTO;
 import lookid.server.service.JUserService;
-import lookid.server.service.JUserServiceImpl;
 import lookid.server.service.JWTService;
 import lookid.server.service.UserService;
 import lookid.server.vo.UserVO;
@@ -41,7 +41,7 @@ public class UserController {
 	@Qualifier("JWTService")
 	private JWTService JWTService;
 
-	// JWTInterceptor 를 이용하여 url로 지정한 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰유효성을 검증 해준다. 
+	// JWTInterceptor 를 이용하여 url로 지정한 컨트롤러로 들어오는 요청에 앞서 전처리해주어 토큰유효성을 검증 해준다.
 	// 단 모든 메소드가아닌 필요한 메소드의 url만 지정.
 
 	// 아이디 중복확인
@@ -60,7 +60,9 @@ public class UserController {
 	// 아이디 찾기
 	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
 	public @ResponseBody FindIdDTO find_id(@RequestBody FindIdDTO user) throws Exception {
+
 		return service.find_id(user);
+
 	}
 
 	// 비밀번호 찾기
@@ -78,7 +80,8 @@ public class UserController {
 
 	// 로그인
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public @ResponseBody UserDTO signin(@RequestBody SigninDTO user, HttpServletResponse response) throws Exception {
+	public @ResponseBody UserDTO signin(@RequestBody SigninDTO user, HttpServletResponse response)
+			throws NullPointerException, Exception {
 		// NullPointException처리
 		// user_pid는 토큰에, 나머지정보는 UserDTO에 담기
 		try {
@@ -97,35 +100,52 @@ public class UserController {
 				System.out.println("token : " + "\n" + "[ " + token + " ]"); // jwt 콘솔 출력
 			}
 			return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
-		} catch (Exception e) {
-			System.out.println(e); // id, pw가 틀릴 시 NullPointerException 발생
-			return null; // id, pw 가 틀릴 시 null 리턴
+		} catch (NullPointerException e) {
+			// id, pw가 틀릴 시 NullPointerException 발생
+			System.out.println(e);
+			UserDTO u = new UserDTO(e);
+			return u; // UserDTO의 각 속성을 null값으로 넘겨줌
 		}
 	}
 
 	// 로그아웃 -> interceptor 포함 url 지정
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public void signout(HttpServletRequest request) throws Exception {
+	@ResponseBody
+	@RequestMapping(value = "/signout", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public JSONObject signout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
-		
+
+		JSONObject json = new JSONObject();
+
 		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
+		int user_pid = JWTService.getUser_pid(token);
+
 		try {
 			if (token != null && JWTService.isUsable(token)) {
-				token = JWTService.detroy(token); // 토큰 무효화
+				JWTService.destroy(token, user_pid, response); // 토큰 무효화
+
+				token = request.getHeader("Authorization");
+
 				try {
 					if (token != null && JWTService.isUsable(token)) {
 						System.out.println("토큰이 아직 유효합니다.");
+						json.put("success", false);
 					}
 				} catch (Exception e) {
+					json.put("success", true);
 					System.out.println(e);
 					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
 				}
+
 			} else {
 				System.out.println("HTTP JWT 파싱 실패");
+				json.put("success", false);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-		} return;
+			json.put("success", false);
+		}
+		return json;
+
 	}
 
 	// 비밀번호 변경 -> interceptor 포함 url 지정
@@ -135,16 +155,18 @@ public class UserController {
 
 		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 
+		final SuccessDTO fail = new SuccessDTO(false);
+
 		try {
 			if (token != null && JWTService.isUsable(token)) {
 				int user_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
 				return jservice.modify_pw(user, user_pid);
 			} else {
-				return JUserServiceImpl.fail;		
+				return fail;
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			return JUserServiceImpl.fail;
+			return fail;
 		}
 	}
 
@@ -155,18 +177,20 @@ public class UserController {
 		// bank정보를 not null 처리하지 않았기 때문.
 
 		final String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
-		
+
+		final SuccessDTO fail = new SuccessDTO(false);
+
 		try {
 			if (token != null && JWTService.isUsable(token)) {
 				int user_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
 				return jservice.modify(user, user_pid);
 			} else {
-				return JUserServiceImpl.fail;
+				return fail;
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			return JUserServiceImpl.fail;
+			return fail;
 		}
 	}
-	
+
 }

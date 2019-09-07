@@ -74,9 +74,18 @@ public class UserServiceImpl implements UserService {
 
 	// 아이디 찾기
 	@Override
-	public FindIdDTO find_id(FindIdDTO user) throws Exception {
+	public FindIdDTO find_id(FindIdDTO user) throws Exception{
 
-		return dao.find_id(user);
+		try {
+			dao.find_id(user).getId(); // NullPointerException 발생 시 catch문으로 이동시킴
+			return dao.find_id(user);
+			
+		} catch (NullPointerException e) {
+			FindIdDTO fdto = new FindIdDTO();
+			System.out.println(e);
+			return fdto; // 찾는 id 가 존재하지 않을 시 속성들을 null 값으로 리턴
+		}
+		
 	}
 
 	// 비밀번호 찾기
@@ -150,10 +159,19 @@ public class UserServiceImpl implements UserService {
 	// 관리자 검색
 	@Override
 	public FindAdminDTO find_admin(String id) throws Exception {
-		return dao.find_admin(id);
+		
+		try {
+			dao.find_admin(id).getName(); // NullPointerException 발생 시 catch문으로 이동시킴
+			return dao.find_admin(id);
+			
+		} catch (NullPointerException e) {
+			FindAdminDTO fdto = new FindAdminDTO();
+			System.out.println(e);
+			return fdto; // 관리자 id 가 존재하지 않을 시 속성들을 null 값으로 리턴
+		}
 	}
 
-	// 튜플 카운트
+	// user 테이블 튜플 카운트
 	@Override
 	public int count() throws Exception {
 		return dao.count();

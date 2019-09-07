@@ -29,7 +29,7 @@ public class JUserDAOImpl implements JUserDAO {
 	// 내 정보 수정
 	@Override
 	public void modify(UserVO user) throws Exception {
-		mapper.modify(user.getUser_pid(), user.getPw(), user.getName(), user.getPhone(), user.getMail(),
+		mapper.modify(user.getUser_pid(), user.getName(), user.getPhone(), user.getMail(),
 				user.getAddress(), user.getBank_name(), user.getBank_num(), user.getBank_holder());
 		return;
 	}

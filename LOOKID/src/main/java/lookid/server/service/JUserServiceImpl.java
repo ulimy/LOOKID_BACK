@@ -15,8 +15,8 @@ public class JUserServiceImpl implements JUserService {
 	@Autowired
 	private JUserDAO jdao;
 
-	public static final SuccessDTO success = new SuccessDTO(true);
-	public static final SuccessDTO fail = new SuccessDTO(false);
+	private static final SuccessDTO success = new SuccessDTO(true);
+	private static final SuccessDTO fail = new SuccessDTO(false);
 
 	// 로그인
 	@Override
