@@ -29,10 +29,10 @@ public interface Mapper {
 	public String[] admin_detail(@Param("g_pid")int g_pid);
 	
 	// 예약 정보 생성
-	public void reservation_create(@Param("input")ReservationVO input);
+	public void reservation_create(ReservationVO input);
 	
 	// 그룹 정보 생성
-	public void group_create(@Param("input")GroupVO input);
+	public void group_create(GroupVO input);
 	
 	// child 정보 생성
 	public void child_create(@Param("g_pid")int g_pid, @Param("children")String[] children);
@@ -41,10 +41,10 @@ public interface Mapper {
 	public void admin_create(@Param("g_pid")int g_pid, @Param("admins")String[] admins);
 	
 	// 예약 정보 수정
-	public void reservation_modify(@Param("input")ReservationDTO input);
+	public void reservation_modify(ReservationDTO input);
 	
 	// 그룹 정보 수정
-	public void group_modify(@Param("input")GroupDTO input);
+	public void group_modify(GroupDTO input);
 	
 	// child 정보 수정을 위한 child 정보 삭제
 	public void child_delete(@Param("g_pid")int g_pid);

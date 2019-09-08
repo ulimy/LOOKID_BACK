@@ -14,8 +14,8 @@ public class ReservationDTO {
 	private String bank_name;
 	private String bank_num;
 	private String bank_holder;
-	private boolean receipt_item;
-	private boolean return_item;
+	private int receipt_item;
+	private int return_item;
 	private String address;
 	private String wb_num;
 	private int cost;
@@ -102,19 +102,19 @@ public class ReservationDTO {
 		this.bank_holder = bank_holder;
 	}
 
-	public boolean isReceipt_item() {
+	public int getReceipt_item() {
 		return receipt_item;
 	}
 
-	public void setReceipt_item(boolean receipt_item) {
+	public void setReceipt_item(int receipt_item) {
 		this.receipt_item = receipt_item;
 	}
 
-	public boolean isReturn_item() {
+	public int getReturn_item() {
 		return return_item;
 	}
 
-	public void setReturn_item(boolean return_item) {
+	public void setReturn_item(int return_item) {
 		this.return_item = return_item;
 	}
 

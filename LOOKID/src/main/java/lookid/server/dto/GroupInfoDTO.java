@@ -9,6 +9,11 @@ public class GroupInfoDTO {
 	// admin (user_pid) 가 , 로 구분되어 string으로
 	private String admin;
 	
+	// 기본 생성자
+	public GroupInfoDTO(){
+		super();
+	}
+	
 	// groupdto를 받는 생성자
 	public GroupInfoDTO(GroupDTO groupdto){
 		this.group = groupdto;

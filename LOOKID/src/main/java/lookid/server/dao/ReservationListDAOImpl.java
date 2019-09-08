@@ -20,7 +20,6 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 	// 예약 당일 여부 확인
 	@Override
 	public RvPidDTO[] today(int user_pid) {
-		System.out.println("TODAYDAO");
 		// 오늘 날짜 계산
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar time = Calendar.getInstance();
