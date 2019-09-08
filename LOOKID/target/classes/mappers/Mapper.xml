@@ -16,7 +16,7 @@
 
 	<!-- 예약 내역 조회 -->
 	<select id="reservation_list" parameterType="int" resultType="lookid.server.dto.ReservationListDTO">
-		select rv_pid,r_name,r_date,state from reservation where user_pid=#{user_pid}
+		select rv_pid,r_name,s_date,e_date,state from reservation where user_pid=#{user_pid}
 	</select>
 	
 	<!-- 예약 상세 조회 -->
