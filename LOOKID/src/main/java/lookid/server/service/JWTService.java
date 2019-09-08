@@ -12,6 +12,6 @@ public interface JWTService {
 
 	public int getUser_pid(String jwt);
 
-	public void destroy(String jwt, int user_pid, HttpServletResponse response);
+	public void destroy(String jwt, HttpServletResponse response);
 
 }

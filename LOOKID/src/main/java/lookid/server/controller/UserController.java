@@ -115,18 +115,16 @@ public class UserController {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
 
 		JSONObject json = new JSONObject();
-
+		
 		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
-		int user_pid = JWTService.getUser_pid(token);
-
 		try {
 			if (token != null && JWTService.isUsable(token)) {
-				JWTService.destroy(token, user_pid, response); // 토큰 무효화
+				JWTService.destroy(token, response); // 토큰 무효화
 
-				token = request.getHeader("Authorization");
-
+				// destroy메소드로 토큰이 만료됐는지 확인
+				String t = request.getHeader("Authorization");
 				try {
-					if (token != null && JWTService.isUsable(token)) {
+					if (t != null && JWTService.isUsable(t)) {
 						System.out.println("토큰이 아직 유효합니다.");
 						json.put("success", false);
 					}
@@ -135,9 +133,7 @@ public class UserController {
 					System.out.println(e);
 					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
 				}
-
-			} else {
-				System.out.println("HTTP JWT 파싱 실패");
+			} else { // 토큰 파싱 오류
 				json.put("success", false);
 			}
 		} catch (Exception e) {
@@ -145,7 +141,6 @@ public class UserController {
 			json.put("success", false);
 		}
 		return json;
-
 	}
 
 	// 비밀번호 변경 -> interceptor 포함 url 지정
