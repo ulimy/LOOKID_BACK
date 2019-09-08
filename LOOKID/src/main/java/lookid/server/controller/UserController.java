@@ -130,7 +130,7 @@ public class UserController {
 						System.out.println("토큰이 아직 유효합니다.");
 						json.put("success", false);
 					}
-				} catch (Exception e) {
+				} catch (Exception e) { // 로그아웃 성공
 					json.put("success", true);
 					System.out.println(e);
 					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
