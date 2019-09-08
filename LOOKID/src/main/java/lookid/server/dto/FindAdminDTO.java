@@ -5,6 +5,7 @@ public class FindAdminDTO {
 
 	private String id;
 	private String name;
+	private int user_pid;
 
 	public String getId() {
 		return id;
@@ -22,9 +23,17 @@ public class FindAdminDTO {
 		this.name = name;
 	}
 
+	public int getUser_pid() {
+		return user_pid;
+	}
+
+	public void setUser_pid(int user_pid) {
+		this.user_pid = user_pid;
+	}
+
 	@Override
 	public String toString() {
-		return "FindAdminDTO [id=" + id + ", name=" + name + "]";
+		return "FindAdminDTO [id=" + id + ", name=" + name + ", user_pid=" + user_pid + "]";
 	}
 
 }

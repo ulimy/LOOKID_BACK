@@ -1,5 +1,6 @@
 package lookid.server.dao;
 
+import lookid.server.dto.FindAdminDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.vo.ReservationVO;
 
@@ -15,5 +16,5 @@ public interface ReservationCreateDAO {
 	public void child_create(int g_pid, String child) throws Exception;
 	
 	// 관리자 정보 생성
-	public void admin_create(int g_pid, String admin)  throws Exception;
+	public void admin_create(int g_pid, FindAdminDTO[] admin)  throws Exception;
 }

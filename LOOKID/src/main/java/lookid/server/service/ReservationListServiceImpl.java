@@ -34,6 +34,7 @@ public class ReservationListServiceImpl implements ReservationListService {
 		try {
 			return list.list(user_pid);
 		} catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
 	}

@@ -7,7 +7,8 @@ public class ReservationListDTO {
 
 	private int rv_pid;
 	private String r_name;
-	private Date r_date;
+	private Date s_date;
+	private Date e_date;
 	private int state;
 
 	public int getRv_pid() {
@@ -26,12 +27,20 @@ public class ReservationListDTO {
 		this.r_name = r_name;
 	}
 
-	public Date getR_date() {
-		return r_date;
+	public Date getS_date() {
+		return s_date;
 	}
 
-	public void setR_date(Date r_date) {
-		this.r_date = r_date;
+	public void setS_date(Date s_date) {
+		this.s_date = s_date;
+	}
+
+	public Date getE_date() {
+		return e_date;
+	}
+
+	public void setE_date(Date e_date) {
+		this.e_date = e_date;
 	}
 
 	public int getState() {
@@ -44,8 +53,8 @@ public class ReservationListDTO {
 
 	@Override
 	public String toString() {
-		return "ReservationListDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", state=" + state
-				+ "]";
+		return "ReservationListDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", s_date=" + s_date + ", e_date="
+				+ e_date + ", state=" + state + "]";
 	}
 
 }

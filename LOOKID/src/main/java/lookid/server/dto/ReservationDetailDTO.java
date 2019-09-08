@@ -9,7 +9,11 @@ public class ReservationDetailDTO {
 	// 예약 정보
 	private ReservationDTO reservation;
 	// 그룹 당 피보호자, 관리자 정보¸
-	private List<GroupInfoDTO> groupInfo = new ArrayList<GroupInfoDTO>();
+	private List<GroupInfoDTO> groupInfo;
+
+	public ReservationDetailDTO() {
+		this.groupInfo = new ArrayList<GroupInfoDTO>();
+	}
 
 	public ReservationDTO getReservation() {
 		return reservation;
@@ -26,9 +30,9 @@ public class ReservationDetailDTO {
 	public void setGroupInfo(List<GroupInfoDTO> groupInfo) {
 		this.groupInfo = groupInfo;
 	}
-	
-	// GroupInfoDTO 중에서 Group정보만 넣어서  add
-	public void addGroupInfoDTO(GroupInfoDTO groupinfodto){
+
+	// GroupInfoDTO 중에서 Group정보만 넣어서 add
+	public void addGroupInfoDTO(GroupInfoDTO groupinfodto) {
 		this.groupInfo.add(groupinfodto);
 	}
 
