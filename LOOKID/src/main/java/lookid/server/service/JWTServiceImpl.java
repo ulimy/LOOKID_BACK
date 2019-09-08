@@ -81,8 +81,7 @@ public class JWTServiceImpl implements JWTService {
 			.setExpiration(new Date(System.currentTimeMillis())) // 만료시간을 현재시간으로 설정하여 토큰을 바로 만료시킴
 			.signWith(SignatureAlgorithm.HS256, this.generateKey())				
 			.compact(); // 직렬화
-		
-		System.out.println(token);
+	
 		response.setHeader("Authorization", token);
 	}
 }
