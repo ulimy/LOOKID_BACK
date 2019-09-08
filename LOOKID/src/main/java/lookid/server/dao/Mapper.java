@@ -39,7 +39,7 @@ public interface Mapper {
 	public void child_create(@Param("g_pid")int g_pid, @Param("children")String[] children);
 	
 	// admin 정보 생성
-	public void admin_create(@Param("g_pid")int g_pid, @Param("admins")String[] admins);
+	public void admin_create(@Param("g_pid")int g_pid, @Param("admins")FindAdminDTO[] admins);
 	
 	// 예약 정보 수정
 	public void reservation_modify(ReservationDTO input);
