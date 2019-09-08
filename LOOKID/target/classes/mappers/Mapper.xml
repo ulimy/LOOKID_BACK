@@ -36,8 +36,8 @@
 	</select>
 	
 	<!-- admin 상세조회 -->
-	<select id="admin_detail" resultType="String">
-		select name from user where user_pid=(select user_pid from admin where g_pid=#{g_pid})
+	<select id="admin_detail" resultType="lookid.server.dto.FindAdminDTO">
+		select user_pid,id,name from user where user_pid=(select user_pid from admin where g_pid=#{g_pid})
 	</select>
 
 	<!-- 예약 정보 생성 -->
