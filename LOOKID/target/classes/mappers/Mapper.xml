@@ -59,7 +59,7 @@
 
 	</update>
 
-	<select id="find_admin" resultType="lookid.server.dto.FindAdminDTO">
+	<select id="find_admin" resultType="lookid.server.dto.AdminDTO">
 		select * from user where
 		id=#{id}
 	</select>
@@ -86,7 +86,7 @@
 		select count(*) from user
 	</select>
 
-	.
+	
 	<!-- 예약 당일 여부 확인 &lt;= : <= &gt;= : >= -->
 	<select id="today" resultType="lookid.server.dto.RvPidDTO">
 		select rv_pid from reservation
@@ -121,7 +121,7 @@
 	</select>
 
 	<!-- admin 상세조회 -->
-	<select id="admin_detail" resultType="lookid.server.dto.FindAdminDTO">
+	<select id="admin_detail" resultType="lookid.server.dto.AdminDTO">
 		select user_pid,id,name
 		from user where user_pid=any(select user_pid from admin where
 		g_pid=#{g_pid})

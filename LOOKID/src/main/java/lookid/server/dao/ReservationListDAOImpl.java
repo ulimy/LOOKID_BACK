@@ -6,7 +6,7 @@ import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.dto.ReservationDTO;
 import lookid.server.dto.ReservationListDTO;
@@ -58,7 +58,7 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 
 	// admin 정보 상세 조회
 	@Override
-	public FindAdminDTO[] admin_detail(int g_pid) throws Exception {
+	public AdminDTO[] admin_detail(int g_pid) throws Exception {
 		return mapper.admin_detail(g_pid);
 	}
 

@@ -9,7 +9,7 @@ public class GroupInfoDTO {
 	// child_pid 가 , 로 구분되어 string 으로
 	private String child;
 	// admin 정보
-	private FindAdminDTO[] admin;
+	private AdminDTO[] admin;
 
 	// 기본 생성자
 	public GroupInfoDTO() {
@@ -37,11 +37,11 @@ public class GroupInfoDTO {
 		this.child = child;
 	}
 
-	public FindAdminDTO[] getAdmin() {
+	public AdminDTO[] getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(FindAdminDTO[] admin) {
+	public void setAdmin(AdminDTO[] admin) {
 		this.admin = admin;
 	}
 

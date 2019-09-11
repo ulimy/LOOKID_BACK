@@ -3,7 +3,7 @@ package lookid.server.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.dto.ReservationDTO;
 
@@ -33,7 +33,7 @@ public class ReservationModifyDAOImpl implements ReservationModifyDAO {
 	}
 
 	@Override
-	public void admin_modify(int g_pid, FindAdminDTO[] admin) {
+	public void admin_modify(int g_pid, AdminDTO[] admin) {
 		mapper.admin_delete(g_pid);
 		mapper.admin_create(g_pid, admin);
 		return;
