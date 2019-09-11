@@ -5,8 +5,8 @@
 
 <configuration>
 
-	<settings>           
-     	<setting name="jdbcTypeForNull" value="NULL" />
-   	</settings>
-   
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" /><!-- null로 데이터가 전달 되었을 때 빈칸이 아닌 null로 인식할 수 있게 함 -->
+	</settings>
+
 </configuration>
