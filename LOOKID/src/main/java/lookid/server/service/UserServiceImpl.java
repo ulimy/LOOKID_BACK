@@ -13,7 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import lookid.server.dao.UserDAO;
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
@@ -158,14 +158,14 @@ public class UserServiceImpl implements UserService {
 
 	// 관리자 검색
 	@Override
-	public FindAdminDTO find_admin(String id) throws Exception {
+	public AdminDTO find_admin(String id) throws Exception {
 		
 		try {
 			dao.find_admin(id).getName(); // NullPointerException 발생 시 catch문으로 이동시킴
 			return dao.find_admin(id);
 			
 		} catch (NullPointerException e) {
-			FindAdminDTO fdto = new FindAdminDTO();
+			AdminDTO fdto = new AdminDTO();
 			System.out.println(e);
 			return fdto; // 관리자 id 가 존재하지 않을 시 속성들을 null 값으로 리턴
 		}
