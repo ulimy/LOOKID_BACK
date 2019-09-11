@@ -1,10 +1,10 @@
-package lookid.server.vo;
+package lookid.server.dto;
 
-public class UserVO {
+import lookid.server.vo.UserVO;
 
-	private int user_pid;
-	private String id;
-	private String pw;
+// user_pid, id, pw를 제외한 DTO
+public class UserDTO{
+
 	private String name;
 	private String phone;
 	private String mail;
@@ -13,30 +13,21 @@ public class UserVO {
 	private String bank_num;
 	private String bank_holder;
 
-	public int getUser_pid() {
-		return user_pid;
+	// signin 에서 vo값을 dto에 담기위한 생성자
+	public UserDTO(UserVO vo) {
+		this.name = vo.getName();
+		this.phone = vo.getPhone();
+		this.mail = vo.getMail();
+		this.address = vo.getAddress();
+		this.bank_name = vo.getBank_name();
+		this.bank_num = vo.getBank_num();
+		this.bank_holder = vo.getBank_holder();
 	}
-
-	public void setUser_pid(int user_pid) {
-		this.user_pid = user_pid;
+	
+	public UserDTO(NullPointerException e) {
+		
 	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPw() {
-		return pw;
-	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -95,9 +86,8 @@ public class UserVO {
 
 	@Override
 	public String toString() {
-		return "UserVO [user_pid=" + user_pid + ", id=" + id + ", pw=" + pw + ", name=" + name + ", phone=" + phone
-				+ ", mail=" + mail + ", address=" + address + ", bank_name=" + bank_name + ", bank_num=" + bank_num
-				+ ", bank_holder=" + bank_holder + "]";
+		return "UserDTO [name=" + name + ", phone=" + phone + ", mail=" + mail + ", address=" + address + ", bank_name="
+				+ bank_name + ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + "]";
 	}
 
 }
