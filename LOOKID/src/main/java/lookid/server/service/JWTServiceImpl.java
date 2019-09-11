@@ -3,7 +3,6 @@ package lookid.server.service;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
@@ -73,17 +72,13 @@ public class JWTServiceImpl implements JWTService {
 	@Override
 	public void destroy(String token, HttpServletResponse response) {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
-	
-		Jws<Claims> claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(token);
+		// 추가기능으로 Spring Security OAuth JWT invalidate 구현
 		
-		System.out.println(claims.getBody().getExpiration());
-		claims.getBody().setExpiration(new Date(System.currentTimeMillis()));		
-		System.out.println(claims.getBody().getExpiration());
-		
-		// claims을 token으로 바꾸기? 
-		
-		response.setHeader("Authorization", token);
-		
+//		Jws<Claims> claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(token);
+//		
+//		System.out.println(claims.getBody().getExpiration());
+//		claims.getBody().setExpiration(new Date(System.currentTimeMillis()));		
+//		System.out.println(claims.getBody().getExpiration());
 		
 	}
 }

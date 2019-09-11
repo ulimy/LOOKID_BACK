@@ -116,30 +116,30 @@ public class UserController {
 
 		JSONObject json = new JSONObject();
 		
-		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
-		try {
-			if (token != null && JWTService.isUsable(token)) {
-				JWTService.destroy(token, response); // 토큰 무효화
-
-				// destroy메소드로 토큰이 만료됐는지 확인
-				String t = request.getHeader("Authorization");
-				try {
-					if (t != null && JWTService.isUsable(t)) {
-						System.out.println("토큰이 아직 유효합니다.");
-						json.put("success", false);
-					}
-				} catch (Exception e) { // 로그아웃 성공
-					json.put("success", true);
-					System.out.println(e);
-					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
-				}
-			} else { // 토큰 파싱 오류
-				json.put("success", false);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-			json.put("success", false);
-		}
+//		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
+//		try {
+//			if (token != null && JWTService.isUsable(token)) {
+//				JWTService.destroy(token, response); // 토큰 무효화
+//
+//				// destroy메소드로 토큰이 만료됐는지 확인
+//				String t = request.getHeader("Authorization");
+//				try {
+//					if (t != null && JWTService.isUsable(t)) {
+//						System.out.println("토큰이 아직 유효합니다.");
+//						json.put("success", false);
+//					}
+//				} catch (Exception e) { // 로그아웃 성공
+//					json.put("success", true);
+//					System.out.println(e);
+//					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
+//				}
+//			} else { // 토큰 파싱 오류
+//				json.put("success", false);
+//			}
+//		} catch (Exception e) {
+//			System.out.println(e);
+//			json.put("success", false);
+//		}
 		return json;
 	}
 
