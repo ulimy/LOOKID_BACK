@@ -1,5 +1,6 @@
 package lookid.server.controller;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,13 +15,18 @@ import lookid.server.dto.ReservationDetailDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
 import lookid.server.dto.SuccessDTO;
+import lookid.server.service.JWTService;
 import lookid.server.service.ReservationCMCService;
 import lookid.server.service.ReservationListService;
-
 
 @Controller
 @RequestMapping(value = "/reservation")
 public class ReservationController {
+
+	// JWT
+	@Autowired
+	@Qualifier("JWTService")
+	private JWTService JWTService;
 
 	// 예약 내역 조회, 예약 상세 조회 Service
 	@Autowired
@@ -42,10 +48,20 @@ public class ReservationController {
 
 	// 예약 내역 조회
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public @ResponseBody ReservationListDTO[] list() throws Exception {
-		// jwt 개발 전이라 임의로 선언
-		int user_pid = 1;
-		return list.list(user_pid);
+	public @ResponseBody ReservationListDTO[] list(HttpServletRequest request) throws Exception {
+		final String token = request.getHeader("Authorization");
+		try {
+			if (token != null && JWTService.isUsable(token)) {
+				int user_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
+				return list.list(user_pid);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+
 	}
 
 	// 예약 내역 상세 조회
