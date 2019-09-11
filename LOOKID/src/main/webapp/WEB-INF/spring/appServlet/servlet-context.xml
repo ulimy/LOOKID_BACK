@@ -31,6 +31,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
+<<<<<<< HEAD
 	<!-- interceptor -->
 	<beans:bean id="interceptorForExam" class="lookid.server.interceptor.JWTInterceptor">
 	</beans:bean>
@@ -46,6 +47,8 @@
 		</interceptor>
 	</interceptors>
 
+=======
+>>>>>>> feature_reservation
 	<context:component-scan base-package="lookid.server" />
 
 </beans:beans>

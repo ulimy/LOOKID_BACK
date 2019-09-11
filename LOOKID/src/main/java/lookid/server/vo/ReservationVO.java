@@ -2,9 +2,12 @@ package lookid.server.vo;
 
 import java.util.Date;
 
+import lookid.server.dto.ReservationDTO;
+
 public class ReservationVO {
 
 	private int rv_pid;
+	private int user_pid;
 	private String r_name;
 	private Date r_date;
 	private Date s_date;
@@ -14,14 +17,37 @@ public class ReservationVO {
 	private String bank_name;
 	private String bank_num;
 	private String bank_holder;
-	private boolean receipt_item;
-	private boolean return_item;
+	private int receipt_item;
+	private int return_item;
 	private String address;
 	private String wb_num;
 	private int cost;
 	private int deposit;
 	private int state;
-	private int user_pid;
+	
+	public ReservationVO(){
+		super();
+	}
+
+	public ReservationVO(int user_pid, ReservationDTO dto) {
+		this.user_pid = user_pid;
+		this.r_name = dto.getR_name();
+		this.r_date = dto.getR_date();
+		this.s_date = dto.getS_date();
+		this.e_date = dto.getE_date();
+		this.name = dto.getName();
+		this.phone = dto.getPhone();
+		this.bank_name = dto.getBank_name();
+		this.bank_num = dto.getBank_num();
+		this.bank_holder = dto.getBank_holder();
+		this.receipt_item = dto.getReceipt_item();
+		this.return_item = dto.getReturn_item();
+		this.address = dto.getAddress();
+		this.wb_num = dto.getWb_num();
+		this.cost = dto.getCost();
+		this.deposit = dto.getDeposit();
+		this.state = dto.getState();
+	}
 
 	public int getRv_pid() {
 		return rv_pid;
@@ -29,6 +55,14 @@ public class ReservationVO {
 
 	public void setRv_pid(int rv_pid) {
 		this.rv_pid = rv_pid;
+	}
+
+	public int getUser_pid() {
+		return user_pid;
+	}
+
+	public void setUser_pid(int user_pid) {
+		this.user_pid = user_pid;
 	}
 
 	public String getR_name() {
@@ -103,19 +137,19 @@ public class ReservationVO {
 		this.bank_holder = bank_holder;
 	}
 
-	public boolean isReceipt_item() {
+	public int getReceipt_item() {
 		return receipt_item;
 	}
 
-	public void setReceipt_item(boolean receipt_item) {
+	public void setReceipt_item(int receipt_item) {
 		this.receipt_item = receipt_item;
 	}
 
-	public boolean isReturn_item() {
+	public int getReturn_item() {
 		return return_item;
 	}
 
-	public void setReturn_item(boolean return_item) {
+	public void setReturn_item(int return_item) {
 		this.return_item = return_item;
 	}
 
@@ -159,21 +193,13 @@ public class ReservationVO {
 		this.state = state;
 	}
 
-	public int getUser_pid() {
-		return user_pid;
-	}
-
-	public void setUser_pid(int user_pid) {
-		this.user_pid = user_pid;
-	}
-
 	@Override
 	public String toString() {
-		return "LookidDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date
-				+ ", e_date=" + e_date + ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name
-				+ ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item
-				+ ", return_item=" + return_item + ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost
-				+ ", deposit=" + deposit + ", state=" + state + ", user_pid=" + user_pid + "]";
+		return "ReservationVO [rv_pid=" + rv_pid + ", user_pid=" + user_pid + ", r_name=" + r_name + ", r_date="
+				+ r_date + ", s_date=" + s_date + ", e_date=" + e_date + ", name=" + name + ", phone=" + phone
+				+ ", bank_name=" + bank_name + ", bank_num=" + bank_num + ", bank_holder=" + bank_holder
+				+ ", receipt_item=" + receipt_item + ", return_item=" + return_item + ", address=" + address
+				+ ", wb_num=" + wb_num + ", cost=" + cost + ", deposit=" + deposit + ", state=" + state + "]";
 	}
 
 }
