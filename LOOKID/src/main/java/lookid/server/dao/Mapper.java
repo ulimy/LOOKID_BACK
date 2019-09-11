@@ -2,7 +2,7 @@ package lookid.server.dao;
 
 import org.apache.ibatis.annotations.Param;
 
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.dto.ReservationDTO;
@@ -28,7 +28,7 @@ public interface Mapper {
 
 	public void modify_temp_pw(@Param("id") String id, @Param("pw") String pw, @Param("mail") String mail);
 
-	public FindAdminDTO find_admin(@Param("id") String id);
+	public AdminDTO find_admin(@Param("id") String id);
 
 	public void modify(@Param("user_pid") int user_pid, @Param("name") String name, @Param("phone") String phone,
 			@Param("mail") String mail, @Param("address") String address, @Param("bank_name") String bank_name,
@@ -54,7 +54,7 @@ public interface Mapper {
 	public String[] child_detail(@Param("g_pid") int g_pid);
 
 	// admin 상세 조회
-	public FindAdminDTO[] admin_detail(@Param("g_pid") int g_pid);
+	public AdminDTO[] admin_detail(@Param("g_pid") int g_pid);
 
 	// 예약 정보 생성
 	public void reservation_create(ReservationVO input);
@@ -66,7 +66,7 @@ public interface Mapper {
 	public void child_create(@Param("g_pid") int g_pid, @Param("children") String[] children);
 
 	// admin 정보 생성
-	public void admin_create(@Param("g_pid") int g_pid, @Param("admins") FindAdminDTO[] admins);
+	public void admin_create(@Param("g_pid") int g_pid, @Param("admins") AdminDTO[] admins);
 
 	// 예약 정보 수정
 	public void reservation_modify(ReservationDTO input);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyPwDTO;
@@ -73,7 +73,7 @@ public class UserController {
 
 	// 관리자 검색
 	@RequestMapping(value = "/find_admin", method = RequestMethod.GET)
-	public @ResponseBody FindAdminDTO find_admin(@RequestParam(value = "id") String id) throws Exception {
+	public @ResponseBody AdminDTO find_admin(@RequestParam(value = "id") String id) throws Exception {
 
 		return service.find_admin(id);
 	}

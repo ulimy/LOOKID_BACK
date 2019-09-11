@@ -1,6 +1,6 @@
 package lookid.server.dao;
 
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
@@ -18,7 +18,7 @@ public interface UserDAO {
 	
 	public void modify_temp_pw(ModifyTempPwDTO user) throws Exception;
 	
-	public FindAdminDTO find_admin(String id) throws Exception;	
+	public AdminDTO find_admin(String id) throws Exception;	
 	
 	public int count() throws Exception;
 	
