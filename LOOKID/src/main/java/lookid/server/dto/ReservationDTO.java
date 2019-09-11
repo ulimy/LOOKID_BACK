@@ -2,9 +2,9 @@ package lookid.server.dto;
 
 import java.util.Date;
 
-// 예약 정보
+// user_pid를 클라이언트에게 보내지 않기 위해 선언
 public class ReservationDTO {
-
+	private int rv_pid;
 	private String r_name;
 	private Date r_date;
 	private Date s_date;
@@ -14,12 +14,21 @@ public class ReservationDTO {
 	private String bank_name;
 	private String bank_num;
 	private String bank_holder;
-	private boolean receipt_item;
-	private boolean return_item;
+	private int receipt_item;
+	private int return_item;
 	private String address;
 	private String wb_num;
 	private int cost;
 	private int deposit;
+	private int state;
+
+	public int getRv_pid() {
+		return rv_pid;
+	}
+
+	public void setRv_pid(int rv_pid) {
+		this.rv_pid = rv_pid;
+	}
 
 	public String getR_name() {
 		return r_name;
@@ -93,19 +102,19 @@ public class ReservationDTO {
 		this.bank_holder = bank_holder;
 	}
 
-	public boolean isReceipt_item() {
+	public int getReceipt_item() {
 		return receipt_item;
 	}
 
-	public void setReceipt_item(boolean receipt_item) {
+	public void setReceipt_item(int receipt_item) {
 		this.receipt_item = receipt_item;
 	}
 
-	public boolean isReturn_item() {
+	public int getReturn_item() {
 		return return_item;
 	}
 
-	public void setReturn_item(boolean return_item) {
+	public void setReturn_item(int return_item) {
 		this.return_item = return_item;
 	}
 
@@ -141,12 +150,21 @@ public class ReservationDTO {
 		this.deposit = deposit;
 	}
 
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
-		return "LookidDTO [r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date + ", e_date=" + e_date
-				+ ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name + ", bank_num=" + bank_num
-				+ ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item + ", return_item=" + return_item
-				+ ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost + ", deposit=" + deposit + "]";
+		return "ReservationDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date
+				+ ", e_date=" + e_date + ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name
+				+ ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item
+				+ ", return_item=" + return_item + ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost
+				+ ", deposit=" + deposit + ", state=" + state + "]";
 	}
 
 }

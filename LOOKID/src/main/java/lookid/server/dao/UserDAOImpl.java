@@ -3,7 +3,7 @@ package lookid.server.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import lookid.server.dto.FindAdminDTO;
+import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
 
 	// 관리자 검색
 	@Override
-	public FindAdminDTO find_admin(String id) throws Exception {
+	public AdminDTO find_admin(String id) throws Exception {
 		return mapper.find_admin(id);
 	}
 

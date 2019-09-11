@@ -7,7 +7,7 @@ public class SuccessDTO {
 	public SuccessDTO(boolean success) {
 		this.success = success;
 	}
-	
+
 	public boolean isSuccess() {
 		return success;
 	}
