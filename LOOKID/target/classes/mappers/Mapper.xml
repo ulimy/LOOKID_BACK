@@ -5,43 +5,131 @@
 
 <mapper namespace="lookid.server.dao.Mapper">
 
-	<!-- 
-	예약 당일 여부 확인 
-	&lt;=  :  <=
-	&gt;=  :  >=
-	-->
+
+	<!-- 로그아웃은 서비스에서 제거 -->
+	<select id="checkId" resultType="Integer">
+		select user_pid from user where	id=#{id}
+	</select>
+
+	<!-- phone이 db에 이미 존재한다면 insert를 하지 않는다 -->
+	<!-- dual을 사용하여 empty table일 때 insert가 가능하도록 함 -->
+	<insert id="signup">
+
+		insert into user(id,pw,name,phone,mail,address,bank_name,bank_num,bank_holder)
+		select
+		#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder}
+		from dual
+		where
+		not exists (
+		select user_pid
+		from user
+		where phone =
+		#{phone}
+		)
+		LIMIT 1
+
+	</insert>
+
+	<select id="signin" resultType="lookid.server.vo.UserVO">
+
+		select * from user where id=#{id}
+		and pw=#{pw}
+
+	</select>
+
+	<select id="find_id" resultType="lookid.server.dto.FindIdDTO">
+
+		select * from user where
+		name=#{name} and phone=#{phone}
+
+	</select>
+
+	<select id="find_pw" resultType="String">
+
+		select mail from user where
+		id=#{id} and mail=#{mail}
+
+	</select>
+
+	<!-- 랜덤스트링 임시비밀번호로 db update -->
+	<update id="modify_temp_pw">
+
+		update user set pw=#{pw} where mail=#{mail} and
+		id=#{id}
+
+	</update>
+
+	<select id="find_admin" resultType="lookid.server.dto.FindAdminDTO">
+		select * from user where
+		id=#{id}
+	</select>
+
+	<!-- jwt 에서 파싱된 user_pid 조건 -->
+	<update id="modify_pw">
+
+		update user set pw=#{pw} where user_pid=#{user_pid}
+
+	</update>
+
+	<!-- 토큰을 통해 user_pid를 알아내어 조건을 user_pid로 sql문작성 -->
+	<!-- phone : unique 중복 업데이트 안됨 -->
+	<update id="modify">
+
+		update user set
+		name=#{name},phone=#{phone},mail=#{mail},address=#{address},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
+		where user_pid=#{user_pid}
+
+	</update>
+
+	<!-- user table 튜플 개수 카운트 -->
+	<select id="count" resultType="Integer">
+		select count(*) from user
+	</select>
+
+	.
+	<!-- 예약 당일 여부 확인 &lt;= : <= &gt;= : >= -->
 	<select id="today" resultType="lookid.server.dto.RvPidDTO">
-		select rv_pid from reservation where user_pid=#{user_pid} and s_date &lt;= #{now} and e_date &gt;= #{now}
+		select rv_pid from reservation
+		where user_pid=#{user_pid} and s_date &lt;= #{now} and e_date &gt;=
+		#{now}
 	</select>
 
 	<!-- 예약 내역 조회 -->
-	<select id="reservation_list" parameterType="int" resultType="lookid.server.dto.ReservationListDTO">
-		select rv_pid,r_name,s_date,e_date,state from reservation where user_pid=#{user_pid}
+	<select id="reservation_list" parameterType="int"
+		resultType="lookid.server.dto.ReservationListDTO">
+		select rv_pid,r_name,s_date,e_date,state from reservation
+		where user_pid=#{user_pid}
 	</select>
-	
+
 	<!-- 예약 상세 조회 -->
 	<select id="reservation_detail" resultType="lookid.server.dto.ReservationDTO">
-		select rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state
+		select
+		rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state
 		from reservation where rv_pid=#{rv_pid}
 	</select>
-	
+
 	<!-- 그룹 상세 조회 -->
 	<select id="group_detail" resultType="lookid.server.dto.GroupDTO">
-		select g_pid,g_name,count from groups where rv_pid=#{rv_pid}
+		select g_pid,g_name,count
+		from groups where rv_pid=#{rv_pid}
 	</select>
-	
+
 	<!-- child 상세 조회 -->
 	<select id="child_detail" resultType="String">
-		select c_name from child where g_pid=#{g_pid}
+		select c_name from child
+		where g_pid=#{g_pid}
 	</select>
-	
+
 	<!-- admin 상세조회 -->
 	<select id="admin_detail" resultType="lookid.server.dto.FindAdminDTO">
-		select user_pid,id,name from user where user_pid=any(select user_pid from admin where g_pid=#{g_pid})
+		select user_pid,id,name
+		from user where user_pid=any(select user_pid from admin where
+		g_pid=#{g_pid})
 	</select>
 
 	<!-- 예약 정보 생성 -->
-	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO" useGeneratedKeys="true" keyProperty="rv_pid">
+	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO"
+		useGeneratedKeys="true" keyProperty="rv_pid">
 		insert into reservation
 		(user_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state)
 		values
@@ -49,50 +137,57 @@
 	</insert>
 
 	<!-- 그룹 정보 생성 -->
-	<insert id="group_create" parameterType="lookid.server.vo.GroupVO" useGeneratedKeys="true" keyProperty="g_pid">
-		insert into groups (rv_pid,g_name,count) values (#{rv_pid},#{g_name},#{count})
+	<insert id="group_create" parameterType="lookid.server.vo.GroupVO"
+		useGeneratedKeys="true" keyProperty="g_pid">
+		insert into groups
+		(rv_pid,g_name,count) values (#{rv_pid},#{g_name},#{count})
 	</insert>
-	
+
 	<!-- child 정보 생성 -->
 	<insert id="child_create">
-		insert into child (g_pid,c_name) values 
+		insert into child (g_pid,c_name) values
 		<foreach collection="children" item="item" separator=",">
-		(${g_pid},"${item}")
+			(${g_pid},"${item}")
 		</foreach>
 	</insert>
-	
-	 <insert id="admin_create">
-	 	insert into admin (user_pid,g_pid) values
-	 	<foreach collection="admins" item="item" separator=",">
-	 	(${item.user_pid},${g_pid})
+
+	<insert id="admin_create">
+		insert into admin (user_pid,g_pid) values
+		<foreach collection="admins" item="item" separator=",">
+			(${item.user_pid},${g_pid})
 		</foreach>
-	 </insert>
-	 
+	</insert>
+
 	<!-- 에약 정보 수정 -->
 	<update id="reservation_modify" parameterType="lookid.server.vo.ReservationVO">
-		update reservation set 
+		update reservation
+		set
 		r_name=#{r_name},r_date=#{r_date},s_date=#{s_date},e_date=#{e_date},name=#{name},phone=#{phone},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder},receipt_item=#{receipt_item},return_item=#{return_item},address=#{address},wb_num=#{wb_num},cost=#{cost},deposit=#{deposit},state=#{state}
 		where rv_pid=#{rv_pid}
 	</update>
-	
+
 	<!-- 그룹 정보 수정 -->
 	<update id="group_modify" parameterType="lookid.server.vo.GroupVO">
-		update groups set g_name=#{g_name}, count=#{count} where g_pid=#{g_pid}
+		update groups set
+		g_name=#{g_name}, count=#{count} where g_pid=#{g_pid}
 	</update>
-	
+
 	<!-- child 정보 수정을 위한 chide 정보 삭제 -->
 	<delete id="child_delete" parameterType="int">
-		delete from child where g_pid=#{g_pid}
+		delete from child where
+		g_pid=#{g_pid}
 	</delete>
-	
+
 	<!-- admin 정보 수정을 위한 admin 정보 삭제 -->
 	<delete id="admin_delete" parameterType="int">
-		delete from admin where g_pid=#{g_pid}
+		delete from admin where
+		g_pid=#{g_pid}
 	</delete>
-	
+
 	<!-- 예약 삭제 -->
 	<delete id="reservation_delete">
 		delete from reservation where rv_pid=#{rv_pid}
-	</delete>	
+	</delete>
+
 
 </mapper>
