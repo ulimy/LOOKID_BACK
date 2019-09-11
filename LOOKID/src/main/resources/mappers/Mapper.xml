@@ -37,7 +37,7 @@
 	
 	<!-- admin 상세조회 -->
 	<select id="admin_detail" resultType="lookid.server.dto.FindAdminDTO">
-		select user_pid,id,name from user where user_pid=(select user_pid from admin where g_pid=#{g_pid})
+		select user_pid,id,name from user where user_pid=any(select user_pid from admin where g_pid=#{g_pid})
 	</select>
 
 	<!-- 예약 정보 생성 -->
@@ -61,15 +61,6 @@
 		</foreach>
 	</insert>
 	
-	<!-- admin 정보 생성 -->
-	<!-- 
-	<insert id="admin_create">
-		insert into admin (user_pid,g_pid) values
-		<foreach collection="admins" item="item" separator=",">
-		(${item},${g_pid})
-		</foreach>
-	</insert>
-	 -->
 	 <insert id="admin_create">
 	 	insert into admin (user_pid,g_pid) values
 	 	<foreach collection="admins" item="item" separator=",">
