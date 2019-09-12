@@ -40,10 +40,19 @@ public class ReservationController {
 
 	// 이용당일 여부 확인
 	@RequestMapping(value = "/today", method = RequestMethod.GET)
-	public @ResponseBody RvPidDTO[] today() throws Exception {
-		// jwt 개발 전이라 임의로 선언
-		int user_pid = 1;
-		return list.today(user_pid);
+	public @ResponseBody RvPidDTO[] today(HttpServletRequest request) throws Exception {
+		final String token = request.getHeader("Authorization");
+		try {
+			if (token != null && JWTService.isUsable(token)) {
+				int user_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
+				return list.today(user_pid);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
 	// 예약 내역 조회
@@ -72,10 +81,19 @@ public class ReservationController {
 
 	// 예약 하기
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public @ResponseBody SuccessDTO create(@RequestBody ReservationDetailDTO input) throws Exception {
-		// jwt 개발 전이라 임의로 선언
-		int user_pid = 1;
-		return cmc.create(user_pid, input);
+	public @ResponseBody SuccessDTO create(@RequestBody ReservationDetailDTO input,HttpServletRequest request) throws Exception {
+		final String token = request.getHeader("Authorization");
+		try {
+			if (token != null && JWTService.isUsable(token)) {
+				int user_pid = JWTService.getUser_pid(token); // 토큰 user_pid 파싱
+				return cmc.create(user_pid, input);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
 	// 예약 수정
