@@ -83,18 +83,15 @@ public class UserController {
 			throws NullPointerException, Exception {
 		// NullPointException처리
 		// user_pid는 토큰에, 나머지정보는 UserDTO에 담기
-		System.out.println(user.toString());
 		try {
 			// id , pw 존재할 시
 			UserVO uvo = jservice.signin(user);
 
 			int user_pid = uvo.getUser_pid(); // 토큰생성에 쓰일 user_pid 따로 저장
 			UserDTO udto = new UserDTO(uvo); // UserVO정보를 UserDTO에 담기
-			System.out.println(udto.toString());
 			
 			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
-			System.out.println(token);
-
+			
 			if (JWTService.isUsable(token)) { // 토큰이 유효할 때
 				response.setHeader("Authorization", token); // http 헤더에 토큰 담기. 안드로이드로 전송?
 				// http 헤더 토큰 키 네임 : Authorization
