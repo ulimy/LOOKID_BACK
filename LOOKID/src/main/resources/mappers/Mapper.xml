@@ -104,7 +104,7 @@
 	<!-- 예약 상세 조회 -->
 	<select id="reservation_detail" resultType="lookid.server.dto.ReservationDTO">
 		select
-		rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state
+		rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,address_detail,wb_num,cost,deposit,state
 		from reservation where rv_pid=#{rv_pid}
 	</select>
 
@@ -131,9 +131,9 @@
 	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO"
 		useGeneratedKeys="true" keyProperty="rv_pid">
 		insert into reservation
-		(user_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,wb_num,cost,deposit,state)
+		(user_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,address_detail,wb_num,cost,deposit,state)
 		values
-		(#{user_pid},#{r_name},#{r_date},#{s_date},#{e_date},#{name},#{phone},#{bank_name},#{bank_num},#{bank_holder},#{receipt_item},#{return_item},#{address},#{wb_num},#{cost},#{deposit},#{state})
+		(#{user_pid},#{r_name},#{r_date},#{s_date},#{e_date},#{name},#{phone},#{bank_name},#{bank_num},#{bank_holder},#{receipt_item},#{return_item},#{address},#{address_detail},#{wb_num},#{cost},#{deposit},#{state})
 	</insert>
 
 	<!-- 그룹 정보 생성 -->
@@ -162,7 +162,7 @@
 	<update id="reservation_modify" parameterType="lookid.server.vo.ReservationVO">
 		update reservation
 		set
-		r_name=#{r_name},r_date=#{r_date},s_date=#{s_date},e_date=#{e_date},name=#{name},phone=#{phone},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder},receipt_item=#{receipt_item},return_item=#{return_item},address=#{address},wb_num=#{wb_num},cost=#{cost},deposit=#{deposit},state=#{state}
+		r_name=#{r_name},r_date=#{r_date},s_date=#{s_date},e_date=#{e_date},name=#{name},phone=#{phone},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder},receipt_item=#{receipt_item},return_item=#{return_item},address=#{address},address_detail=#{address_detail},wb_num=#{wb_num},cost=#{cost},deposit=#{deposit},state=#{state}
 		where rv_pid=#{rv_pid}
 	</update>
 

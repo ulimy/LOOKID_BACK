@@ -17,6 +17,7 @@ public class ReservationDTO {
 	private int receipt_item;
 	private int return_item;
 	private String address;
+	private String address_detail;
 	private String wb_num;
 	private int cost;
 	private int deposit;
@@ -126,6 +127,14 @@ public class ReservationDTO {
 		this.address = address;
 	}
 
+	public String getAddress_detail() {
+		return address_detail;
+	}
+
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+
 	public String getWb_num() {
 		return wb_num;
 	}
@@ -163,8 +172,8 @@ public class ReservationDTO {
 		return "ReservationDTO [rv_pid=" + rv_pid + ", r_name=" + r_name + ", r_date=" + r_date + ", s_date=" + s_date
 				+ ", e_date=" + e_date + ", name=" + name + ", phone=" + phone + ", bank_name=" + bank_name
 				+ ", bank_num=" + bank_num + ", bank_holder=" + bank_holder + ", receipt_item=" + receipt_item
-				+ ", return_item=" + return_item + ", address=" + address + ", wb_num=" + wb_num + ", cost=" + cost
-				+ ", deposit=" + deposit + ", state=" + state + "]";
+				+ ", return_item=" + return_item + ", address=" + address + ", address_detail=" + address_detail
+				+ ", wb_num=" + wb_num + ", cost=" + cost + ", deposit=" + deposit + ", state=" + state + "]";
 	}
 
 }
