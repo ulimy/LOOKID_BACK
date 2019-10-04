@@ -20,12 +20,13 @@ public class ReservationVO {
 	private int receipt_item;
 	private int return_item;
 	private String address;
+	private String address_detail;
 	private String wb_num;
 	private int cost;
 	private int deposit;
 	private int state;
-	
-	public ReservationVO(){
+
+	public ReservationVO() {
 		super();
 	}
 
@@ -43,6 +44,7 @@ public class ReservationVO {
 		this.receipt_item = dto.getReceipt_item();
 		this.return_item = dto.getReturn_item();
 		this.address = dto.getAddress();
+		this.address_detail = dto.getAddress_detail();
 		this.wb_num = dto.getWb_num();
 		this.cost = dto.getCost();
 		this.deposit = dto.getDeposit();
@@ -161,6 +163,14 @@ public class ReservationVO {
 		this.address = address;
 	}
 
+	public String getAddress_detail() {
+		return address_detail;
+	}
+
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
+
 	public String getWb_num() {
 		return wb_num;
 	}
@@ -199,7 +209,8 @@ public class ReservationVO {
 				+ r_date + ", s_date=" + s_date + ", e_date=" + e_date + ", name=" + name + ", phone=" + phone
 				+ ", bank_name=" + bank_name + ", bank_num=" + bank_num + ", bank_holder=" + bank_holder
 				+ ", receipt_item=" + receipt_item + ", return_item=" + return_item + ", address=" + address
-				+ ", wb_num=" + wb_num + ", cost=" + cost + ", deposit=" + deposit + ", state=" + state + "]";
+				+ ", address_detail=" + address_detail + ", wb_num=" + wb_num + ", cost=" + cost + ", deposit="
+				+ deposit + ", state=" + state + "]";
 	}
 
 }
