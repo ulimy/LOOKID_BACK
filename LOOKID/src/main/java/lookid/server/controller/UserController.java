@@ -41,8 +41,6 @@ public class UserController {
 	@Qualifier("JWTService")
 	private JWTService JWTService;
 
-
-
 	// 아이디 중복확인
 	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
 	public @ResponseBody SuccessDTO idcheck(@RequestParam(value = "id") String id) throws Exception {
@@ -89,9 +87,9 @@ public class UserController {
 
 			int user_pid = uvo.getUser_pid(); // 토큰생성에 쓰일 user_pid 따로 저장
 			UserDTO udto = new UserDTO(uvo); // UserVO정보를 UserDTO에 담기
-			
+
 			String token = JWTService.create("user_pid", user_pid); // 토큰 생성
-			
+
 			if (JWTService.isUsable(token)) { // 토큰이 유효할 때
 				response.setHeader("Authorization", token); // http 헤더에 토큰 담기. 안드로이드로 전송?
 				// http 헤더 토큰 키 네임 : Authorization
@@ -114,7 +112,7 @@ public class UserController {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
 
 		JSONObject json = new JSONObject();
-		
+
 //		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
 //		try {
 //			if (token != null && JWTService.isUsable(token)) {
