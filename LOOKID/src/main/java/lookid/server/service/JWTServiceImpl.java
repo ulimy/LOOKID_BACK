@@ -21,13 +21,11 @@ public class JWTServiceImpl implements JWTService {
 	// 토큰 생성
 	@Override
 	public <T> String create(String key, T data) { // 토큰만료시간을 설정하면 토큰이 로그인 할 때 마다 바뀜
-		System.out.println(data);
 		String jwt = Jwts.builder()
 				.setHeaderParam("typ", "JWT")
 				.claim(key, data)
 				.signWith(SignatureAlgorithm.HS256, this.generateKey())
 				.compact(); // 직렬화
-		System.out.println(jwt);
 		return jwt;
 	}
 

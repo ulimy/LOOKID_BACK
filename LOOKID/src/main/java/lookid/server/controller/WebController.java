@@ -38,7 +38,7 @@ public class WebController {
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String adminPage() {
 
-		return "admin/adminAction";
+		return "admin/admin";
 	}
 
 }
