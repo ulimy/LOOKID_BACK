@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import lookid.server.dto.AdminDTO;
 import lookid.server.dto.GroupDTO;
-import lookid.server.dto.ReservationDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
+import lookid.server.vo.ReservationVO;
 
 @Repository("ReservationListDAO")
 public class ReservationListDAOImpl implements ReservationListDAO {
@@ -35,7 +35,7 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 
 	// 예약 정보 상세 조회
 	@Override
-	public ReservationDTO reservation_detail(int rv_pid) throws Exception {
+	public ReservationVO reservation_detail(int rv_pid) throws Exception {
 		return mapper.reservation_detail(rv_pid);
 	}
 

@@ -103,10 +103,8 @@
 
 	<!-- 예약 상세 조회 -->
 	<select id="reservation_detail"
-		resultType="lookid.server.dto.ReservationDTO">
-		select
-		rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,address_detail,wb_num,cost,deposit,state
-		from reservation where rv_pid=#{rv_pid}
+		resultType="lookid.server.vo.ReservationVO">
+		select * from reservation where rv_pid=#{rv_pid}
 	</select>
 
 	<!-- 그룹 상세 조회 -->

@@ -2,11 +2,11 @@ package lookid.server.dao;
 
 import lookid.server.dto.AdminDTO;
 import lookid.server.dto.GroupDTO;
-import lookid.server.dto.ReservationDTO;
+import lookid.server.vo.ReservationVO;
 
 public interface ReservationModifyDAO {
 
-	public void reservation_modify(ReservationDTO input);
+	public void reservation_modify(ReservationVO input);
 
 	public void group_modify(GroupDTO input);
 	

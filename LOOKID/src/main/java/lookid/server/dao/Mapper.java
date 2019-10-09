@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.GroupDTO;
-import lookid.server.dto.ReservationDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
 import lookid.server.vo.GroupVO;
@@ -46,7 +45,7 @@ public interface Mapper {
 	public ReservationListDTO[] reservation_list(@Param("user_pid") int user_pid);
 
 	// 예약 상세 조회
-	public ReservationDTO reservation_detail(@Param("rv_pid") int rv_pid);
+	public ReservationVO reservation_detail(@Param("rv_pid") int rv_pid);
 
 	// 그룹 상세 조회
 	public GroupDTO[] group_detail(@Param("rv_pid") int rv_pid);
@@ -70,7 +69,7 @@ public interface Mapper {
 	public void admin_create(@Param("g_pid") int g_pid, @Param("admins") AdminDTO[] admins);
 
 	// 예약 정보 수정
-	public void reservation_modify(ReservationDTO input);
+	public void reservation_modify(ReservationVO input);
 
 	// 그룹 정보 수정
 	public void group_modify(GroupDTO input);

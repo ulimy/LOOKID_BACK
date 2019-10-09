@@ -3,11 +3,13 @@ package lookid.server.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import lookid.server.vo.ReservationVO;
+
 // 전체 예약 정보 (예약 하기, 예약 조회, 예약 수정 등에 사용)
 public class ReservationDetailDTO {
 
 	// 예약 정보
-	private ReservationDTO reservation;
+	private ReservationVO reservation;
 	// 그룹 당 피보호자, 관리자 정보¸
 	private List<GroupInfoDTO> groupInfo;
 
@@ -15,11 +17,11 @@ public class ReservationDetailDTO {
 		this.groupInfo = new ArrayList<GroupInfoDTO>();
 	}
 
-	public ReservationDTO getReservation() {
+	public ReservationVO getReservation() {
 		return reservation;
 	}
 
-	public void setReservation(ReservationDTO reservation) {
+	public void setReservation(ReservationVO reservation) {
 		this.reservation = reservation;
 	}
 
