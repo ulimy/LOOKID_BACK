@@ -5,19 +5,19 @@
 
 <mapper namespace="lookid.server.dao.Mapper">
 
-
-	<!-- 로그아웃은 서비스에서 제거 -->
 	<select id="checkId" resultType="Integer">
-		select user_pid from user where	id=#{id}
+		select user_pid from user where
+		id=#{id}
 	</select>
 
 	<!-- phone이 db에 이미 존재한다면 insert를 하지 않는다 -->
 	<!-- dual을 사용하여 empty table일 때 insert가 가능하도록 함 -->
 	<insert id="signup">
 
-		insert into user(id,pw,name,phone,mail,address,bank_name,bank_num,bank_holder)
+		insert into
+		user(id,pw,name,phone,mail,address,address_detail,bank_name,bank_num,bank_holder)
 		select
-		#{id},#{pw},#{name},#{phone},#{mail},#{address},#{bank_name},#{bank_num},#{bank_holder}
+		#{id},#{pw},#{name},#{phone},#{mail},#{address},#{address_detail},#{bank_name},#{bank_num},#{bank_holder}
 		from dual
 		where
 		not exists (
@@ -76,7 +76,7 @@
 	<update id="modify">
 
 		update user set
-		name=#{name},phone=#{phone},mail=#{mail},address=#{address},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
+		name=#{name},phone=#{phone},mail=#{mail},address=#{address},address_detail=#{address_detail},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder}
 		where user_pid=#{user_pid}
 
 	</update>
@@ -86,7 +86,7 @@
 		select count(*) from user
 	</select>
 
-	
+
 	<!-- 예약 당일 여부 확인 &lt;= : <= &gt;= : >= -->
 	<select id="today" resultType="lookid.server.dto.RvPidDTO">
 		select rv_pid from reservation
@@ -102,14 +102,16 @@
 	</select>
 
 	<!-- 예약 상세 조회 -->
-	<select id="reservation_detail" resultType="lookid.server.dto.ReservationDTO">
+	<select id="reservation_detail"
+		resultType="lookid.server.dto.ReservationDTO">
 		select
 		rv_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,address_detail,wb_num,cost,deposit,state
 		from reservation where rv_pid=#{rv_pid}
 	</select>
 
 	<!-- 그룹 상세 조회 -->
-	<select id="group_detail" resultType="lookid.server.dto.GroupDTO">
+	<select id="group_detail"
+		resultType="lookid.server.dto.GroupDTO">
 		select g_pid,g_name,count
 		from groups where rv_pid=#{rv_pid}
 	</select>
@@ -121,15 +123,18 @@
 	</select>
 
 	<!-- admin 상세조회 -->
-	<select id="admin_detail" resultType="lookid.server.dto.AdminDTO">
+	<select id="admin_detail"
+		resultType="lookid.server.dto.AdminDTO">
 		select user_pid,id,name
-		from user where user_pid=any(select user_pid from admin where
+		from user where user_pid=any(select
+		user_pid from admin where
 		g_pid=#{g_pid})
 	</select>
 
 	<!-- 예약 정보 생성 -->
-	<insert id="reservation_create" parameterType="lookid.server.vo.ReservationVO"
-		useGeneratedKeys="true" keyProperty="rv_pid">
+	<insert id="reservation_create"
+		parameterType="lookid.server.vo.ReservationVO" useGeneratedKeys="true"
+		keyProperty="rv_pid">
 		insert into reservation
 		(user_pid,r_name,r_date,s_date,e_date,name,phone,bank_name,bank_num,bank_holder,receipt_item,return_item,address,address_detail,wb_num,cost,deposit,state)
 		values
@@ -137,10 +142,12 @@
 	</insert>
 
 	<!-- 그룹 정보 생성 -->
-	<insert id="group_create" parameterType="lookid.server.vo.GroupVO"
-		useGeneratedKeys="true" keyProperty="g_pid">
+	<insert id="group_create"
+		parameterType="lookid.server.vo.GroupVO" useGeneratedKeys="true"
+		keyProperty="g_pid">
 		insert into groups
-		(rv_pid,g_name,count) values (#{rv_pid},#{g_name},#{count})
+		(rv_pid,g_name,count) values
+		(#{rv_pid},#{g_name},#{count})
 	</insert>
 
 	<!-- child 정보 생성 -->
@@ -159,7 +166,8 @@
 	</insert>
 
 	<!-- 에약 정보 수정 -->
-	<update id="reservation_modify" parameterType="lookid.server.vo.ReservationVO">
+	<update id="reservation_modify"
+		parameterType="lookid.server.vo.ReservationVO">
 		update reservation
 		set
 		r_name=#{r_name},r_date=#{r_date},s_date=#{s_date},e_date=#{e_date},name=#{name},phone=#{phone},bank_name=#{bank_name},bank_num=#{bank_num},bank_holder=#{bank_holder},receipt_item=#{receipt_item},return_item=#{return_item},address=#{address},address_detail=#{address_detail},wb_num=#{wb_num},cost=#{cost},deposit=#{deposit},state=#{state}
@@ -167,9 +175,11 @@
 	</update>
 
 	<!-- 그룹 정보 수정 -->
-	<update id="group_modify" parameterType="lookid.server.vo.GroupVO">
+	<update id="group_modify"
+		parameterType="lookid.server.vo.GroupVO">
 		update groups set
-		g_name=#{g_name}, count=#{count} where g_pid=#{g_pid}
+		g_name=#{g_name}, count=#{count} where
+		g_pid=#{g_pid}
 	</update>
 
 	<!-- child 정보 수정을 위한 chide 정보 삭제 -->

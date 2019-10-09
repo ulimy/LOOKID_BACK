@@ -4,9 +4,15 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.Random;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -115,21 +121,22 @@ public class UserServiceImpl implements UserService {
 				}
 				temp_pw = buf.toString();
 
-				String subject = "루키드 LOOKID 임시 비밀번호 발급입니다."; // 메일 제목
-				String text = "회원님의 임시 비밀번호가 발급되었습니다." + "\n\n" + "임시 비밀번호로 로그인하여 '내 정보 수정' -> '비밀번호 변경' 을 해주세요."
-						+ "\n\n" + "임시 비밀번호 : " + temp_pw; // 메일 내용
-
 				/*
 				 * 메일 전송 api
 				 * 
 				 */
+				
+				String subject = "루키드 LOOKID 임시 비밀번호 발급입니다."; // 메일 제목
+				String text = "안녕하세요. LOOKID 입니다.<br><br>회원님의 LOOKID 임시 비밀번호가 발급되었습니다." + "<br><br>" + "임시 비밀번호로 로그인하여 '내 정보 수정' -> '비밀번호 변경' 을 해주세요."
+						+ "<br><br>" + "임시 비밀번호 : " + temp_pw + "<br><br>LOOKID를 이용하여 주셔서 감사합니다."; // 메일 내용
+
 				try {
 
 					MimeMessage message = mailSender.createMimeMessage();
 					message.setFrom(new InternetAddress("smulookid@gmail.com")); // 발신자
 					message.addRecipient(RecipientType.TO, new InternetAddress(mail));
 					message.setSubject(subject);
-					message.setText(text, "utf-8", "html");
+					message.setText(text, "utf-8", "html");	
 					mailSender.send(message);
 				} catch (Exception e) {
 					e.printStackTrace();
