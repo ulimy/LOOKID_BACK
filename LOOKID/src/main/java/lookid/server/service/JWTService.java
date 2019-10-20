@@ -1,15 +1,17 @@
 package lookid.server.service;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
 
 public interface JWTService {
 
-	public <T> String create(String user_pid, T data);
+	public <T> String create(String key, T data);
 
 	boolean isUsable(String jwt);
 
-	public Map<String, Object> get(String user_pid);
+	public byte[] generateKey();
 
-	public void detroy(String jwt);
+	public int getUser_pid(String jwt);
+
+	public void destroy(String jwt, HttpServletResponse response);
 
 }

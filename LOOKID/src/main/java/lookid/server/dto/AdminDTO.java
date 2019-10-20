@@ -1,10 +1,19 @@
 package lookid.server.dto;
 
 // 관리자 추가할때 이름으로 관리자 검색
-public class FindAdminDTO {
+public class AdminDTO {
 
+	private int user_pid;
 	private String id;
 	private String name;
+
+	public int getUser_pid() {
+		return user_pid;
+	}
+
+	public void setUser_pid(int user_pid) {
+		this.user_pid = user_pid;
+	}
 
 	public String getId() {
 		return id;
@@ -24,7 +33,7 @@ public class FindAdminDTO {
 
 	@Override
 	public String toString() {
-		return "FindAdminDTO [id=" + id + ", name=" + name + "]";
+		return "AdminDTO [user_pid=" + user_pid + ", id=" + id + ", name=" + name + "]";
 	}
 
 }
