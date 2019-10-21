@@ -36,7 +36,6 @@ public class JUserServiceImpl implements JUserService {
 			jdao.modify_pw(mpdto);
 			return success;
 		} catch (Exception e) {
-			System.out.println(e);
 			return fail;
 		}
 	}
@@ -49,7 +48,6 @@ public class JUserServiceImpl implements JUserService {
 			jdao.modify(user);
 			return success;
 		} catch (Exception e) {
-			System.out.println(e);
 			return fail;
 		}
 

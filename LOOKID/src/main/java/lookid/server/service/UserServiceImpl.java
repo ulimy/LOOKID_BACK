@@ -88,7 +88,6 @@ public class UserServiceImpl implements UserService {
 			
 		} catch (NullPointerException e) {
 			FindIdDTO fdto = new FindIdDTO();
-			System.out.println(e);
 			return fdto; // 찾는 id 가 존재하지 않을 시 속성들을 null 값으로 리턴
 		}
 		
@@ -158,7 +157,6 @@ public class UserServiceImpl implements UserService {
 				return fail;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			return fail;
 		}
 	}
@@ -173,7 +171,6 @@ public class UserServiceImpl implements UserService {
 			
 		} catch (NullPointerException e) {
 			AdminDTO fdto = new AdminDTO();
-			System.out.println(e);
 			return fdto; // 관리자 id 가 존재하지 않을 시 속성들을 null 값으로 리턴
 		}
 	}
