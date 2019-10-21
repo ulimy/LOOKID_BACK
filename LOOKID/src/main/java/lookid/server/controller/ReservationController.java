@@ -50,7 +50,6 @@ public class ReservationController {
 				return null;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
@@ -67,7 +66,6 @@ public class ReservationController {
 				return null;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 
@@ -91,7 +89,6 @@ public class ReservationController {
 				return null;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}

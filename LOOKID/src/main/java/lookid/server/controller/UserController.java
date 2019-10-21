@@ -93,13 +93,10 @@ public class UserController {
 			if (JWTService.isUsable(token)) { // 토큰이 유효할 때
 				response.setHeader("Authorization", token); // http 헤더에 토큰 담기. 안드로이드로 전송?
 				// http 헤더 토큰 키 네임 : Authorization
-
-				System.out.println("token : " + "\n" + "[ " + token + " ]"); // jwt 콘솔 출력
 			}
 			return udto; // 안드로이드에게 userDTO정보를 넘겨줌.
 		} catch (NullPointerException e) {
 			// id, pw가 틀릴 시 NullPointerException 발생
-			System.out.println(e);
 			UserDTO u = new UserDTO(e);
 			return u; // UserDTO의 각 속성을 null값으로 넘겨줌
 		}
@@ -112,31 +109,6 @@ public class UserController {
 		// 토큰 자체는 삭제 못하나 destroy한 토큰에 요청이 들어오면 잘못된 접근임을 알수있게 무효화
 
 		JSONObject json = new JSONObject();
-
-//		String token = request.getHeader("Authorization"); // HTTP 헤더에 담긴 토큰을 꺼냄 (요청)
-//		try {
-//			if (token != null && JWTService.isUsable(token)) {
-//				JWTService.destroy(token, response); // 토큰 무효화
-//
-//				// destroy메소드로 토큰이 만료됐는지 확인
-//				String t = request.getHeader("Authorization");
-//				try {
-//					if (t != null && JWTService.isUsable(t)) {
-//						System.out.println("토큰이 아직 유효합니다.");
-//						json.put("success", false);
-//					}
-//				} catch (Exception e) { // 로그아웃 성공
-//					json.put("success", true);
-//					System.out.println(e);
-//					System.out.println("토큰이 삭제되었습니다. 로그아웃 성공");
-//				}
-//			} else { // 토큰 파싱 오류
-//				json.put("success", false);
-//			}
-//		} catch (Exception e) {
-//			System.out.println(e);
-//			json.put("success", false);
-//		}
 		return json;
 	}
 
@@ -157,7 +129,6 @@ public class UserController {
 				return fail;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			return fail;
 		}
 	}
@@ -180,7 +151,6 @@ public class UserController {
 				return fail;
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 			return fail;
 		}
 	}

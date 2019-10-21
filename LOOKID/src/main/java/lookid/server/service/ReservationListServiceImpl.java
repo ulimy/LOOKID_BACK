@@ -23,7 +23,6 @@ public class ReservationListServiceImpl implements ReservationListService {
 		try {
 			return list.today(user_pid);
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
@@ -34,7 +33,6 @@ public class ReservationListServiceImpl implements ReservationListService {
 		try {
 			return list.list(user_pid);
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
@@ -63,7 +61,6 @@ public class ReservationListServiceImpl implements ReservationListService {
 			}
 			return result;
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
