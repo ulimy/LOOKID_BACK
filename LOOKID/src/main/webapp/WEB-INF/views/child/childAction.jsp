@@ -25,7 +25,7 @@
     String occrAdres = "";
     String xmlUseYN = "";
 
-    String urlStr = "http://www.safe182.go.kr/api/lcm/findChildList.do";
+    String urlStr = "http://www.safe182.go.kr/api/lcm/amberList.do";
 
     String params = "esntlId=";
     params += esntlId;

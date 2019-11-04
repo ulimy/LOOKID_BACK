@@ -27,7 +27,7 @@
     
     String reference = ""; // 출처 
 
-    String urlStr = "http://www.safe182.go.kr/api/lcm/findChildList.do";
+    String urlStr = "http://www.safe182.go.kr/api/lcm/amberList.do";
 
     String params = "esntlId=";
     params += esntlId;
@@ -110,7 +110,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>실종정보 OPEN API</title>
 <style type="text/css">
-body {margin:0px; padding:0px; font-size:12px; font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif; line-height:1.5em; color:#666;}
+	body {margin:0px; padding:0px; font-size:12px; font-family:"돋움",Dotum,Helvetica,AppleGothic,Sans-serif; line-height:1.5em; color:#666;}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
@@ -130,11 +130,11 @@ body {margin:0px; padding:0px; font-size:12px; font-family:"돋움",Dotum,Helvet
     }   
  
     var j = rand();
-   for(var i=0; i<_list.length; i++){
+    for(var i=0; i<_list.length; i++){
       
       if(_list[i].rnum == j){ // rnum : 신고 건 고유번호 (캡슐화되어있음) ; 웹 우클릭 -> 소스보기
          
-         document.write('<table border="1" width="100%" height="100%" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
+      	   document.write('<table border="1" width="100%" height="100%" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
            //bgcolor : 테이블 색, cellspacing : 테이블 테두리 가늘기,  color : 폰트색 , width/height : 100% 크기에 맞게 자동조절, font-family: 폰트, font-size:1em 폰트크기(가변)
            
            // 폰트크기 : style="font-size:1em;"
@@ -184,14 +184,14 @@ body {margin:0px; padding:0px; font-size:12px; font-family:"돋움",Dotum,Helvet
           
            // 신상정보   
            document.write('<td align="center" style="font-weight: bold; color: #222b3c; font-family: NotoSansCJKkrBold">' + "이름: " + _list[i].nm + "&nbsp;(" + status +")<br/>성별: " + _list[i].sexdstnDscd + "<br/>발생일시: " + _list[i].occrde + "<br/>발생장소: " + address + "<br/>현재나이: " + _list[i].ageNow + "&nbsp;(당시나이: " + _list[i].age + ")<br/>인상착의: " + _list[i].alldressingDscd  + "<br/><br/>경찰청 실종아동찾기센터: 182" + '</td>');
-          document.write('    </tr>');
-             document.write('</table>');   
+           document.write('    </tr>');
+           document.write('</table>');   
          
       }
          
    }
    
-   setTimeout("location.reload()",10000) // 10초마다 페이지 갱신
+   setTimeout("location.reload()",10000); // 10초마다 페이지 갱신
    
    /*
       최근 실종 접수 50건(모든 연령) 10초마다 랜덤 출력 (새로운 실종 접수 데이터는 경찰청으로 부터 자동갱신됨)
