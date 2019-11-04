@@ -9,10 +9,10 @@
 <%@page import="java.io.IOException"%>
 
 <%
-	// 안드로이드 , 웹  - 공공데이터 포탈 실종아동 Open API 발급
+   // 안드로이드 , 웹  - 공공데이터 포탈 실종아동 Open API 발급
     String esntlId = "10000287"; // 발급 ID
     String authKey = "78e54c5f554345cf"; // 발급 인증키
-    String rowSize = "10";
+    String rowSize = "50"; 
     String pageNum = "1";
     String[] writngTrgetDscds = {"010", "060", "070"};
     String sexdstnDscd = "";
@@ -144,7 +144,7 @@ body {margin:0px; padding:0px; font-size:12px; font-family:"돋움",Dotum,Helvet
         document.write('        <td>' + _list[i].sexdstnDscd + '</td>');
         document.write('        <td>' + _list[i].occrAdres + '</td>');
         document.write('        <td>' + _list[i].nm + '</td>');
-		if( _list[i].tknphotolength != "0" )
+      if( _list[i].tknphotolength != "0" )
             document.write("        <td><a href='http://www.safe182.go.kr/home/lcm/lcmMssGet.do?gnbMenuCd=014000000000&lnbMenuCd=014001000000&rptDscd=2&msspsnIdntfccd=" + _list[i].msspsnIdntfccd + "'><img style='width:96px;height:128px;' width='96' height='128' border='0' src='http://www.safe182.go.kr/api/lcm/imgView.do?msspsnIdntfccd=" + _list[i].msspsnIdntfccd + "'/></a></td>");
         else
             document.write("        <td> &nbsp; </td>");        
