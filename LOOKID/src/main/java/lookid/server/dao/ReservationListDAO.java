@@ -2,9 +2,9 @@ package lookid.server.dao;
 
 import lookid.server.dto.AdminDTO;
 import lookid.server.dto.GroupDTO;
-import lookid.server.dto.ReservationDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
+import lookid.server.vo.ReservationVO;
 
 public interface ReservationListDAO {
 
@@ -12,7 +12,7 @@ public interface ReservationListDAO {
 
 	public ReservationListDTO[] list(int user_pid) throws Exception;
 
-	public ReservationDTO reservation_detail(int rv_pid) throws Exception;
+	public ReservationVO reservation_detail(int rv_pid) throws Exception;
 
 	public GroupDTO[] group_detail(int rv_pid) throws Exception;
 

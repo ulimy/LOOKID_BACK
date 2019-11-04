@@ -2,8 +2,6 @@ package lookid.server.vo;
 
 import java.util.Date;
 
-import lookid.server.dto.ReservationDTO;
-
 public class ReservationVO {
 
 	private int rv_pid;
@@ -28,27 +26,6 @@ public class ReservationVO {
 
 	public ReservationVO() {
 		super();
-	}
-
-	public ReservationVO(int user_pid, ReservationDTO dto) {
-		this.user_pid = user_pid;
-		this.r_name = dto.getR_name();
-		this.r_date = dto.getR_date();
-		this.s_date = dto.getS_date();
-		this.e_date = dto.getE_date();
-		this.name = dto.getName();
-		this.phone = dto.getPhone();
-		this.bank_name = dto.getBank_name();
-		this.bank_num = dto.getBank_num();
-		this.bank_holder = dto.getBank_holder();
-		this.receipt_item = dto.getReceipt_item();
-		this.return_item = dto.getReturn_item();
-		this.address = dto.getAddress();
-		this.address_detail = dto.getAddress_detail();
-		this.wb_num = dto.getWb_num();
-		this.cost = dto.getCost();
-		this.deposit = dto.getDeposit();
-		this.state = dto.getState();
 	}
 
 	public int getRv_pid() {
