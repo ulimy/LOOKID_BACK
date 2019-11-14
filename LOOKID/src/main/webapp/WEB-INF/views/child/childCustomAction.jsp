@@ -134,8 +134,12 @@
       
       if(_list[i].rnum == j){ // rnum : 신고 건 고유번호 (캡슐화되어있음) ; 웹 우클릭 -> 소스보기
          
-      	   document.write('<table border="1" width="100%" height="100%" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
-           //bgcolor : 테이블 색, cellspacing : 테이블 테두리 가늘기,  color : 폰트색 , width/height : 100% 크기에 맞게 자동조절, font-family: 폰트, font-size:1em 폰트크기(가변)
+      	  // 가변길이
+    	  //document.write('<table border="1" width="100%" height="100%" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
+          //bgcolor : 테이블 색, cellspacing : 테이블 테두리 가늘기,  color : 폰트색 , width/height : 100% 크기에 맞게 자동조절, font-family: 폰트, font-size:1em 폰트크기(가변)
+    	  
+      	   // 고정길이  1.6:1.0
+      	   document.write('<table border="1" width="720" height="450" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
            
            // 폰트크기 : style="font-size:1em;"
            document.write('    <tr>');
@@ -183,7 +187,7 @@
            address = _list[i].occrAdres.split(' '); // API 주소형식 변환
           
            // 신상정보   
-           document.write('<td align="center" style="font-weight: bold; color: #222b3c; font-family: NotoSansCJKkrBold">' + "이름: " + _list[i].nm + "&nbsp;(" + status +")<br/>성별: " + _list[i].sexdstnDscd + "<br/>발생일시: " + _list[i].occrde + "<br/>발생장소: " + address + "<br/>현재나이: " + _list[i].ageNow + "&nbsp;(당시나이: " + _list[i].age + ")<br/>인상착의: " + _list[i].alldressingDscd  + "<br/><br/>경찰청 실종아동찾기센터: 182" + '</td>');
+           document.write('<td align="center" style="font-weight: bold; color: #222b3c; font-family: NotoSansCJKkrBold">' + "이름: " + _list[i].nm + "&nbsp;(" + status +")<br/>성별: " + _list[i].sexdstnDscd + "<br/>발생일시: " + _list[i].occrde + "<br/>발생장소: " + address + "<br/>현재나이: " + _list[i].ageNow + "&nbsp;(당시나이: " + _list[i].age + ")<br/>인상착의: " + _list[i].alldressingDscd  + "<br/><br/>실종신고: 112<br/>경찰청 실종아동찾기센터: 182" + '</td>');
            document.write('    </tr>');
            document.write('</table>');   
          
