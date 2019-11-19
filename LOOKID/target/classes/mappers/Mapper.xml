@@ -115,7 +115,7 @@
 	</select>
 
 	<!-- child 상세 조회 -->
-	<select id="child_detail" resultType="String">
+	<select id="child_detail" resultType="lookid.server.dto.ChildDTO">
 		select c_name from child
 		where g_pid=#{g_pid}
 	</select>
@@ -152,7 +152,7 @@
 	<insert id="child_create">
 		insert into child (g_pid,c_name) values
 		<foreach collection="children" item="item" separator=",">
-			(${g_pid},"${item}")
+			(${g_pid},"${item.c_name}")
 		</foreach>
 	</insert>
 

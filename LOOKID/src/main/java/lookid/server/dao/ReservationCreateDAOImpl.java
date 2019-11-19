@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lookid.server.dto.AdminDTO;
+import lookid.server.dto.ChildDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.vo.GroupVO;
 import lookid.server.vo.ReservationVO;
@@ -30,14 +31,16 @@ public class ReservationCreateDAOImpl implements ReservationCreateDAO {
 	}
 
 	@Override
-	public void child_create(int g_pid, String child) throws Exception {
+	public void child_create(int g_pid, ChildDTO[] child) throws Exception {
 		// child 정보 , 으로 잘라 배열로 만들어서 g_pid와 함께 mapper로 전달
-		mapper.child_create(g_pid,child.split(","));
+		mapper.child_create(g_pid, child);
+		return;
 	}
 
 	@Override
 	public void admin_create(int g_pid, AdminDTO[] admin) throws Exception {
 		mapper.admin_create(g_pid, admin);
+		return;
 	}
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lookid.server.dto.AdminDTO;
+import lookid.server.dto.ChildDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.vo.ReservationVO;
 
@@ -26,9 +27,9 @@ public class ReservationModifyDAOImpl implements ReservationModifyDAO {
 	}
 
 	@Override
-	public void child_modify(int g_pid, String child) {
+	public void child_modify(int g_pid, ChildDTO[] child) {
 		mapper.child_delete(g_pid);
-		mapper.child_create(g_pid, child.split(","));
+		mapper.child_create(g_pid, child);
 		return;
 	}
 

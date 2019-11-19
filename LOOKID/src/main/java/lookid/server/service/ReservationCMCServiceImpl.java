@@ -50,6 +50,7 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 			}
 			return success;
 		} catch (Exception e) {
+			System.out.println(e);
 			return fail;
 		}
 	}
