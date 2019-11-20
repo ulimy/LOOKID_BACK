@@ -138,7 +138,7 @@
     	  //document.write('<table border="1" width="100%" height="100%" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
           //bgcolor : 테이블 색, cellspacing : 테이블 테두리 가늘기,  color : 폰트색 , width/height : 100% 크기에 맞게 자동조절, font-family: 폰트, font-size:1em 폰트크기(가변)
     	  
-      	   // 고정길이  1.6:1.0
+      	   // 고정길이  1.6:1.0 에서 웹 가득 채우는 것으로 변경
       	   document.write('<table border="1" width="100%" height="720" bgcolor="#ffdb70" cellspacing=0.1 style="font-size:1em; color: #222b3c; font-family: NotoSansCJKkrBold">'); 
            
            // 폰트크기 : style="font-size:1em;"
