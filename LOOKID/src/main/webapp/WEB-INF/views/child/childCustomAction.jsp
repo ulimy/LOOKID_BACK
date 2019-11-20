@@ -143,7 +143,7 @@
            
            // 폰트크기 : style="font-size:1em;"
            document.write('    <tr>');
-           document.write('        <th width="360" height="240">사진</th>'); // 사진 테이블 크기 조정 (고정크기o 가변x)
+           document.write('        <th width="360" height="240">사진</th>'); // 테이블 크기 조정 (고정크기o 가변x)
            document.write('        <th>신상정보&nbsp;&nbsp;[자료 출처:경찰청]</th>');
            document.write('    </tr>');
           
