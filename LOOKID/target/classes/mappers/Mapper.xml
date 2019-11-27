@@ -110,7 +110,7 @@
 	<!-- 그룹 상세 조회 -->
 	<select id="group_detail"
 		resultType="lookid.server.dto.GroupDTO">
-		select g_pid,g_name,count
+		select g_pid,g_name
 		from groups where rv_pid=#{rv_pid}
 	</select>
 
@@ -144,8 +144,8 @@
 		parameterType="lookid.server.vo.GroupVO" useGeneratedKeys="true"
 		keyProperty="g_pid">
 		insert into groups
-		(rv_pid,g_name,count) values
-		(#{rv_pid},#{g_name},#{count})
+		(rv_pid,g_name) values
+		(#{rv_pid},#{g_name})
 	</insert>
 
 	<!-- child 정보 생성 -->
@@ -176,7 +176,7 @@
 	<update id="group_modify"
 		parameterType="lookid.server.vo.GroupVO">
 		update groups set
-		g_name=#{g_name}, count=#{count} where
+		g_name=#{g_name} where
 		g_pid=#{g_pid}
 	</update>
 
