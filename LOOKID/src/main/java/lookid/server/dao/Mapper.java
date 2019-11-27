@@ -71,15 +71,9 @@ public interface Mapper {
 
 	// 예약 정보 수정
 	public void reservation_modify(ReservationVO input);
-
-	// 그룹 정보 수정
-	public void group_modify(GroupDTO input);
-
-	// child 정보 수정을 위한 child 정보 삭제
-	public void child_delete(@Param("g_pid") int g_pid);
-
-	// admin 정보 수정을 위한 child 정보 삭제
-	public void admin_delete(@Param("g_pid") int g_pid);
+	
+	// 그룹 정보 수정을 위한 그룹 정보 삭제
+	public void group_delete(@Param("rv_pid")int rv_pid);
 
 	// 예약 취소
 	public void reservation_delete(@Param("rv_pid")int rv_pid);
