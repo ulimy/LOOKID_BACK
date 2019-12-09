@@ -7,12 +7,10 @@ public class GroupVO {
 	private int g_pid;
 	private int rv_pid;
 	private String g_name;
-	private int count;
 	
 	public GroupVO(int rv_pid, GroupDTO dto){
 		this.rv_pid = rv_pid;
 		this.g_name = dto.getG_name();
-		this.count = dto.getCount();
 	}
 
 	public int getG_pid() {
@@ -39,17 +37,10 @@ public class GroupVO {
 		this.g_name = g_name;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
 
 	@Override
 	public String toString() {
-		return "GroupVO [g_pid=" + g_pid + ", rv_pid=" + rv_pid + ", g_name=" + g_name + ", count=" + count + "]";
+		return "GroupVO [g_pid=" + g_pid + ", rv_pid=" + rv_pid + ", g_name=" + g_name + "]";
 	}
 
 }

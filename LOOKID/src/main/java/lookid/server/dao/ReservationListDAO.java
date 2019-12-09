@@ -1,6 +1,7 @@
 package lookid.server.dao;
 
 import lookid.server.dto.AdminDTO;
+import lookid.server.dto.ChildDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
@@ -16,7 +17,7 @@ public interface ReservationListDAO {
 
 	public GroupDTO[] group_detail(int rv_pid) throws Exception;
 
-	public String child_detail(int g_pid) throws Exception;
+	public ChildDTO[] child_detail(int g_pid) throws Exception;
 
 	public AdminDTO[] admin_detail(int g_pid) throws Exception;
 
