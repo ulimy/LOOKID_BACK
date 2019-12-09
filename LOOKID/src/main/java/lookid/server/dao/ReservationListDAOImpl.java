@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lookid.server.dto.AdminDTO;
+import lookid.server.dto.ChildDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.dto.ReservationListDTO;
 import lookid.server.dto.RvPidDTO;
@@ -47,13 +48,8 @@ public class ReservationListDAOImpl implements ReservationListDAO {
 
 	// child 정보 상세 조회
 	@Override
-	public String child_detail(int g_pid) throws Exception {
-		String result = "";
-		for (String input : mapper.child_detail(g_pid)) {
-			result = result.concat(input);
-			result = result.concat(",");
-		}
-		return result;
+	public ChildDTO[] child_detail(int g_pid) throws Exception {
+		return mapper.child_detail(g_pid);
 	}
 
 	// admin 정보 상세 조회
