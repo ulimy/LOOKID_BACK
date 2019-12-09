@@ -5,12 +5,10 @@ import java.util.List;
 
 import lookid.server.vo.ReservationVO;
 
-// 전체 예약 정보 (예약 하기, 예약 조회, 예약 수정 등에 사용)
 public class ReservationDetailDTO {
 
-	// 예약 정보
 	private ReservationVO reservation;
-	// 그룹 당 피보호자, 관리자 정보¸
+
 	private List<GroupInfoDTO> group_list;
 
 	public ReservationDetailDTO() {
@@ -33,7 +31,6 @@ public class ReservationDetailDTO {
 		this.group_list = groupInfo;
 	}
 
-	// GroupInfoDTO 중에서 Group정보만 넣어서 add
 	public void addGroupInfoDTO(GroupInfoDTO groupinfodto) {
 		this.group_list.add(groupinfodto);
 	}

@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// true or false 를 리턴해주는 DTO
 public class SuccessDTO {
 	boolean success;
 
