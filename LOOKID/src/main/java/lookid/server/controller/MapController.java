@@ -19,7 +19,6 @@ public class MapController {
 	@Qualifier("MapService")
 	MapService map;
 	
-	// 초기화
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody GroupDTO[] group(@RequestParam int rv_pid) throws Exception {
 		return map.group(rv_pid);
