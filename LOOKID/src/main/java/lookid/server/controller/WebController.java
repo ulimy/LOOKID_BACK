@@ -9,36 +9,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/web")
 public class WebController {
 
-	// 주소 검색 open API 다음 kakao
-	// http://localhost:8080/web/address
-	@RequestMapping(value = "/address", method = RequestMethod.GET)
-	public String searchAddress() {
+   // 주소 검색 open API 다음 kakao
+   // http://localhost:8080/web/address
+   @RequestMapping(value = "/address", method = RequestMethod.GET)
+   public String searchAddress() {
 
-		return "address/addressAction";
-	}
-	
-	// 실종 아동 open API (표 형식)
-	// http://localhost:8080/web/child
-	@RequestMapping(value = "/child", method = RequestMethod.GET)
-	public String searchChild() {
+      return "address/addressAction";
+   }
 
-		return "child/childAction";
-	}
+   // 실종 아동 open API (표 형식)
+   // http://localhost:8080/web/child
+   @RequestMapping(value = "/child", method = RequestMethod.GET)
+   public String searchChild() {
 
-	// 실종 아동 open API (템플릿)
-	// http://localhost:8080/web/childTemplate
-	@RequestMapping(value = "/childTemplate", method = RequestMethod.GET)
-	public String searchChildTemplate() {
+      return "child/childAction";
+   }
 
-		return "child/childTemplateAction";
-	}
+   // 실종 아동 open API (템플릿)
+   // http://localhost:8080/web/childTemplate
+   @RequestMapping(value = "/childTemplate", method = RequestMethod.GET)
+   public String searchChildTemplate() {
 
-	// 관리자 페이지
-	// http://localhost:8080/web/admin
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage() {
+      return "child/childTemplateAction";
+   }
 
-		return "admin/admin";
-	}
+   // 실종 아동 open API (커스터마이징)
+   // http://localhost:8080/web/childCustom
+   @RequestMapping(value = "/childCustom", method = RequestMethod.GET)
+   public String searchChildCustom() {
+
+      return "child/childCustomAction";
+   }
+
+   // 관리자 페이지
+   // http://localhost:8080/web/admin
+   @RequestMapping(value = "/admin", method = RequestMethod.GET)
+   public String adminPage() {
+
+      return "admin/admin";
+   }
 
 }
