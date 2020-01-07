@@ -11,10 +11,10 @@ public class ReservationDetailDTO {
 	// 예약 정보
 	private ReservationVO reservation;
 	// 그룹 당 피보호자, 관리자 정보¸
-	private List<GroupInfoDTO> groupInfo;
+	private List<GroupInfoDTO> group_list;
 
 	public ReservationDetailDTO() {
-		this.groupInfo = new ArrayList<GroupInfoDTO>();
+		this.group_list = new ArrayList<GroupInfoDTO>();
 	}
 
 	public ReservationVO getReservation() {
@@ -25,22 +25,23 @@ public class ReservationDetailDTO {
 		this.reservation = reservation;
 	}
 
-	public List<GroupInfoDTO> getGroupInfo() {
-		return groupInfo;
+
+	public List<GroupInfoDTO> getGroup_list() {
+		return group_list;
 	}
 
-	public void setGroupInfo(List<GroupInfoDTO> groupInfo) {
-		this.groupInfo = groupInfo;
+	public void setGroup_list(List<GroupInfoDTO> group_list) {
+		this.group_list = group_list;
 	}
 
 	// GroupInfoDTO 중에서 Group정보만 넣어서 add
 	public void addGroupInfoDTO(GroupInfoDTO groupinfodto) {
-		this.groupInfo.add(groupinfodto);
+		this.group_list.add(groupinfodto);
 	}
 
 	@Override
 	public String toString() {
-		return "ReservationDetailDTO [reservation=" + reservation + ", groupInfo=" + groupInfo + "]";
+		return "ReservationDetailDTO [reservation=" + reservation + ", group_list=" + group_list + "]";
 	}
 
 }

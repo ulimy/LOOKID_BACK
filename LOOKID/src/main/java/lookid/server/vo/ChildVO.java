@@ -2,17 +2,17 @@ package lookid.server.vo;
 
 public class ChildVO {
 
-	private int childpid;
+	private int c_pid;
 	private int g_pid;
 	private int d_pid;
 	private String c_name;
 
-	public int getChildpid() {
-		return childpid;
+	public int getC_pid() {
+		return c_pid;
 	}
 
-	public void setChildpid(int childpid) {
-		this.childpid = childpid;
+	public void setC_pid(int childpid) {
+		this.c_pid = childpid;
 	}
 
 	public int getG_pid() {
@@ -41,7 +41,7 @@ public class ChildVO {
 
 	@Override
 	public String toString() {
-		return "ChildVO [childpid=" + childpid + ", g_pid=" + g_pid + ", d_pid=" + d_pid + ", c_name=" + c_name + "]";
+		return "ChildVO [c_pid=" + c_pid + ", g_pid=" + g_pid + ", d_pid=" + d_pid + ", c_name=" + c_name + "]";
 	}
 
 }
