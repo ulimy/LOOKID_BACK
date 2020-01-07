@@ -25,12 +25,13 @@ public class ReservationDetailDTO {
 		this.reservation = reservation;
 	}
 
-	public List<GroupInfoDTO> getGroupInfo() {
+
+	public List<GroupInfoDTO> getGroup_list() {
 		return group_list;
 	}
 
-	public void setGroupInfo(List<GroupInfoDTO> groupInfo) {
-		this.group_list = groupInfo;
+	public void setGroup_list(List<GroupInfoDTO> group_list) {
+		this.group_list = group_list;
 	}
 
 	// GroupInfoDTO 중에서 Group정보만 넣어서 add
