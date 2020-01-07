@@ -6,8 +6,8 @@ public class GroupInfoDTO {
 
 	// 그룹 정보
 	private GroupDTO group;
-	// child_pid 가 , 로 구분되어 string 으로
-	private String child;
+	// child 정보
+	private ChildDTO[] child;
 	// admin 정보
 	private AdminDTO[] admin;
 
@@ -29,11 +29,11 @@ public class GroupInfoDTO {
 		this.group = group;
 	}
 
-	public String getChild() {
+	public ChildDTO[] getChild() {
 		return child;
 	}
 
-	public void setChild(String child) {
+	public void setChild(ChildDTO[] child) {
 		this.child = child;
 	}
 
@@ -47,7 +47,8 @@ public class GroupInfoDTO {
 
 	@Override
 	public String toString() {
-		return "GroupInfoDTO [group=" + group + ", child=" + child + ", admin=" + Arrays.toString(admin) + "]";
+		return "GroupInfoDTO [group=" + group + ", child=" + Arrays.toString(child) + ", admin="
+				+ Arrays.toString(admin) + "]";
 	}
 
 }

@@ -3,6 +3,7 @@ package lookid.server.dao;
 import org.apache.ibatis.annotations.Param;
 
 import lookid.server.dto.AdminDTO;
+import lookid.server.dto.ChildDTO;
 import lookid.server.dto.FindIdDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.dto.ReservationListDTO;
@@ -51,7 +52,7 @@ public interface Mapper {
 	public GroupDTO[] group_detail(@Param("rv_pid") int rv_pid);
 
 	// child 상세 조회
-	public String[] child_detail(@Param("g_pid") int g_pid);
+	public ChildDTO[] child_detail(@Param("g_pid") int g_pid);
 
 	// admin 상세 조회
 	public AdminDTO[] admin_detail(@Param("g_pid") int g_pid);
@@ -63,22 +64,16 @@ public interface Mapper {
 	public void group_create(GroupVO input);
 
 	// child 정보 생성
-	public void child_create(@Param("g_pid") int g_pid, @Param("children") String[] children);
+	public void child_create(@Param("g_pid") int g_pid, @Param("children") ChildDTO[] children);
 
 	// admin 정보 생성
 	public void admin_create(@Param("g_pid") int g_pid, @Param("admins") AdminDTO[] admins);
 
 	// 예약 정보 수정
 	public void reservation_modify(ReservationVO input);
-
-	// 그룹 정보 수정
-	public void group_modify(GroupDTO input);
-
-	// child 정보 수정을 위한 child 정보 삭제
-	public void child_delete(@Param("g_pid") int g_pid);
-
-	// admin 정보 수정을 위한 child 정보 삭제
-	public void admin_delete(@Param("g_pid") int g_pid);
+	
+	// 그룹 정보 수정을 위한 그룹 정보 삭제
+	public void group_delete(@Param("rv_pid")int rv_pid);
 
 	// 예약 취소
 	public void reservation_delete(@Param("rv_pid")int rv_pid);
