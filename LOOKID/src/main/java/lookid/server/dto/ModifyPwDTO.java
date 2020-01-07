@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 비밀번호 변경
 public class ModifyPwDTO {
 
 	private int user_pid;

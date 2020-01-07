@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 로그인
 public class SigninDTO {
 	private String id;
 	private String pw;

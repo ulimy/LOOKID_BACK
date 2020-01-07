@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-// 우편번호 검색 API, 실종아동 API, 관리자 페이지  jsp 실행 컨트롤러
 @Controller
 @RequestMapping(value = "/web")
 public class WebController {
