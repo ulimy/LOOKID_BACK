@@ -33,7 +33,7 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 			rvo.setUser_pid(user_pid);
 
 			// 돌려받은 rv_pid와 함께 그룹 정보 추가
-			create_group(dao.reservation_create(rvo), input.getGroupInfo());
+			create_group(dao.reservation_create(rvo), input.getGroup_list());
 
 			return success;
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class ReservationCMCServiceImpl implements ReservationCMCService {
 
 			// 그룹 개수가 변할 경우를 대비하여 삭제 후 재생성
 			dao.group_delete(rv_pid);
-			create_group(rv_pid, input.getGroupInfo());
+			create_group(rv_pid, input.getGroup_list());
 
 			return success;
 

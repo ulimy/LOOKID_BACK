@@ -18,6 +18,7 @@ public class ReservationCMCDAOImpl implements ReservationCMCDAO {
 	// 예약 정보 추가
 	@Override
 	public int reservation_create(ReservationVO input) throws Exception {
+		System.out.println(input.toString());
 		mapper.reservation_create(input);
 		return input.getRv_pid();
 	}
