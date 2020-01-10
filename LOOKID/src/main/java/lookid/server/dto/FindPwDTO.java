@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 비밀번호 찾기
 public class FindPwDTO {
 
 	private String id;
