@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 아이디 찾기
 public class FindIdDTO {
 
 	private String name;

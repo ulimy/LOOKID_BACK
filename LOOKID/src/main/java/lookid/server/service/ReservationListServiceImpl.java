@@ -23,47 +23,41 @@ public class ReservationListServiceImpl implements ReservationListService {
 		try {
 			return list.today(user_pid);
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
 
-	// 예약 내역 조회
 	@Override
 	public ReservationListDTO[] list(int user_pid) {
 		try {
 			return list.list(user_pid);
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
 
-	// 예약 내역 상세 조회
 	@Override
 	public ReservationDetailDTO detail(int rv_pid) {
 		try {
-			// 전체 결과를 담을 ReservationDetailDTO
+
 			ReservationDetailDTO result = new ReservationDetailDTO();
-			// 예약 정보 담기
+
 			result.setReservation(list.reservation_detail(rv_pid));
-			// 그룹 개수 만큼
+
 			for (GroupDTO gd : list.group_detail(rv_pid)) {
-				// 그룹 정보를 담을 GroupInfoDTO에 그룹 정보 담기
+
 				GroupInfoDTO gid = new GroupInfoDTO(gd);
-				//child, admin 정보를 가져오기 위한 g_pid
+
 				int g_pid = gd.getG_pid();
-				// child 정보 담기
+
 				gid.setChild(list.child_detail(g_pid));
-				// admin정보 담기
+
 				gid.setAdmin(list.admin_detail(g_pid));
-				
-				//GroupInfoDTO를 result에 추가
+
 				result.addGroupInfoDTO(gid);
 			}
 			return result;
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
