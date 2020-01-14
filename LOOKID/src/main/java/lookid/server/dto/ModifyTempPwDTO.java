@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 비밀번호 찾기 시 임시비밀번호로 DB 수정 
 public class ModifyTempPwDTO {
 
 	private String id;

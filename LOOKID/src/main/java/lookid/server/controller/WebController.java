@@ -1,44 +1,121 @@
 package lookid.server.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-// 우편번호 검색 API, 실종아동 API, 관리자 페이지  jsp 실행 컨트롤러
+import lookid.server.dao.Mapper;
+import lookid.server.dto.UserPageDTO;
+import lookid.server.vo.DeviceChildVO;
+import lookid.server.vo.DeviceVO;
+import lookid.server.vo.ReservationVO;
+
 @Controller
 @RequestMapping(value = "/web")
 public class WebController {
+	
+	@Autowired
+	private Mapper mapper;
 
-	// 주소 검색 open API 다음 kakao
-	// http://localhost:8080/web/address
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String searchAddress() {
 
 		return "address/addressAction";
 	}
-	
-	// 실종 아동 open API (표 형식)
-	// http://localhost:8080/web/child
+
 	@RequestMapping(value = "/child", method = RequestMethod.GET)
 	public String searchChild() {
 
 		return "child/childAction";
 	}
 
-	// 실종 아동 open API (템플릿)
-	// http://localhost:8080/web/childTemplate
 	@RequestMapping(value = "/childTemplate", method = RequestMethod.GET)
 	public String searchChildTemplate() {
 
 		return "child/childTemplateAction";
 	}
 
-	// 관리자 페이지
-	// http://localhost:8080/web/admin
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage() {
+	@RequestMapping(value = "/childCustom", method = RequestMethod.GET)
+	public String searchChildCustom() {
 
-		return "admin/admin";
+		return "child/childCustomAction";
+	}
+
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String mainPage() {
+
+		return "admin/main";
+	}
+
+	@RequestMapping(value = "/device", method = RequestMethod.GET)
+	public String devicePage() {
+
+		return "admin/device";
+	}
+
+	@RequestMapping(value = "/deviceAction", method = RequestMethod.POST)
+	public String deviceActionPage(HttpServletRequest request) {
+		mapper.truncate_table();
+		
+		int j = 1;
+		while(!request.getParameter("child" + Integer.toString(j)).equals("")) {
+			j++;
+		}
+		
+		for(int i = 1; i < j; i++) {
+		
+			DeviceChildVO dcvo = new DeviceChildVO(request.getParameter("device" + Integer.toString(i)), request.getParameter("child" + Integer.toString(i)));
+			DeviceVO dvo = new DeviceVO(request.getParameter("device" + Integer.toString(i)));
+			mapper.device_child(dcvo);		
+			mapper.device(dvo);
+		}
+		
+		return "admin/deviceAction";
+	}
+
+	@RequestMapping(value = "/reservation", method = RequestMethod.GET)
+	public String reservationPage() {
+
+		return "admin/reservation";
+	}
+
+	@RequestMapping(value = "/reservationAction", method = RequestMethod.POST)
+	public String reservationActionPage(HttpServletRequest request) {
+		
+		ReservationVO vo = null;
+	
+		for(int i = 1; i <= 500; i++) {
+			if((vo = mapper.reservation_detail(i)) != null) {
+				request.setAttribute("reservationDetail"+Integer.toString(i), vo);
+			}
+		}
+		
+		return "admin/reservationAction";
+	}
+	
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String userPage() {
+
+		return "admin/user";
+	}
+
+	@RequestMapping(value = "/userAction", method = RequestMethod.POST)
+	public String userActionPage(HttpServletRequest request) {
+		
+		UserPageDTO dto = null;
+		int count = mapper.count() + 1;
+//		request.setAttribute("count", count);
+		
+		for(int i = 1; i <= count; i++) {
+			if((dto = mapper.userPage(i)) != null) {
+				request.setAttribute("userInfo"+Integer.toString(i), dto);
+			}
+		}
+		
+		return "admin/userAction";
 	}
 
 }

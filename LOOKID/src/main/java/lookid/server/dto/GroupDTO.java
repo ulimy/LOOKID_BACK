@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 그룹 정보
 public class GroupDTO {
 
 	private int g_pid;
@@ -22,11 +21,9 @@ public class GroupDTO {
 		this.g_name = g_name;
 	}
 
-
 	@Override
 	public String toString() {
 		return "GroupDTO [g_pid=" + g_pid + ", g_name=" + g_name + "]";
 	}
-
 
 }

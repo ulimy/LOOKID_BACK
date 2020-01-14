@@ -1,6 +1,5 @@
 package lookid.server.dto;
 
-// 관리자 추가할때 이름으로 관리자 검색
 public class AdminDTO {
 
 	private int user_pid;

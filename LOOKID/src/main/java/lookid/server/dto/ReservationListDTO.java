@@ -2,7 +2,6 @@ package lookid.server.dto;
 
 import java.util.Date;
 
-// 예약 내역 조회
 public class ReservationListDTO {
 
 	private int rv_pid;
