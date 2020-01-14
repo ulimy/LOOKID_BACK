@@ -1,9 +1,9 @@
 package lookid.server.dto;
 
-import lookid.server.vo.UserVO;
+public class UserPageDTO {
 
-public class UserDTO {
-
+	private int user_pid;
+	private String id;
 	private String name;
 	private String phone;
 	private String mail;
@@ -13,19 +13,20 @@ public class UserDTO {
 	private String bank_num;
 	private String bank_holder;
 
-	public UserDTO(UserVO vo) {
-		this.name = vo.getName();
-		this.phone = vo.getPhone();
-		this.mail = vo.getMail();
-		this.address = vo.getAddress();
-		this.address_detail = vo.getAddress_detail();
-		this.bank_name = vo.getBank_name();
-		this.bank_num = vo.getBank_num();
-		this.bank_holder = vo.getBank_holder();
+	public int getUser_pid() {
+		return user_pid;
 	}
 
-	public UserDTO(NullPointerException e) {
+	public void setUser_pid(int user_pid) {
+		this.user_pid = user_pid;
+	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -94,9 +95,11 @@ public class UserDTO {
 
 	@Override
 	public String toString() {
-		return "UserDTO [name=" + name + ", phone=" + phone + ", mail=" + mail + ", address=" + address
-				+ ", address_detail=" + address_detail + ", bank_name=" + bank_name + ", bank_num=" + bank_num
-				+ ", bank_holder=" + bank_holder + "]";
+		return "user_pid=" + user_pid + "<br/>" + "id=" + id + "<br/>" + "name=" + name + "<br/>" + "phone=" + phone
+				+ "<br/>" + "mail=" + mail + "<br/>" + "address=" + address + "<br/>" + "address_detail="
+				+ address_detail + "<br/>" + "bank_name=" + bank_name + "<br/>" + "bank_num=" + bank_num + "<br/>"
+				+ "bank_holder=" + bank_holder + "<br/>";
 	}
-
+	
+	
 }

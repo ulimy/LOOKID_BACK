@@ -16,21 +16,20 @@ public class JUserDAOImpl implements JUserDAO {
    // 로그인
    @Override
    public UserVO signin(SigninDTO user) throws Exception {
-      return mapper.signin(user.getId(), user.getPw());
+      return mapper.signin(user);
    }
 
    // 비밀번호 변경
    @Override
    public void modify_pw(ModifyPwDTO user) throws Exception {
-      mapper.modify_pw(user.getUser_pid(), user.getPw());
+      mapper.modify_pw(user);
       return;
    }
 
    // 내 정보 수정
    @Override
    public void modify(UserVO user) throws Exception {
-      mapper.modify(user.getUser_pid(), user.getName(), user.getPhone(), user.getMail(), user.getAddress(),
-            user.getAddress_detail(), user.getBank_name(), user.getBank_num(), user.getBank_holder());
+      mapper.modify(user);
       return;
    }
 }

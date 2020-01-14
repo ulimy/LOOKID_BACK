@@ -4,19 +4,16 @@ import java.util.Arrays;
 
 public class GroupInfoDTO {
 
-	// 그룹 정보
 	private GroupDTO group;
-	// child 정보
+
 	private ChildDTO[] child;
-	// admin 정보
+
 	private AdminDTO[] admin;
 
-	// 기본 생성자
 	public GroupInfoDTO() {
 		super();
 	}
 
-	// groupdto를 받는 생성자
 	public GroupInfoDTO(GroupDTO groupdto) {
 		this.group = groupdto;
 	}
