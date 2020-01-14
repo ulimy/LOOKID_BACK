@@ -182,12 +182,13 @@ public class ReservationVO {
 
 	@Override
 	public String toString() {
-		return "ReservationVO [rv_pid=" + rv_pid + ", user_pid=" + user_pid + ", r_name=" + r_name + ", r_date="
-				+ r_date + ", s_date=" + s_date + ", e_date=" + e_date + ", name=" + name + ", phone=" + phone
-				+ ", bank_name=" + bank_name + ", bank_num=" + bank_num + ", bank_holder=" + bank_holder
-				+ ", receipt_item=" + receipt_item + ", return_item=" + return_item + ", address=" + address
-				+ ", address_detail=" + address_detail + ", wb_num=" + wb_num + ", cost=" + cost + ", deposit="
-				+ deposit + ", state=" + state + "]";
+		return "rv_pid=" + rv_pid + "<br/>" + "user_pid=" + user_pid + "<br/>" + "r_name=" + r_name + "<br/>" + "r_date="
+				+ r_date + "<br/>" + "s_date=" + s_date + "<br/>" + "e_date=" + e_date + "<br/>" + "name=" + name + "<br/>"
+				+ "phone=" + phone + "<br/>" + "bank_name=" + bank_name + "<br/>" + "bank_num=" + bank_num + "<br/>"
+				+ "bank_holder=" + bank_holder + "<br/>" + "receipt_item=" + receipt_item + "<br/>" + "return_item="
+				+ return_item + "<br/>" + "address=" + address + "<br/>" + "address_detail=" + address_detail + "<br/>"
+				+ "wb_num=" + wb_num + "<br/>" + "cost=" + cost + "<br/>" + "deposit=" + deposit + "<br/>" + "state=" + state
+				+ "<br/>";
 	}
 
 }

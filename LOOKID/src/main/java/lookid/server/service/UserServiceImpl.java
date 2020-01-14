@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import lookid.server.dao.UserDAO;
 import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
-import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyTempPwDTO;
 import lookid.server.dto.SuccessDTO;
 import lookid.server.vo.UserVO;
@@ -70,11 +69,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public FindIdDTO find_id(FindIdDTO user) throws Exception {
+	public FindIdDTO find_id(String name, String phone) throws Exception {
 
 		try {
-			dao.find_id(user).getId();
-			return dao.find_id(user);
+			dao.find_id(name,phone).getId();
+			return dao.find_id(name, phone);
 
 		} catch (NullPointerException e) {
 			FindIdDTO fdto = new FindIdDTO();
@@ -84,13 +83,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public SuccessDTO find_pw(FindPwDTO user) throws FileNotFoundException, URISyntaxException, Exception {
+	public SuccessDTO find_pw(String id, String mail) throws FileNotFoundException, URISyntaxException, Exception {
 
 		try {
-			String mail = dao.find_pw(user);
+			String email = dao.find_pw(id, mail);
 			String temp_pw;
 
-			if (mail != null) {
+			if (email != null) {
 				Random rnd = new Random();
 				StringBuffer buf = new StringBuffer();
 
@@ -113,7 +112,7 @@ public class UserServiceImpl implements UserService {
 
 					MimeMessage message = mailSender.createMimeMessage();
 					message.setFrom(new InternetAddress("smulookid@gmail.com"));
-					message.addRecipient(RecipientType.TO, new InternetAddress(mail));
+					message.addRecipient(RecipientType.TO, new InternetAddress(email));
 					message.setSubject(subject);
 					message.setText(text, "utf-8", "html");
 					mailSender.send(message);
@@ -122,9 +121,9 @@ public class UserServiceImpl implements UserService {
 				}
 
 				ModifyTempPwDTO mtp = new ModifyTempPwDTO();
-				mtp.setMail(mail);
+				mtp.setMail(email);
 				mtp.setPw(temp_pw);
-				mtp.setId(user.getId());
+				mtp.setId(id);
 
 				dao.modify_temp_pw(mtp);
 

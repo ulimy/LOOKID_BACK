@@ -5,6 +5,10 @@ public class DeviceVO {
 	private int d_pid;
 	private String d_num;
 
+	public DeviceVO(String d_num) {
+		this.d_num = d_num;
+	}
+
 	public int getD_pid() {
 		return d_pid;
 	}
