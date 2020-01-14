@@ -100,5 +100,6 @@ public class UserPageDTO {
 				+ address_detail + "<br/>" + "bank_name=" + bank_name + "<br/>" + "bank_num=" + bank_num + "<br/>"
 				+ "bank_holder=" + bank_holder + "<br/>";
 	}
-
+	
+	
 }
