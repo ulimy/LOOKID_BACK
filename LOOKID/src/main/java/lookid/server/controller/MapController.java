@@ -8,20 +8,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lookid.server.dto.ChildDTO;
 import lookid.server.dto.GroupDTO;
 import lookid.server.service.MapService;
 
 @Controller
 @RequestMapping(value = "/map")
 public class MapController {
-	
+
 	@Autowired
 	@Qualifier("MapService")
 	MapService map;
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody GroupDTO[] group(@RequestParam int rv_pid) throws Exception {
 		return map.group(rv_pid);
 	}
-	
+
+	@RequestMapping(value = "/location", method = RequestMethod.GET)
+	public @ResponseBody ChildDTO[] location(@RequestParam int g_pid) throws Exception {
+		return map.child(g_pid);
+	}
+
 }
