@@ -92,7 +92,7 @@ public class ReservationController {
 		return cmc.modify(input);
 	}
 
-	@RequestMapping(value = "/cancle", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/cancel", method = RequestMethod.DELETE)
 	public @ResponseBody SuccessDTO cancle(@RequestBody RvPidDTO input) throws Exception {
 		return cmc.cancle(input);
 	}
