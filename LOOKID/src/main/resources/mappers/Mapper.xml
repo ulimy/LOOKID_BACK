@@ -5,6 +5,22 @@
 
 <mapper namespace="lookid.server.dao.Mapper">
 
+	<select id="userPage" resultType="lookid.server.dto.UserPageDTO">
+		select * from user where user_pid=#{user_pid}
+	</select>
+
+	<delete id="truncate_table">
+		truncate table device_child
+	</delete>
+
+	<insert id="device">
+		insert into device(d_num) values(#{d_num})
+	</insert>
+
+	<insert id="device_child">
+		insert into device_child(device,child) values(#{device}, #{child})
+	</insert>
+
 	<select id="checkId" resultType="Integer">
 		select user_pid from user where
 		id=#{id}

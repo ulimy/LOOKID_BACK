@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lookid.server.dto.AdminDTO;
 import lookid.server.dto.FindIdDTO;
-import lookid.server.dto.FindPwDTO;
 import lookid.server.dto.ModifyPwDTO;
 import lookid.server.dto.SigninDTO;
 import lookid.server.dto.SuccessDTO;
@@ -53,15 +52,15 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/find_id", method = RequestMethod.GET)
-	public @ResponseBody FindIdDTO find_id(@RequestBody FindIdDTO user) throws Exception {
+	public @ResponseBody FindIdDTO find_id(@RequestParam(value = "name") String name, @RequestParam(value = "phone") String phone) throws Exception {
 
-		return service.find_id(user);
+		return service.find_id(name,phone);
 
 	}
 
 	@RequestMapping(value = "/find_pw", method = RequestMethod.GET)
-	public @ResponseBody SuccessDTO find_pw(@RequestBody FindPwDTO user) throws Exception {
-		return service.find_pw(user);
+	public @ResponseBody SuccessDTO find_pw(@RequestParam(value = "id") String id, @RequestParam(value = "mail") String mail) throws Exception {
+		return service.find_pw(id,mail);
 	}
 
 	@RequestMapping(value = "/find_admin", method = RequestMethod.GET)
